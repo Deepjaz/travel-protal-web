@@ -9,6 +9,8 @@ import TopDestinations from '../TopDestinations/TopDestinations';
 import BookSuccess from '../Booking/BookSuccess';
 import ContactUs from '../ContactUs.js/ContactUs';
 import OfferDeals from '../OfferDeals/OfferDeals';
+import TravellerAddOn from './../TravellerAddOn/TravellerAddOn';
+import TravellerMain from './../TravellerAddOn/TravellerMain';
 
 const AllRoutes = () => {
   return (
@@ -21,6 +23,7 @@ const AllRoutes = () => {
                 <Route  path='/book-success' element={<BookSuccess/>}></Route>
                 <Route  path='/contact' element={<ContactUs/>}></Route>
                 <Route  path='/deals-offers' element={<OfferDeals/>}></Route>
+            <Route  path='/TravellerAddOn' element={<TravellerMain/>}></Route>
             </Route>
             <Route  path='/sign-up' element={<SignUp/>}></Route>
             <Route  path='/sign-in' element={<SignIn/>}></Route>
