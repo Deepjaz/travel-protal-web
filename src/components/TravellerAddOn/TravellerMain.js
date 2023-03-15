@@ -4,6 +4,8 @@ import TravellerNaveTabes from "./TravellerNaveTabes";
 import TravellerHistory from "./TravellerHistory";
 import TravellerMeal from "./TravellerMeal";
 import TravellerBaggage from './TravellerBaggage';
+import Travellerseat from './Travellerseat';
+import TravellerFooter from './TravellerFooter';
 
 const TravellerMain = () => {
   return (
@@ -20,13 +22,15 @@ const TravellerMain = () => {
                 <div class="theme-box-shadow theme-border-radius bg-light mb-3 pb-0">
                   <div class="tab-content" id="pills-tabContent">
                     <TravellerMeal />
-                    {/* <TravellerBaggage/> */}
+                    <TravellerBaggage/>
+                    <Travellerseat/>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+            <TravellerFooter/>
       </div>
     </>
   );

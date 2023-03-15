@@ -3,29 +3,34 @@ import React from 'react'
 const TravellerBaggage = () => {
   return (
     <>
-       <div class="tab-pane fade" id="pills-profile" role="tabpanel"
-                                        aria-labelledby="pills-profile-tab">
-                                     
+       
+              
+                          
+                            <div class="theme-box-shadow theme-border-radius bg-light mb-3 pb-0">
+                                <div class="tab-content" id="pills-tabContent">
+                                  
+                                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                                        aria-labelledby="pills-home-tab">
                                         <div class="row g-0 mb-3">
                                             <div class="col-12 border-bottom">
                                                 <div class="d-flex flex-column p-3">
                                                     <span class="fw-bold">Select your extra
                                                         baggage(s)</span>
-                                                    <span class="font-medium">Kochi - Delhi</span>
+                                                    <span class="font-medium">Delhi - Kochi</span>
                                                 </div>
                                             </div>
-                                            <div class="col-12 p-3">
-                                    
+                                            <div class="col-12 col-md-8 offset-md-2 p-2">
+    
                                                 <ul class="d-md-flex justify-content-between pt-3">
                                                     <li class="pb-3">
-                                                        <img src="assets/images/icons/veg-meal.png" class="img-fluid"
-                                                            alt="Meal"/>
-                                                        <span class="ms-2 font-medium">VEG Sandwich</span>
+                                                        <img src="assets/images/icons/baggage-small.png"
+                                                            class="img-fluid" alt="Bagg"/>
+                                                        <span class="ms-2 font-medium">5 Kilograms</span>
                                                     </li>
                                                     <li class="pb-3">
                                                         <div class="d-flex align-items-center justify-content-end">
                                                             <i class="bi bi-currency-dollar"></i>
-                                                            <span class="font-medium me-3 fw-bold">80</span>
+                                                            <span class="font-medium me-3 fw-bold">1900</span>
                                                             <div class="add-btn-wrap">
                                                                 <div class="input-group">
                                                                     <span class="input-group-btn">
@@ -51,17 +56,17 @@ const TravellerBaggage = () => {
                                                         </div>
                                                     </li>
                                                 </ul>
-                                    
+    
                                                 <ul class="d-md-flex justify-content-between pt-3">
                                                     <li class="pb-3">
-                                                        <img src="assets/images/icons/veg-meal.png" class="img-fluid"
-                                                            alt="Meal"/>
-                                                        <span class="ms-2 font-medium">VEG Meal</span>
+                                                        <img src="assets/images/icons/baggage-small.png"
+                                                            class="img-fluid" alt="Bag"/>
+                                                        <span class="ms-2 font-medium">30 Kilograms</span>
                                                     </li>
                                                     <li class="pb-3">
                                                         <div class="d-flex align-items-center justify-content-end">
                                                             <i class="bi bi-currency-dollar"></i>
-                                                            <span class="font-medium me-3 fw-bold">275</span>
+                                                            <span class="font-medium me-3 fw-bold">11400</span>
                                                             <div class="add-btn-wrap">
                                                                 <div class="input-group">
                                                                     <span class="input-group-btn">
@@ -87,18 +92,17 @@ const TravellerBaggage = () => {
                                                         </div>
                                                     </li>
                                                 </ul>
-                                    
+    
                                                 <ul class="d-md-flex justify-content-between pt-3">
                                                     <li class="pb-3">
-                                                        <img src="assets/images/icons/veg-meal.png" class="img-fluid"
-                                                            alt="Meal"/>
-                                                        <span class="ms-2 font-medium">Vegetables in Red Thai Curry with
-                                                            Steamed Rice</span>
+                                                        <img src="assets/images/icons/baggage-small.png"
+                                                            class="img-fluid" alt="Bagg"/>
+                                                        <span class="ms-2 font-medium">20 Kilograms</span>
                                                     </li>
                                                     <li class="pb-3">
                                                         <div class="d-flex align-items-center justify-content-end">
                                                             <i class="bi bi-currency-dollar"></i>
-                                                            <span class="font-medium me-3 fw-bold">300</span>
+                                                            <span class="font-medium me-3 fw-bold">7600</span>
                                                             <div class="add-btn-wrap">
                                                                 <div class="input-group">
                                                                     <span class="input-group-btn">
@@ -124,17 +128,17 @@ const TravellerBaggage = () => {
                                                         </div>
                                                     </li>
                                                 </ul>
-                                    
+    
                                                 <ul class="d-md-flex justify-content-between pt-3">
                                                     <li class="pb-3">
-                                                        <img src="assets/images/icons/nonveg-meal.png" class="img-fluid"
-                                                            alt="Meal"/>
-                                                        <span class="ms-2 font-medium">Non VEG Sandwich</span>
+                                                        <img src="assets/images/icons/baggage-small.png"
+                                                            class="img-fluid" alt="Bagg"/>
+                                                        <span class="ms-2 font-medium">15 Kilograms</span>
                                                     </li>
                                                     <li class="pb-3">
                                                         <div class="d-flex align-items-center justify-content-end">
                                                             <i class="bi bi-currency-dollar"></i>
-                                                            <span class="font-medium me-3 fw-bold">180</span>
+                                                            <span class="font-medium me-3 fw-bold">5700</span>
                                                             <div class="add-btn-wrap">
                                                                 <div class="input-group">
                                                                     <span class="input-group-btn">
@@ -160,17 +164,17 @@ const TravellerBaggage = () => {
                                                         </div>
                                                     </li>
                                                 </ul>
-                                    
+    
                                                 <ul class="d-md-flex justify-content-between pt-3">
                                                     <li class="pb-3">
-                                                        <img src="assets/images/icons/nonveg-meal.png" class="img-fluid"
-                                                            alt="Meal"/>
-                                                        <span class="ms-2 font-medium">Non VEG Meal</span>
+                                                        <img src="assets/images/icons/baggage-small.png"
+                                                            class="img-fluid" alt="Bagg"/>
+                                                        <span class="ms-2 font-medium">10 Kilograms</span>
                                                     </li>
                                                     <li class="pb-3">
                                                         <div class="d-flex align-items-center justify-content-end">
                                                             <i class="bi bi-currency-dollar"></i>
-                                                            <span class="font-medium me-3 fw-bold">275</span>
+                                                            <span class="font-medium me-3 fw-bold">3800</span>
                                                             <div class="add-btn-wrap">
                                                                 <div class="input-group">
                                                                     <span class="input-group-btn">
@@ -196,35 +200,49 @@ const TravellerBaggage = () => {
                                                         </div>
                                                     </li>
                                                 </ul>
-                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+                                        aria-labelledby="pills-profile-tab">
+                                        
+                                        <div class="row g-0 mb-3">
+                                            <div class="col-12 border-bottom">
+                                                <div class="d-flex flex-column p-3">
+                                                    <span class="fw-bold">Select your extra
+                                                        baggage(s)</span>
+                                                    <span class="font-medium">Kochi - Delhi</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-8 offset-md-2 p-2">
+    
                                                 <ul class="d-md-flex justify-content-between pt-3">
                                                     <li class="pb-3">
-                                                        <img src="assets/images/icons/nonveg-meal.png" class="img-fluid"
-                                                            alt="Meal"/>
-                                                        <span class="ms-2 font-medium">Chicken in Red Thai Curry with
-                                                            Steamed Rice</span>
+                                                        <img src="assets/images/icons/baggage-small.png"
+                                                            class="img-fluid" alt="Bagg"/>
+                                                        <span class="ms-2 font-medium">5 Kilograms</span>
                                                     </li>
                                                     <li class="pb-3">
                                                         <div class="d-flex align-items-center justify-content-end">
                                                             <i class="bi bi-currency-dollar"></i>
-                                                            <span class="font-medium me-3 fw-bold">300</span>
+                                                            <span class="font-medium me-3 fw-bold">1900</span>
                                                             <div class="add-btn-wrap">
                                                                 <div class="input-group">
                                                                     <span class="input-group-btn">
                                                                         <button type="button"
                                                                             class="btn btn-default btn-number"
                                                                             disabled="disabled" data-type="minus"
-                                                                            data-field="quant[6]">
+                                                                            data-field="quant[1]">
                                                                             <span class="bi bi-dash"></span>
                                                                         </button>
                                                                     </span>
-                                                                    <input type="text" name="quant[6]"
+                                                                    <input type="text" name="quant[1]"
                                                                         class="form-control input-number text-center border-0"
                                                                         value="Add"/>
                                                                     <span class="input-group-btn">
                                                                         <button type="button"
                                                                             class="btn btn-default btn-number"
-                                                                            data-type="plus" data-field="quant[6]">
+                                                                            data-type="plus" data-field="quant[1]">
                                                                             <span class="bi bi-plus"></span>
                                                                         </button>
                                                                     </span>
@@ -233,36 +251,34 @@ const TravellerBaggage = () => {
                                                         </div>
                                                     </li>
                                                 </ul>
-                                    
+    
                                                 <ul class="d-md-flex justify-content-between pt-3">
                                                     <li class="pb-3">
-                                                        <img src="assets/images/icons/nonveg-meal.png" class="img-fluid"
-                                                            alt="Meal"/>
-                                                        <span class="ms-2 font-medium">Grilled Chicken Breast with
-                                                            Mushroom Sauce, Yellow Rice, Saute Carrot and Beans
-                                                            Baton</span>
+                                                        <img src="assets/images/icons/baggage-small.png"
+                                                            class="img-fluid" alt="Bagg"/>
+                                                        <span class="ms-2 font-medium">30 Kilograms</span>
                                                     </li>
                                                     <li class="pb-3">
                                                         <div class="d-flex align-items-center justify-content-end">
                                                             <i class="bi bi-currency-dollar"></i>
-                                                            <span class="font-medium me-3 fw-bold">300</span>
+                                                            <span class="font-medium me-3 fw-bold">11400</span>
                                                             <div class="add-btn-wrap">
                                                                 <div class="input-group">
                                                                     <span class="input-group-btn">
                                                                         <button type="button"
                                                                             class="btn btn-default btn-number"
                                                                             disabled="disabled" data-type="minus"
-                                                                            data-field="quant[7]">
+                                                                            data-field="quant[2]">
                                                                             <span class="bi bi-dash"></span>
                                                                         </button>
                                                                     </span>
-                                                                    <input type="text" name="quant[7]"
+                                                                    <input type="text" name="quant[2]"
                                                                         class="form-control input-number text-center border-0"
                                                                         value="Add"/>
                                                                     <span class="input-group-btn">
                                                                         <button type="button"
                                                                             class="btn btn-default btn-number"
-                                                                            data-type="plus" data-field="quant[7]">
+                                                                            data-type="plus" data-field="quant[2]">
                                                                             <span class="bi bi-plus"></span>
                                                                         </button>
                                                                     </span>
@@ -271,34 +287,34 @@ const TravellerBaggage = () => {
                                                         </div>
                                                     </li>
                                                 </ul>
-                                    
+    
                                                 <ul class="d-md-flex justify-content-between pt-3">
                                                     <li class="pb-3">
-                                                        <img src="assets/images/icons/veg-meal.png" class="img-fluid"
-                                                            alt="Meal"/>
-                                                        <span class="ms-2 font-medium">Gluten Free Veg Meal</span>
+                                                        <img src="assets/images/icons/baggage-small.png"
+                                                            class="img-fluid" alt="Bagg"/>
+                                                        <span class="ms-2 font-medium">20 Kilograms</span>
                                                     </li>
                                                     <li class="pb-3">
                                                         <div class="d-flex align-items-center justify-content-end">
                                                             <i class="bi bi-currency-dollar"></i>
-                                                            <span class="font-medium me-3 fw-bold">350</span>
+                                                            <span class="font-medium me-3 fw-bold">7600</span>
                                                             <div class="add-btn-wrap">
                                                                 <div class="input-group">
                                                                     <span class="input-group-btn">
                                                                         <button type="button"
                                                                             class="btn btn-default btn-number"
                                                                             disabled="disabled" data-type="minus"
-                                                                            data-field="quant[8]">
+                                                                            data-field="quant[3]">
                                                                             <span class="bi bi-dash"></span>
                                                                         </button>
                                                                     </span>
-                                                                    <input type="text" name="quant[8]"
+                                                                    <input type="text" name="quant[3]"
                                                                         class="form-control input-number text-center border-0"
                                                                         value="Add"/>
                                                                     <span class="input-group-btn">
                                                                         <button type="button"
                                                                             class="btn btn-default btn-number"
-                                                                            data-type="plus" data-field="quant[8]">
+                                                                            data-type="plus" data-field="quant[3]">
                                                                             <span class="bi bi-plus"></span>
                                                                         </button>
                                                                     </span>
@@ -307,34 +323,34 @@ const TravellerBaggage = () => {
                                                         </div>
                                                     </li>
                                                 </ul>
-                                    
+    
                                                 <ul class="d-md-flex justify-content-between pt-3">
                                                     <li class="pb-3">
-                                                        <img src="assets/images/icons/nonveg-meal.png" class="img-fluid"
-                                                            alt="Meal"/>
-                                                        <span class="ms-2 font-medium">Gluten Free Non-Veg Meal</span>
+                                                        <img src="assets/images/icons/baggage-small.png"
+                                                            class="img-fluid" alt="Bagg"/>
+                                                        <span class="ms-2 font-medium">15 Kilograms</span>
                                                     </li>
                                                     <li class="pb-3">
                                                         <div class="d-flex align-items-center justify-content-end">
                                                             <i class="bi bi-currency-dollar"></i>
-                                                            <span class="font-medium me-3 fw-bold">380</span>
+                                                            <span class="font-medium me-3 fw-bold">5700</span>
                                                             <div class="add-btn-wrap">
                                                                 <div class="input-group">
                                                                     <span class="input-group-btn">
                                                                         <button type="button"
                                                                             class="btn btn-default btn-number"
                                                                             disabled="disabled" data-type="minus"
-                                                                            data-field="quant[9]">
+                                                                            data-field="quant[4]">
                                                                             <span class="bi bi-dash"></span>
                                                                         </button>
                                                                     </span>
-                                                                    <input type="text" name="quant[9]"
+                                                                    <input type="text" name="quant[4]"
                                                                         class="form-control input-number text-center border-0"
                                                                         value="Add"/>
                                                                     <span class="input-group-btn">
                                                                         <button type="button"
                                                                             class="btn btn-default btn-number"
-                                                                            data-type="plus" data-field="quant[9]">
+                                                                            data-type="plus" data-field="quant[4]">
                                                                             <span class="bi bi-plus"></span>
                                                                         </button>
                                                                     </span>
@@ -343,34 +359,34 @@ const TravellerBaggage = () => {
                                                         </div>
                                                     </li>
                                                 </ul>
-                                    
+    
                                                 <ul class="d-md-flex justify-content-between pt-3">
                                                     <li class="pb-3">
-                                                        <img src="assets/images/icons/beverages.png" class="img-fluid"
-                                                            alt="Meal"/>
-                                                        <span class="ms-2 font-medium">Beverages</span>
+                                                        <img src="assets/images/icons/baggage-small.png"
+                                                            class="img-fluid" alt="Bagg"/>
+                                                        <span class="ms-2 font-medium">10 Kilograms</span>
                                                     </li>
                                                     <li class="pb-3">
                                                         <div class="d-flex align-items-center justify-content-end">
                                                             <i class="bi bi-currency-dollar"></i>
-                                                            <span class="font-medium me-3 fw-bold">80</span>
+                                                            <span class="font-medium me-3 fw-bold">3800</span>
                                                             <div class="add-btn-wrap">
                                                                 <div class="input-group">
                                                                     <span class="input-group-btn">
                                                                         <button type="button"
                                                                             class="btn btn-default btn-number"
                                                                             disabled="disabled" data-type="minus"
-                                                                            data-field="quant[10]">
+                                                                            data-field="quant[5]">
                                                                             <span class="bi bi-dash"></span>
                                                                         </button>
                                                                     </span>
-                                                                    <input type="text" name="quant[10]"
+                                                                    <input type="text" name="quant[5]"
                                                                         class="form-control input-number text-center border-0"
                                                                         value="Add"/>
                                                                     <span class="input-group-btn">
                                                                         <button type="button"
                                                                             class="btn btn-default btn-number"
-                                                                            data-type="plus" data-field="quant[10]">
+                                                                            data-type="plus" data-field="quant[5]">
                                                                             <span class="bi bi-plus"></span>
                                                                         </button>
                                                                     </span>
@@ -382,6 +398,11 @@ const TravellerBaggage = () => {
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+
+                   
+                
     </>
   )
 }
