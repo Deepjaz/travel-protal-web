@@ -1,28 +1,5 @@
 import React, { useState } from 'react'
-import '../../assets/css/main.css';
-import '../../assets/css/aos.css';
-import '../../assets/css/bootstrap.min.css';
-import '../../assets/css/bootstrap-icons.css';
-import '../../assets/css/jquery-ui.css';
-import '../../assets/css/owl.carousel.min.css';
-
-// const toggleDiv = () => {
-//   const offcanvasDiv = document.getElementById("offcanvasWithBackdrop");
-//   if (offcanvasDiv.style.display === "none") {
-//     offcanvasDiv.classList.add("show");
-//     offcanvasDiv.style.visibility = "visible";
-//     offcanvasDiv.style.display = "block";
-//     offcanvasDiv.style.backgroundColor = "#461f75";
-//     console.log('if',offcanvasDiv)
-//   } else {
-//     offcanvasDiv.classList.remove("show");
-//     offcanvasDiv.style.display = "none";
-//     offcanvasDiv.style.visibility = "hidden";
-//     console.log('else',offcanvasDiv)
-//   }
-// };
-
-
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [showDiv, setShowDiv] = useState(false);
@@ -61,96 +38,96 @@ const Header = () => {
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasWithBackdrop"
               aria-controls="offcanvasWithBackdrop"
+              Travel Portal
               onClick={toggleDiv}
             >
               <i className="bi bi-text-center" />
             </button>
             {showDiv && (<div
-              class="offcanvas offcanvas-start theme-bg-secondary border-0 show"
-              tabindex="-1" id="offcanvasWithBackdrop"
+              className="offcanvas offcanvas-start theme-bg-secondary border-0 show"
               style={{ visibility: 'visible', backgroundColor: "#461f75" }}
               aria-modal="true" role="dialog"
             >
-              <div class="p-0">
-                <span class="p-0" id="offcanvasLabel"></span>
-                <button type="button" onClick={closeDiv} class="btn-close custom-btn-close theme-text-white" data-bs-dismiss="offcanvas" aria-label="Close">
-                  <i class="bi bi bi-x-lg"></i>
+              <div className="p-0">
+                <span className="p-0" id="offcanvasLabel"></span>
+                <button type="button" onClick={closeDiv} className="btn-close custom-btn-close theme-text-white" data-bs-dismiss="offcanvas" aria-label="Close">
+                  <i className="bi bi bi-x-lg"></i>
                 </button>
               </div>
               {/* left side menu section */}
               <div className="offcanvas-body p-0 mt-5">
                 <ul className="menuList nav flex-column w-100">
                   <li className="nav-item">
-                    <a href="index.html" className="position-relative card-effect">
+                    <Link to="/" className="position-relative card-effect">
                       <div className="card-box" />
                       <i className="bi bi-house-fill ps-4 pe-2" />
                       Home
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a
-                      href="index-corporate.html"
+                    <Link
+                      to="index-corporate.html"
                       className="position-relative card-effect"
                     >
                       <div className="card-box" />
                       <i className="bi bi-house-fill ps-4 pe-2" />
                       Home Corporate
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a
-                      href="deals-offers.html"
+                    <Link
+                      to="deals-offers.html"
                       className="position-relative card-effect"
                     >
                       <div className="card-box" />
                       <i className="bi bi-chat-square-heart-fill ps-4 pe-2" />
                       Specials Deals
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a href="#travelDeals" className="position-relative card-effect">
+                    <Link to="#travelDeals" className="position-relative card-effect">
                       <div className="card-box" />
                       <i className="bi bi-bookmark-check-fill ps-4 pe-2" />
                       Travel Deals
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a
-                      href="#featuredFlights"
+                    <Link
+                      to="#featuredFlights"
                       className="position-relative card-effect"
                     >
                       <div className="card-box" />
                       <i className="bi bi-bell-fill ps-4 pe-2" />
                       Featured Flights
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a href="#howWork" className="position-relative card-effect">
+                    <Link to="#howWork" className="position-relative card-effect">
                       <div className="card-box" />
                       <i className="bi bi-shield-fill-exclamation ps-4 pe-2" />
                       How it Work
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a href="about.html" className="position-relative card-effect">
+                    <Link to="about.html" className="position-relative card-effect">
                       <div className="card-box" />
                       <i className="bi bi-balloon-fill ps-4 pe-2" />
                       About Us
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a href="contact.html" className="position-relative card-effect">
+                    <Link to="contact.html" className="position-relative card-effect">
                       <div className="card-box" />
                       <i className="bi bi-arrows-move ps-4 pe-2" />
                       Contact Us
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a href="blog.html" className="position-relative card-effect">
+                    <Link to="blog.html" className="position-relative card-effect">
                       <div className="card-box" />
                       <i className="bi bi-arrow-right-circle-fill ps-4 pe-2" />
                       Blogs
-                    </a>
+                    </Link>
                   </li>
                 </ul>
                 <div className="mt-5">
@@ -167,26 +144,26 @@ const Header = () => {
                 </div>
                 <p className="ps-4 mb-0 mt-5 theme-text-white">Social Network</p>
                 <div className="d-flex social mt-3 ps-4">
-                  <a href="#" className="h4 pe-3">
+                  <Link to="#" className="h4 pe-3">
                     <i className="bi bi-facebook" />
-                  </a>
-                  <a href="#" className="h4 px-3">
+                  </Link>
+                  <Link to="#" className="h4 px-3">
                     <i className="bi bi-twitter" />
-                  </a>
-                  <a href="#" className="h4 px-3">
+                  </Link>
+                  <Link to="#" className="h4 px-3">
                     <i className="bi bi-linkedin" />
-                  </a>
-                  <a href="#" className="h4 px-3">
+                  </Link>
+                  <Link to="#" className="h4 px-3">
                     <i className="bi bi-instagram" />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>)}
           </div>
           <nav className="navbar navbar-expand-md navbar-light py-0 px-0">
-            <a className="navbar-brand ms-5" href="index.html">
+            <Link className="navbar-brand ms-5" to="/">
               Travel Portal
-            </a>
+            </Link>
             <button
               className="navbar-toggler px-1 btn rounded-0"
               type="button"
@@ -201,16 +178,16 @@ const Header = () => {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav ms-auto">
                 <li className="nav-item">
-                  <a href=""
+                  <Link to="/hotels"
                   style={{color:'black'}}>
                     <i className="fa-solid fa-hotel" /> Hotels
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a href=""
+                  <Link to="/"
                   style={{color:'black'}}>
                     <i className="fa fa-plane-departure" /> Flights
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <div className="dropdown-container">
@@ -223,14 +200,14 @@ const Header = () => {
                     style={{ visibility: 'visible',display: 'block'}}>
                       <ul>
                         <li className="nav-item">
-                          <a className="dropdown-item" href="signin.html">
+                          <Link className="dropdown-item" to="/sign-in">
                             Login
-                          </a>
+                          </Link>
                         </li>
                         <li className="nav-item">
-                          <a className="dropdown-item" href="signup.html">
+                          <Link className="dropdown-item" to="sign-up">
                             Register
-                          </a>
+                          </Link>
                         </li>
                       </ul>
                     </div>)}

@@ -128,11 +128,6 @@ const SignUp = () => {
                         </div>
                     </div>
                 </div>
-                {/* Option 1: Bootstrap Bundle with Popper */}
-                {/*This page JavaScript */}
-                {/*Data Calendar js */}
-                {/*Traveler counter js */}
-                {/* animation aos library */}
             </>
 
         </>
