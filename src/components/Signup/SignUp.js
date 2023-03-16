@@ -1,23 +1,14 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
+import InputFeild from '../../common/InputFeild/InputFeild'
+import SignUpHook from './SignUpHook/SignUpHook';
 
 const SignUp = () => {
+
+    const { HandleSubmit  , handleChange , formValue} =  SignUpHook();
     return (
         <>
             <>
-                {/* Required meta tags */}
-                <meta charSet="utf-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <meta name="description" content="" />
-                <meta name="author" content="ThemesLay" />
-                {/* Favicon icon */}
-                {/* Bootstrap CSS */}
-                <link href="assets/css/main.css" rel="stylesheet" />
-                <link
-                    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
-                    rel="stylesheet"
-                />
-                {/*title tag for page */}
-                <title>Sign up </title>
                 <div className="pagewrap modify-search">
                     {/* body section */}
                     <div className="content-section">
@@ -41,59 +32,74 @@ const SignUp = () => {
                                                 </div>
                                             </div>
                                             <div className="col-12">
-                                                <form className="needs-validation" noValidate="">
+                                                <form className="needs-validation" onSubmit={HandleSubmit}>
+                                                    
                                                     <div className="form-floating mb-3">
-                                                        <input
-                                                            type="text"
-                                                            className="form-control"
-                                                            id="floatingInput"
-                                                            placeholder="Your Name"
+                                                        
+                                                        <InputFeild
+                                                            Placeholder={'Email Address'}
+                                                            OnChange= {handleChange}
+                                                            ClassName={'form-control'}
+                                                            Name ={'email'}
+                                                            Value = {formValue.email}
+                                                            Type={"email"}
+                                                            Label= {'Email Address'}
+                                                            Id="floatingInput2"
+                                                            Error ={''}
                                                         />
-                                                        <label htmlFor="floatingInput">Your Name</label>
                                                     </div>
+                                                    
                                                     <div className="form-floating mb-3">
-                                                        <input
-                                                            type="email"
-                                                            className="form-control"
-                                                            id="floatingInput2"
-                                                            placeholder="Email address"
+                                                        <InputFeild
+                                                            Placeholder={'Password'}
+                                                            OnChange= {handleChange}
+                                                            ClassName={'form-control'}
+                                                            Value = {formValue.password}
+                                                            Name ={'password'}
+                                                            Type={"Password"}
+                                                            Label= {'Password'}
+                                                            Id="floatingPassword"
+                                                            Error ={''}
                                                         />
-                                                        <label htmlFor="floatingInput2">Email Address</label>
                                                     </div>
+
                                                     <div className="form-floating mb-3">
-                                                        <input
-                                                            type="number"
-                                                            className="form-control"
-                                                            id="floatingInput3"
-                                                            placeholder="Number"
+                                                        <InputFeild
+                                                            Placeholder={'First Name'}
+                                                            OnChange= {handleChange}
+                                                            ClassName={'form-control'}
+                                                            Name ={'firstName'}
+                                                            Type={"text"}
+                                                            Label= {'First Name'}
+                                                            Id="floatingPassword"
+                                                            Error ={''}
+                                                            Value = {formValue.firstName}
                                                         />
-                                                        <label htmlFor="floatingInput3">Number</label>
                                                     </div>
+
+
                                                     <div className="form-floating mb-3">
-                                                        <input
-                                                            type="password"
-                                                            className="form-control"
-                                                            id="floatingPassword"
-                                                            placeholder="Password"
+                                                        <InputFeild
+                                                            Placeholder={'Last Name'}
+                                                            OnChange= {handleChange}
+                                                            ClassName={'form-control'}
+                                                            Name ={'lastName'}
+                                                            Type={"text"}
+                                                            Label= {'Last Name'}
+                                                            Id="floatingPassword"
+                                                            Error ={''}
+                                                            Value = {formValue.lastName}
                                                         />
-                                                        <label htmlFor="floatingPassword">Password</label>
                                                     </div>
-                                                    <div className="form-floating mb-3">
-                                                        <input
-                                                            type="password"
-                                                            className="form-control"
-                                                            id="floatingPassword2"
-                                                            placeholder="Password"
-                                                        />
-                                                        <label htmlFor="floatingPassword2">
-                                                            Confirm Password
-                                                        </label>
-                                                    </div>
+                                                    
                                                     <div className="mb-3 form-check">
-                                                        <input
-                                                            type="checkbox"
-                                                            className="form-check-input"
-                                                            id="exampleCheck2"
+                                                        
+                                                        <InputFeild
+                                                            ClassName={'form-check-input'}
+                                                            Type={"checkbox"}
+                                                            Id="exampleCheck2"
+                                                            Error ={''}
+                                                            Checked = {true}
                                                         />
                                                         <label
                                                             className="form-check-label font-small"
@@ -107,16 +113,16 @@ const SignUp = () => {
                                                     <div className="mb-3">
                                                         <button
                                                             type="submit"
-                                                            className="btn btn-effect btn-book px-5 min-h58"
+                                                            className="btn btn-effect btn-book px-5 min-h58 btn-primary"
                                                             onclick="window.location.href='#';"
                                                         >
                                                             Register
                                                         </button>
                                                         <span className="font-medium">
                                                             <span className="mx-3">Already a member?</span>
-                                                            <a href="signin.html" className="">
+                                                            <Link to="/sign-in" className="">
                                                                 Login
-                                                            </a>
+                                                            </Link>
                                                         </span>
                                                     </div>
                                                 </form>

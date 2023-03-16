@@ -1,24 +1,11 @@
 import React from 'react'
+import InputFeild from '../../common/InputFeild/InputFeild'
+import SignInform from './Hooks/SignInform'
 
 const SignIn = () => {
+     const {handleChange , signForm , handleSubmit} =SignInform();
     return (
         <>
-            <>
-                {/* Required meta tags */}
-                <meta charSet="utf-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <meta name="description" content="" />
-                <meta name="author" content="ThemesLay" />
-                {/* Favicon icon */}
-                {/* <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png"> */}
-                {/* Bootstrap CSS */}
-                <link href="assets/css/main.css" rel="stylesheet" />
-                <link
-                    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
-                    rel="stylesheet"
-                />
-                {/*title tag for page */}
-                <title> Login </title>
                 <div className="pagewrap modify-search">
                     {/* body section */}
                     <div className="content-section">
@@ -43,36 +30,33 @@ const SignIn = () => {
                                                 </div>
                                             </div>
                                             <div className="col-12">
-                                                <form className="needs-validation" noValidate="">
+                                                <form className="needs-validation" onSubmit={e => handleSubmit(e)}>
                                                     <div className="mb-3">
-                                                        <label
-                                                            htmlFor="exampleInputEmail1"
-                                                            className="form-label"
-                                                        >
-                                                            Email Address
-                                                        </label>
-                                                        <input
-                                                            type="email"
-                                                            className="form-control min-h58"
-                                                            id="exampleInputEmail1"
-                                                            placeholder="Enter Your Email"
-                                                            required=""
+                                                        <InputFeild 
+                                                            Requrried={true}
+                                                            Error={'Please enter Your Email Address'}
+                                                            Label={'Email Address'}
+                                                            Name={'email'} 
+                                                            Type={'text'}
+                                                            OnChange = {handleChange}
+                                                            Value = {signForm.email}
+                                                            PlaceHolder = {"Enter Your Email"}
+                                                            ClassName="form-control min-h58"
                                                         />
                                                     </div>
                                                     <div className="mb-3">
-                                                        <label
-                                                            htmlFor="exampleInputPassword1"
-                                                            className="form-label"
-                                                        >
-                                                            Password
-                                                        </label>
-                                                        <input
-                                                            type="password"
-                                                            className="form-control min-h58"
-                                                            id="exampleInputPassword1"
-                                                            placeholder="Enter Your Password"
-                                                            required=""
+                                                         <InputFeild 
+                                                            Requrried={true}
+                                                            Type={'password'}
+                                                            Error={'Please enter Your Password'}
+                                                            Label={'Password'}
+                                                            Name={'password'} 
+                                                            OnChange = {handleChange}
+                                                            Value = {signForm.password}
+                                                            PlaceHolder = {"Enter Your Password"}
+                                                            ClassName="form-control min-h58"
                                                         />
+                                                        
                                                     </div>
                                                     <div className="mb-3 form-check">
                                                         <input
@@ -111,14 +95,10 @@ const SignIn = () => {
                         </div>
                     </div>
                 </div>
-                {/* Option 1: Bootstrap Bundle with Popper */}
-                {/*This page JavaScript */}
-                {/*Data Calendar js */}
-                {/*Traveler counter js */}
-                {/* animation aos library */}
+                
             </>
 
-        </>
+       
     )
 }
 
