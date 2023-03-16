@@ -157,7 +157,7 @@ const FlightSearch = () => {
                         <div className="form-control form-group d-flex">
                           <i className="bi bi-calendar3 position-absolute h2 icon-pos" />
                           <span className="dep-date-input">
-                            <input
+                            {/* <input
                               type="text"
                               className="cal-input hasDatepicker"
                               placeholder="Depart Date"
@@ -165,7 +165,7 @@ const FlightSearch = () => {
                               dateFormat="yyyy-MM-dd"
                               value={departDate}
                               onChange={(e) => setDepartDate(e.target.value)}
-                            />
+                            /> */}
                             <DatePicker
                               selected={date}
                               onChange={(date) => setDate(date)}
