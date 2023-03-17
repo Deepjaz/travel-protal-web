@@ -1,78 +1,11 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import axios from "axios";
-
+import FlightSearchApi from "./Hooks/FlightSearchApi"; 
 const FlightSearch = () => {
-  const [toggle, setToggle] = useState();
-  const [adults, setAdults] = useState(0);
-  const [child, setChild] = useState(0);
-  const [infants, setInfants] = useState(0);
-  const [cabinClass, setcabinClass] = useState();
-  const [date, setDate] = useState(new Date());
-  const [flight, setFlight] = useState("hotels");
+ 
 
-  const [origin, setOrigin] = useState("");
-  const [destination, setDestination] = useState("");
-  const [departDate, setDepartDate] = useState("");
-  const [travellers, setTravellers] = useState("");
-  const [data, setData] = useState([]);
-
-  const handleSearch = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await axios.get(
-        `localhost:3000/api/flight-booking?originLocationCode=${encodeURIComponent(
-          origin
-        )}&destinationLocationCode=${encodeURIComponent(
-          destination
-        )}&departureDate=${encodeURIComponent(
-          departDate
-        )}&adults=${encodeURIComponent(travellers)}`
-      );
-      setData(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleAdultIncrease = () => {
-    setAdults(adults + 1);
-  };
-
-  const handleAdultDecrease = () => {
-    if (adults > 0) {
-      setAdults(adults - 1);
-    }
-  };
-
-  const handleChildIncrease = () => {
-    setChild(child + 1);
-  };
-
-  const handleChildDecrease = () => {
-    if (child > 0) {
-      setChild(child - 1);
-    }
-  };
-
-  const handleInfantIncrease = () => {
-    setInfants(infants + 1);
-  };
-
-  const handleInfantDecrease = () => {
-    if (infants > 0) {
-      setInfants(infants - 1);
-    }
-  };
-
-  const onChangeCaptureHandler = (e) => {
-    setcabinClass(e.target.value);
-  };
-
-  const handleFlight = (tabName) => {
-    console.log("flight", flight);
-    setFlight(tabName);
-  };
+  const {handleClick} = FlightSearchApi()
 
   return (
     <>
@@ -89,9 +22,9 @@ const FlightSearch = () => {
                 role="tab"
                 aria-controls="hotels"
                 aria-selected="true"
-                onClick={() => handleFlight(true)}
+                onClick={handleClick}
               >
-                <i className="fa-solid fa-hotel" />
+               
                 Hotels
               </button>
             </li>
@@ -105,7 +38,7 @@ const FlightSearch = () => {
                 role="tab"
                 aria-controls="Flights"
                 aria-selected="false"
-                onClick={() => handleFlight(false)}
+                
               >
                 <i className="fa fa-plane-departure" />
                 Flights
@@ -115,263 +48,7 @@ const FlightSearch = () => {
           {/* Tab content */}
           <div className="tab-content">
             {/* oneway search */}
-            {flight ? (
-              <div
-                id="hotels"
-                className="tab-pane active"
-                onSubmit={handleSearch}
-              >
-                <div className="row">
-                  <div className="col-12">
-                    <div className="search-pan row mx-0 theme-border-radius">
-                      <div className="col-12 col-lg-4 col-xl-2 ps-0 mb-2 mb-xl-0 pe-0 pe-lg-2">
-                        <div className="form-group">
-                          <i className="bi bi-geo-alt-fill position-absolute h2 icon-pos" />
-                          <input
-                            type="text"
-                            className="form-control ps-5"
-                            id="onewayOrigin"
-                            placeholder="Origin"
-                            value={origin}
-                            onChange={(e) => setOrigin(e.target.value)}
-                          />
-                          <button className="pos-swap">
-                            <i className="bi bi-arrow-left-right pl-1" />
-                          </button>
-                        </div>
-                      </div>
-                      <div className="col-12 col-lg-4 col-xl-2 ps-0 mb-2 mb-xl-0 pe-0 pe-lg-2">
-                        <div className="form-group">
-                          <i className="bi bi-geo-alt-fill position-absolute h2 icon-pos" />
-                          <input
-                            type="text"
-                            className="form-control ps-5"
-                            id="onewayDestination"
-                            placeholder="Destination"
-                            value={destination}
-                            onChange={(e) => setDestination(e.target.value)}
-                          />
-                        </div>
-                      </div>
-                      <div className="col-12 col-lg-4 col-xl-3 ps-0 mb-2 mb-xl-0 pe-0 pe-lg-0 pe-xl-2">
-                        <div className="form-control form-group d-flex">
-                          <i className="bi bi-calendar3 position-absolute h2 icon-pos" />
-                          <span className="dep-date-input">
-                            {/* <input
-                              type="text"
-                              className="cal-input hasDatepicker"
-                              placeholder="Depart Date"
-                              id="datepicker"
-                              dateFormat="yyyy-MM-dd"
-                              value={departDate}
-                              onChange={(e) => setDepartDate(e.target.value)}
-                            /> */}
-                            <DatePicker
-                              selected={date}
-                              onChange={(date) => setDate(date)}
-                            />
-                          </span>
-                        </div>
-                      </div>
-                      <div className="col-12 col-lg-6 col-xl-3 ps-0 mb-2 mb-lg-0 mb-xl-0 pe-0 pe-lg-2">
-                        <div className="dropdown" id="myDD">
-                          <button
-                            className="dropdown-toggle form-control"
-                            type="button"
-                            id="travellerInfoOneway"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                            onClick={() => setToggle(!toggle)}
-                          >
-                            <i className="bi bi-person-lines-fill position-absolute h2 icon-pos" />
-                            <span className="text-truncate">
-                              {adults + child + infants} Traveller(s),{" "}
-                              {cabinClass}
-                            </span>
-                          </button>
-                          {toggle && (
-                            <div
-                              className="dropdown-menu"
-                              aria-labelledby="travellerInfoOneway"
-                            >
-                              <ul className="drop-rest">
-                                <li>
-                                  <div className="d-flex">Select Adults</div>
-                                  <div className="ms-auto input-group plus-minus-input">
-                                    <div className="input-group-button">
-                                      <button
-                                        type="button"
-                                        className="circle"
-                                        data-quantity="minus"
-                                        data-field="onewayAdult"
-                                        onClick={handleAdultDecrease}
-                                        value={travellers}
-                                        onChange={(e) =>
-                                          setTravellers(e.target.value)
-                                        }
-                                      >
-                                        <i className="bi bi-dash" />
-                                      </button>
-                                    </div>
-                                    <input
-                                      className="input-group-field"
-                                      type="number"
-                                      name="onewayAdult"
-                                      // defaultValue={0}
-                                      value={adults}
-                                    />
-                                    <div className="input-group-button">
-                                      <button
-                                        type="button"
-                                        className="circle"
-                                        data-quantity="plus"
-                                        data-field="onewayAdult"
-                                        onClick={handleAdultIncrease}
-                                      >
-                                        <i className="bi bi-plus" />
-                                      </button>
-                                    </div>
-                                  </div>
-                                </li>
-                                <li>
-                                  <div className="d-flex">Select Child</div>
-                                  <div className="ms-auto input-group plus-minus-input">
-                                    <div className="input-group-button">
-                                      <button
-                                        type="button"
-                                        className="circle"
-                                        data-quantity="minus"
-                                        data-field="onewayChild"
-                                        onClick={handleChildDecrease}
-                                      >
-                                        <i className="bi bi-dash" />
-                                      </button>
-                                    </div>
-                                    <input
-                                      className="input-group-field"
-                                      type="number"
-                                      name="onewayChild"
-                                      value={child}
-                                    />
-                                    <div className="input-group-button">
-                                      <button
-                                        type="button"
-                                        className="circle"
-                                        data-quantity="plus"
-                                        data-field="onewayChild"
-                                        onClick={handleChildIncrease}
-                                      >
-                                        <i className="bi bi-plus" />
-                                      </button>
-                                    </div>
-                                  </div>
-                                </li>
-                                <li>
-                                  <div className="d-flex">Select Infants</div>
-                                  <div className="ms-auto input-group plus-minus-input">
-                                    <div className="input-group-button">
-                                      <button
-                                        type="button"
-                                        className="circle"
-                                        data-quantity="minus"
-                                        data-field="onewayInfant"
-                                        onClick={handleInfantDecrease}
-                                      >
-                                        <i className="bi bi-dash" />
-                                      </button>
-                                    </div>
-                                    <input
-                                      className="input-group-field"
-                                      type="number"
-                                      name="onewayInfant"
-                                      value={infants}
-                                    />
-                                    <div className="input-group-button">
-                                      <button
-                                        type="button"
-                                        className="circle"
-                                        data-quantity="plus"
-                                        data-field="onewayInfant"
-                                        onClick={handleInfantIncrease}
-                                      >
-                                        <i className="bi bi-plus" />
-                                      </button>
-                                    </div>
-                                  </div>
-                                </li>
-                                <li>
-                                  <label className="radio-inline">
-                                    <input
-                                      type="radio"
-                                      name="class"
-                                      value="Economy"
-                                      className="me-2"
-                                      onChangeCapture={onChangeCaptureHandler}
-                                    />
-                                    Economy{" "}
-                                  </label>
-                                </li>
-                                <li>
-                                  <label className="radio-inline">
-                                    <input
-                                      type="radio"
-                                      name="class"
-                                      defaultValue="Premium Economy"
-                                      className="me-2"
-                                      onChangeCapture={onChangeCaptureHandler}
-                                    />
-                                    Premium Economy{" "}
-                                  </label>
-                                </li>
-                                <li>
-                                  <label className="radio-inline">
-                                    <input
-                                      type="radio"
-                                      name="class"
-                                      defaultValue="Business Class"
-                                      className="me-2"
-                                      onChangeCapture={onChangeCaptureHandler}
-                                    />
-                                    Business{" "}
-                                  </label>
-                                </li>
-                                <li>
-                                  <label className="radio-inline">
-                                    <input
-                                      type="radio"
-                                      name="class"
-                                      defaultValue="First Class"
-                                      className="me-2"
-                                      onChangeCapture={onChangeCaptureHandler}
-                                    />
-                                    First Class{" "}
-                                  </label>
-                                </li>
-                                {/* <li>
-                        <button type="button" className="btn btn" onclick={handleDone}>
-                          Done
-                        </button>
-                      </li> */}
-                              </ul>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                      <div className="col-12 col-lg-6 col-xl-2 px-0">
-                        <button
-                          type="submit"
-                          className="btn btn-search"
-                          // onclick="window.location.href='flight-listing-oneway.html';"
-                          onSubmit={handleSearch}
-                        >
-                          <span className="fw-bold">Search</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ) : (
+            
               <div id="Flights" className="tab-pane fade">
                 <div className="row">
                   <div className="col-sm-12 col-md-12">
@@ -1226,19 +903,13 @@ const FlightSearch = () => {
                   </div>
                 </div>
               </div>
-            )}
+            
           </div>
           <div>
-            {data.length > 0 && (
-              <div>
-                <h1>Data from the backend:</h1>
-                <ul>
-                  {data.map((item) => (
-                    <li key={item.id}>{item.name}</li>
-                  ))}
-                </ul>
+           
+              
               </div>
-            )}
+          
           </div>
         </div>
         {/* Promotion banner section */}
@@ -1424,7 +1095,7 @@ const FlightSearch = () => {
             </div>
           </div>
         </section>
-      </div>
+   
     </>
   );
 };

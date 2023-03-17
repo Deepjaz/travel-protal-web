@@ -7,8 +7,10 @@ import TravelDeals from "../TravelsDeals/TravelDeals";
 import FlightDestination from "../Flights/FlightDestination/FlightDestination";
 import Recommendations from "../Recommendations/Recommendations";
 import { Link } from "react-router-dom";
+import FlightSearchApi from './../Flights/FlightSearch.js/Hooks/FlightSearchApi';
 
 const Home = () => {
+
   const travelDeals = Array.from({ length: 9 }, (_, index) => index);
   const travelDealsList = travelDeals.map((deal) => <TravelDeals key={deal} />);
 
