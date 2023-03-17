@@ -18,7 +18,7 @@ const SignInform = () => {
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        let url= `${baseUrl}login`
+        let url= `${baseUrl}/api/auth/login`
         const signInResponse = await axios.post(url , signForm )
         console.log(signInResponse)
 
