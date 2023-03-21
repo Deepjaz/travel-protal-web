@@ -13,6 +13,8 @@ import TravellerAddOn from "./../TravellerAddOn/TravellerAddOn";
 import TravellerMain from "./../TravellerAddOn/TravellerMain";
 import Payment from "./../Payment/Payment";
 import Privacy from './../Privacy/Privacy';
+import DetailofFlight from './../Flights/FlightSearch.js/DetailofFlight';
+import Demo from './../../Demo';
 
 const AllRoutes = () => {
   return (
@@ -28,6 +30,8 @@ const AllRoutes = () => {
           <Route path="/TravellerAddOn" element={<TravellerMain />}></Route>
           <Route path="/Payment" element={<Payment />}></Route>
           <Route path="/Privacy" element={<Privacy />}></Route>
+          <Route path="/DetailofFlight" element={<DetailofFlight />}></Route>
+          <Route path="/Demo" element={<Demo />}></Route>
         </Route>
         <Route path="/sign-up" element={<SignUp />}></Route>
         <Route path="/sign-in" element={<SignIn />}></Route>

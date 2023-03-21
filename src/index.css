@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.tab-content.bg-primary {
+  background: #6b0be0 !important;
+}
+.flight-search .search-pan .dropdown .dropdown-menu {
+  width: 100%;
+  padding: 0px 0.5rem;
+  border-radius: 0.5rem;
+  display: none;
+}
+.bottom-spcae{
+  margin-bottom: 85px;
+}
