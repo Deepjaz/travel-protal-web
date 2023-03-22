@@ -4,7 +4,7 @@ import axios from "axios";
 import "react-calendar/dist/Calendar.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Calendar from "react-calendar";
+
 const formobject = {
   orgin: "",
   code: "",
@@ -68,6 +68,16 @@ const handleCountChange2 = (action) => {
     } 
     else if (action === "decrement" && counting > 0) {
         setCounting(counting - 1);
+    }
+  };
+// create count of adults code here for third 
+const [counting2, setCounting2] = useState(0);
+const handleCountChange3 = (action) => {
+    if (action === "increment") {
+      setCounting2(counting2 + 1);
+    } 
+    else if (action === "decrement" && counting2 > 0) {
+      setCounting2(counting2 - 1);
     }
   };
 
@@ -307,6 +317,7 @@ const handleCountChange2 = (action) => {
                                     class="circle"
                                     data-quantity="minus"
                                     data-field="onewayInfant"
+                                    onClick={() => handleCountChange3("decrement")}
                                   >
                                     <i class="bi bi-dash"></i>
                                   </button>
@@ -315,7 +326,7 @@ const handleCountChange2 = (action) => {
                                   class="input-group-field"
                                   type="number"
                                   name="onewayInfant"
-                                  value="0"
+                                  value={counting2}
                                 />
                                 <div class="input-group-button">
                                   <button
@@ -323,6 +334,7 @@ const handleCountChange2 = (action) => {
                                     class="circle"
                                     data-quantity="plus"
                                     data-field="onewayInfant"
+                                    onClick={() => handleCountChange3("increment")}
                                   >
                                     <i class="bi bi-plus"></i>
                                   </button>
