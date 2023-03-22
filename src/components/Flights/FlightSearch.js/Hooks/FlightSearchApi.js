@@ -1,38 +1,33 @@
-import {React,useState} from 'react'
+import {useState, useEffect} from 'react'
 import axios from "axios";
 const FlightSearchApi = () => {
-    const [postApi, setPost] = useState();
+    
+  const [postApi, setPostApi] = useState([]);
 
-    var defineData = new Date();
-
-    // console.log('defineDatadefineDatadefineData' , defineData.)
-    const dataData = defineData.getDate();
-    const monthData =  defineData.getMonth();
-    const YearData =  defineData.getFullYear();
-
-    var newData = `${YearData} ${monthData} ${dataData}`
-   
-    console.log('dataDatadataData' , YearData)
-    let departureDate = '2023-03-17'
-    let returnDate = '2023-03-18'
+    let departureDate = '2023-04-01'
+    let returnDate = '2023-04-18'
     let adults = '5' 
     let max = '9'
     let code = 'DEL'
-    let orgin = "MUB"
+    let orgin = "LON"
 
-    const handleClick = () =>{
+    useEffect(() => {
+
+    }, [postApi]);
+
+    const handleClick = () => {
       console.log("yes clicked")
-        axios.get(`http://18.215.160.28/api/flight-booking?departureDate=${departureDate}&returnDate=${returnDate}&adults=${adults}&max=${max}&destinationLocationCode=${code}&originLocationCode=${orgin}`).then((response) => {
-            console.log(response)
-            setPost(response)
-        }).then((err) => {console.log(err)})
+        axios.get(`http://localhost:3000/api/flight-booking?originLocationCode=DEL&destinationLocationCode=LON&departureDate=2023-04-10&returnDate=2023-04-11&adults=2&max=5`)
+        .then((response) => {
+            console.log(response.data,"this is ready")
+            setPostApi(response.data)
+        })
     }
-  return (
-    {
-        handleClick,
-        postApi
-    }
-  )
+
+  return ({     
+        postApi,
+        handleClick
+  })
 }
 
 export default FlightSearchApi
