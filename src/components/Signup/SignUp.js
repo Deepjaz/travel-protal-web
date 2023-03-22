@@ -2,13 +2,16 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import InputFeild from '../../common/InputFeild/InputFeild'
 import SignUpHook from './SignUpHook/SignUpHook';
-
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from 'react-toastify';
 const SignUp = () => {
+    const { HandleSubmit  , handleChange , formValue , signUpError} =  SignUpHook();
 
-    const { HandleSubmit  , handleChange , formValue} =  SignUpHook();
+    console.log('signUpErrorsignUpError' ,signUpError)
     return (
         <>
             <>
+            <ToastContainer/>
                 <div className="pagewrap modify-search">
                     {/* body section */}
                     <div className="content-section">
@@ -34,8 +37,7 @@ const SignUp = () => {
                                             <div className="col-12">
                                                 <form className="needs-validation" onSubmit={HandleSubmit}>
                                                     
-                                                    <div className="form-floating mb-3">
-                                                        
+                                                    <div className="form-floating mb-3"> 
                                                         <InputFeild
                                                             Placeholder={'Email Address'}
                                                             OnChange= {handleChange}
@@ -45,7 +47,7 @@ const SignUp = () => {
                                                             Type={"email"}
                                                             Label= {'Email Address'}
                                                             Id="floatingInput2"
-                                                            Error ={''}
+                                                            Error ={signUpError.email}
                                                         />
                                                     </div>
                                                     
