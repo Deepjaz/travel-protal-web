@@ -1,20 +1,18 @@
 import React from 'react'
 import InputFeild from '../../common/InputFeild/InputFeild'
 import SignInform from './Hooks/SignInform'
+import {Link} from 'react-router-dom'
 
 const SignIn = () => {
      const {handleChange , signForm , handleSubmit} =SignInform();
     return (
         <>
                 <div className="pagewrap modify-search">
-                    {/* body section */}
                     <div className="content-section">
-                        {/* flight result page - oneway start */}
                         <div className="review-flight py-5">
                             <div className="container">
                                 <div className="row">
                                     <div className="col-12 col-md-6 offset-md-3">
-                                        {/* travel insurance section */}
                                         <div className="theme-box-shadow theme-border-radius theme-bg-white p-3">
                                             <div className="d-flex align-items-center mb-3">
                                                 <div className="flex-shrink-0">
@@ -81,9 +79,9 @@ const SignIn = () => {
                                                         </button>
                                                         <span className="font-medium">
                                                             <span className="mx-3 text-uppercase">or</span>
-                                                            <a href="signup.html" className="">
+                                                            <Link to="/sign-up" className="">
                                                                 Create New Account
-                                                            </a>
+                                                            </Link>
                                                         </span>
                                                     </div>
                                                 </form>

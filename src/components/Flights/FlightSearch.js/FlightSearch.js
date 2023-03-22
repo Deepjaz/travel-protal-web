@@ -24,7 +24,6 @@ const FlightSearch = () => {
                 aria-selected="true"
                 onClick={handleClick}
               >
-               
                 Hotels
               </button>
             </li>
@@ -37,8 +36,7 @@ const FlightSearch = () => {
                 type="button"
                 role="tab"
                 aria-controls="Flights"
-                aria-selected="false"
-                
+                aria-selected="false" 
               >
                 <i className="fa fa-plane-departure" />
                 Flights
@@ -328,7 +326,7 @@ const FlightSearch = () => {
                                 <button
                                   type="submit"
                                   className="btn btn-search"
-                                  onclick="window.location.href='flight-listing-oneway.html';"
+                                  onclick="window.location.href='flight-listing-oneway.html'"
                                 >
                                   <span className="fw-bold">Search</span>
                                 </button>

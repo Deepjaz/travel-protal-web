@@ -5,9 +5,9 @@ import SignUpHook from './SignUpHook/SignUpHook';
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify';
 const SignUp = () => {
-    const { HandleSubmit  , handleChange , formValue , signUpError} =  SignUpHook();
+    const { HandleSubmit  , handleChange , formValue , emailError ,passwordError  , nameError} =  SignUpHook();
 
-    console.log('signUpErrorsignUpError' ,signUpError)
+    console.log('signUpErrorsignUpError' ,emailError)
     return (
         <>
             <>
@@ -47,7 +47,7 @@ const SignUp = () => {
                                                             Type={"email"}
                                                             Label= {'Email Address'}
                                                             Id="floatingInput2"
-                                                            Error ={signUpError.email}
+                                                            Error ={emailError}
                                                         />
                                                     </div>
                                                     
@@ -61,7 +61,7 @@ const SignUp = () => {
                                                             Type={"Password"}
                                                             Label= {'Password'}
                                                             Id="floatingPassword"
-                                                            Error ={''}
+                                                            Error ={passwordError}
                                                         />
                                                     </div>
 
@@ -74,7 +74,7 @@ const SignUp = () => {
                                                             Type={"text"}
                                                             Label= {'First Name'}
                                                             Id="floatingPassword"
-                                                            Error ={''}
+                                                            Error ={nameError}
                                                             Value = {formValue.firstName}
                                                         />
                                                     </div>
@@ -116,7 +116,7 @@ const SignUp = () => {
                                                         <button
                                                             type="submit"
                                                             className="btn btn-effect btn-book px-5 min-h58 btn-primary"
-                                                            onclick="window.location.href='#';"
+                                                            // onclick="window.location.href='#';"
                                                         >
                                                             Register
                                                         </button>
