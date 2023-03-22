@@ -9,7 +9,7 @@ const FlightSearchApi = () => {
     let adults = '5' 
     let max = '9'
     let code = 'DEL'
-    let orgin = "MUB"
+    let orgin = "LON"
 
     useEffect(() => {
 
@@ -17,7 +17,7 @@ const FlightSearchApi = () => {
 
     const handleClick = () => {
       console.log("yes clicked")
-        axios.get(`http://localhost:3000/api/flight-booking?departureDate=${departureDate}&returnDate=${returnDate}&adults=${adults}&max=${max}&destinationLocationCode=${code}&originLocationCode=${orgin}`)
+        axios.get(`http://localhost:3000/api/flight-booking?originLocationCode=DEL&destinationLocationCode=LON&departureDate=2023-04-10&returnDate=2023-04-11&adults=2&max=5`)
         .then((response) => {
             console.log(response.data,"this is ready")
             setPostApi(response.data)
