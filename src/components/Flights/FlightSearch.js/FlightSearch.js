@@ -12,7 +12,7 @@ const FlightSearch = () => {
       <div className="flight-search aos-init aos-animate" data-aos="fade-up">
         <div className="container">
           <ul className="nav nav-tabs border-0" role="tablist" id="top_tab">
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <button
                 className="nav-link active"
                 id="hotels-tab"
@@ -26,10 +26,10 @@ const FlightSearch = () => {
               >
                 Hotels
               </button>
-            </li>
+            </li> */}
             <li className="nav-item">
               <button
-                className="nav-link"
+                className="nav-link active"
                 id="Flights-tab"
                 data-bs-toggle="tab"
                 data-bs-target="#Flights"
@@ -37,6 +37,7 @@ const FlightSearch = () => {
                 role="tab"
                 aria-controls="Flights"
                 aria-selected="false" 
+                onClick={handleClick}
               >
                 <i className="fa fa-plane-departure" />
                 Flights
