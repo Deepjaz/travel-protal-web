@@ -4,7 +4,9 @@ import SignInform from './Hooks/SignInform'
 import {Link} from 'react-router-dom'
 
 const SignIn = () => {
-     const {handleChange , signForm , handleSubmit} =SignInform();
+     const {handleChange , signForm , handleSubmit , emailError , passError} =SignInform();
+
+     console.log('emailErroremailErroremailError' , emailError) 
     return (
         <>
                 <div className="pagewrap modify-search">
@@ -32,21 +34,21 @@ const SignIn = () => {
                                                     <div className="mb-3">
                                                         <InputFeild 
                                                             Requrried={true}
-                                                            Error={'Please enter Your Email Address'}
+                                                            Error={emailError}
                                                             Label={'Email Address'}
                                                             Name={'email'} 
                                                             Type={'text'}
                                                             OnChange = {handleChange}
                                                             Value = {signForm.email}
                                                             PlaceHolder = {"Enter Your Email"}
-                                                            ClassName="form-control min-h58"
+                                                            ClassName={'form-control min-h58'}
                                                         />
                                                     </div>
                                                     <div className="mb-3">
                                                          <InputFeild 
                                                             Requrried={true}
                                                             Type={'password'}
-                                                            Error={'Please enter Your Password'}
+                                                            Error={passError}
                                                             Label={'Password'}
                                                             Name={'password'} 
                                                             OnChange = {handleChange}

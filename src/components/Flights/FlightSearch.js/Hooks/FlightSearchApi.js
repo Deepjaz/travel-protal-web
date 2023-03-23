@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import axios from "axios";
+import { baseUrl } from '../../../../env/env';
 const FlightSearchApi = () => {
     
   const [postApi, setPostApi] = useState([]);
@@ -17,7 +18,7 @@ const FlightSearchApi = () => {
 
     const handleClick = () => {
       console.log("yes clicked")
-        axios.get(`http://localhost:3000/api/flight-booking?originLocationCode=DEL&destinationLocationCode=LON&departureDate=2023-04-10&returnDate=2023-04-11&adults=2&max=5`)
+        axios.get(`${baseUrl}/api/flight-booking?originLocationCode=DEL&destinationLocationCode=LON&departureDate=2023-04-10&returnDate=2023-04-11&adults=2&max=5`)
         .then((response) => {
             console.log(response.data,"this is ready")
             setPostApi(response.data)

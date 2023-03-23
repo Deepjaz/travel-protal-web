@@ -46,7 +46,6 @@ const SignUp = () => {
                                                             Value = {formValue.email}
                                                             Type={"email"}
                                                             Label= {'Email Address'}
-                                                            Id="floatingInput2"
                                                             Error ={emailError}
                                                         />
                                                     </div>

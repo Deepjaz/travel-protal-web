@@ -9,6 +9,9 @@ const SignForm = {
 }
 const SignInform = () => {
     const [signForm , setSignform]= useState(SignForm);
+    const [emailError , setEmailError] = useState('')
+    const [passError , setPassError] = useState('')
+
 // handleChange
     const handleChange = (event) => {
         const {name , value} = event.target
@@ -16,14 +19,25 @@ const SignInform = () => {
     }
 // handleSubmit
     const handleSubmit = async (e) => {
+      setEmailError('')
+      setPassError('')
       e.preventDefault();
       try {
+
+        if(!signForm.email){
+          setEmailError('Please enter Your Email Address')
+        }
+        if(!signForm.password){
+          setPassError('Please enter Your Password')
+        }
+
         let url= `${baseUrl}/api/auth/login`
         const signInResponse = await axios.post(url , signForm)
         console.log(signInResponse)
 
       }catch(err){
         console.log('this is the erros' , err)
+        
       }
 
     }
@@ -31,7 +45,9 @@ const SignInform = () => {
   return ({
     handleChange,
     handleSubmit,
-    signForm
+    signForm,
+    emailError,
+    passError
   })
 }
 
