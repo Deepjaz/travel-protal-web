@@ -1,7 +1,7 @@
-import {useEffect, useState} from 'react'
+import {useEffect, useState , useContext} from 'react'
 import FLightsSearching from './FLightsSearching';
 //import FlightSearchApi from './Hooks/FlightSearchApi';
-
+import {ContextProvider} from "./FLightsSearching"
 const DetailofFlight = () => {
     //const { postApi } = FlightSearchApi()
     const [postApi, setPostApi] = useState([]);
