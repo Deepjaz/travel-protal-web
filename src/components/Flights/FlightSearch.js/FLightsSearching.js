@@ -5,17 +5,20 @@ import "react-calendar/dist/Calendar.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { baseUrl } from "../../../env/env";
+import {Routes, Route, useNavigate} from 'react-router-dom';
 
 const formobject = {
   "currencyCode": "USD",
   "originDestinations": [
     {
       "id": "1",
+      // "originLocationCode": "BOS",
+      // "destinationLocationCode": "MAD",
       'originLocationCode' : "",
       'destinationLocationCode' : '',
       "departureDateTimeRange": {
         "date": "",
-        "time": ""
+        "time": "18:00:00"
       }
     }
   ],
@@ -32,9 +35,12 @@ const formobject = {
 };
 
 
-
-
 const FLightsSearching = ({ callBackData }) => {
+  const navigate = useNavigate();
+  const [count ,setCount] = useState(0);
+  const [counting, setCounting] = useState(0);
+  const [counting2 ,setCounting2] = useState(0)
+
   // this code is used for form Data objects
   const [formValue, setFormValue] = useState(formobject);
   const [newformValue ,setnewFormValue] = useState({
@@ -42,17 +48,12 @@ const FLightsSearching = ({ callBackData }) => {
     'destinationLocationCode': '',
     'selectedData': ''
   })
-  const [count, setCount] = useState(0);
-  const [counting, setCounting] = useState(0);
-  const [counting2, setCounting2] = useState(0);
+  console.log('this is the formValue' , formValue)
   const handleChange = (event) => {
     const { name, value } = event.target;
     setnewFormValue({ ...newformValue, [name]: value });
-    
-    
-  };
 
-  
+  };
 
   // date format handlechange
   const [selectedDate, setSelectedDate] = useState("");
@@ -86,6 +87,7 @@ const handleCountChange = (action) => {
   };
 
 // create count of adults code here for second 
+
 const handleCountChange2 = (action) => {
     if (action === "increment") {
         setCounting(counting + 1);
@@ -147,9 +149,36 @@ const handleCountChange3 = (action) => {
     console.log('formValueformValueformValue' , formValue)
     axios.post(`${baseUrl}/api/flight-booking`, formobject).then((res) => {
       console.log('res.data')
-      
     })
+    navigate('/DetailofFlight');
   };
+
+
+  // this is dropdown code 
+  const [isOpen, setIsOpen] = useState(false);
+
+const handleButtonClick = () => {
+  setIsOpen(!isOpen);
+};
+
+const handleDoneClick = () => {
+  setIsOpen(false);
+};
+
+
+
+
+// radio button handling
+
+const [selectedOption, setSelectedOption] = useState('');
+
+// handle option selection
+const handleOptionChange = (event) => {
+  setSelectedOption(event.target.value);
+};
+console.log(selectedOption,"selectedOption")
+
+
 
 
 
@@ -177,36 +206,8 @@ const handleCountChange3 = (action) => {
                 One-way
               </button>
             </li>
-            <li className="nav-item">
-              <button
-                className="nav-link"
-                id="return-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#return"
-                type="button"
-                role="tab"
-                aria-controls="return"
-                aria-selected="false"
-              >
-                <span className="d-inline-block icon-20 rounded-circle bg-white align-middle me-2"></span>
-                Return
-              </button>
-            </li>
-            <li className="nav-item">
-              <button
-                className="nav-link"
-                id="multiCity-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#multiCity"
-                type="button"
-                role="tab"
-                aria-controls="multiCity"
-                aria-selected="false"
-              >
-                <span className="d-inline-block icon-20 rounded-circle bg-white align-middle me-2"></span>
-                Multi-city
-              </button>
-            </li>
+            
+            
           </ul>
 
           <div className="tab-content">
@@ -268,12 +269,15 @@ const handleCountChange3 = (action) => {
                           id="travellerInfoOneway"
                           data-bs-toggle="dropdown"
                           aria-expanded="false"
+                          onClick={handleButtonClick}
                         >
                           <i className="bi bi-person-lines-fill position-absolute h2 icon-pos"></i>
                           <span className="text-truncate">
-                            1 Traveller(s), Economy{" "}
+                            1 Traveller(s), Economy
+
                           </span>
                         </button>
+                        {isOpen && (
                         <div
                           className="dropdown-menu"
                           aria-labelledby="travellerInfoOneway"
@@ -379,25 +383,26 @@ const handleCountChange3 = (action) => {
                               </div>
                             </li>
                             <li>
-                              <input
+                              
+                                <input
                                   type="radio"
                                   name="class"
                                   value="Economy"
                                   className="me-2"
-                                  id="Economy"
+                                  checked={selectedOption === 'Economy'}
+                                  onChange={handleOptionChange}
                                 />
                               <label className="radio-inline" htmlFor="Economy">Economy{" "}</label>
-
-                                
-                              
                             </li>
                             <li>
+                              
                                 <input
                                   type="radio"
                                   name="class"
                                   value="Special"
                                   className="me-2"
-                                  id="Premium_Economy"
+                                  checked={selectedOption === 'Special'}
+                                  onChange={handleOptionChange}
                                 />
                                 {/* Premium Economy{" "} */}
                                 <label className="radio-inline" htmlFor="Premium_Economy">Premium Economy</label>
@@ -409,8 +414,8 @@ const handleCountChange3 = (action) => {
                                   name="class"
                                   value="Business"
                                   className="me-2"
-                                  id="Business"
-
+                                  checked={selectedOption === 'Business'}
+                                  onChange={handleOptionChange}
                                 />
                                 
                                 <label className="radio-inline" htmlFor="Business">Business{" "}</label>
@@ -422,17 +427,20 @@ const handleCountChange3 = (action) => {
                                   name="class"
                                   value="First"
                                   className="me-2"
+                                  checked={selectedOption === 'First'}
+                                  onChange={handleOptionChange}
                                 />
                                 First Class{" "}
                               </label>
                             </li>
                             <li>
-                              <button type="button" className="btn btn" onclick="">
+                              <button type="button" className="btn btn" onClick={handleDoneClick}>
                                 Done
                               </button>
                             </li>
                           </ul>
                         </div>
+                        )}
                       </div>
                     </div>
                     <div className="col-12 col-lg-6 col-xl-2 px-0">
@@ -539,9 +547,12 @@ const handleCountChange3 = (action) => {
                         >
                           <i className="bi bi-person-lines-fill position-absolute h2 icon-pos"></i>
                           <span className="text-truncate">
-                            1 Traveller(s), Economy{" "}
+                            1 Traveller(s), Economy
                           </span>
                         </button>
+                        {
+                          isOpen &&
+                       
                         <div
                           className="dropdown-menu"
                           aria-labelledby="travellerInfoReturn"
@@ -685,12 +696,13 @@ const handleCountChange3 = (action) => {
                               </label>
                             </li>
                             <li>
-                              <button type="button" className="btn btn" onclick="">
+                              <button type="button" className="btn btn" onclick={handleDoneClick}>
                                 Done
                               </button>
                             </li>
                           </ul>
                         </div>
+                         }
                       </div>
                     </div>
                     <div className="col-12 col-lg-6 col-xl-2 px-0">
@@ -707,289 +719,7 @@ const handleCountChange3 = (action) => {
               </div>
             </div>
 
-            <div id="multiCity" className="tab-pane fade">
-              <div className="row">
-                <div className="col-sm-12 col-md-12">
-                  <div className="search-pan row mx-0 theme-border-radius">
-                    <div className="col-12">
-                      <div className="row">
-                        <div className="col-12 col-lg-6 col-xl-3 ps-0 mb-2 mb-xl-0 pe-0 pe-lg-2">
-                          <div className="form-group">
-                            <i className="bi bi-geo-alt-fill position-absolute h2 icon-pos"></i>
-                            <input
-                              type="text"
-                              className="form-control ps-5"
-                              id="multiOrigin"
-                              placeholder="Origin"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12 col-lg-6 col-xl-3 ps-0 mb-2 mb-xl-0 pe-0 pe-lg-0 pe-xl-2">
-                          <div className="form-group">
-                            <i className="bi bi-geo-alt-fill position-absolute h2 icon-pos"></i>
-                            <input
-                              type="text"
-                              className="form-control ps-5"
-                              id="multiDestination"
-                              placeholder="Destination"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12 col-lg-6 col-xl-2 ps-0 mb-2 mb-xl-0 pe-0 pe-lg-2 pe-xl-2">
-                          <div className="form-control form-group d-flex">
-                            <i className="bi bi-calendar3 position-absolute h2 icon-pos"></i>
-                            <span className="dep-date-input">
-                              <input
-                                type="text"
-                                className="cal-input"
-                                placeholder="Depart Date"
-                                id="datepicker3"
-                              />
-                            </span>
-                          </div>
-                        </div>
-                        <div className="col-12 col-lg-6 col-xl-4 ps-0 mb-2 mb-lg-0 mb-xl-0 pe-0 pe-lg-0 pe-xl-0">
-                          <div className="dropdown" id="myDDRound">
-                            <button
-                              className="dropdown-toggle form-control"
-                              type="button"
-                              id="travellerInfoMulti"
-                              data-bs-toggle="dropdown"
-                              aria-expanded="false"
-                            >
-                              <i className="bi bi-person-lines-fill position-absolute h2 icon-pos"></i>
-                              <span className="text-truncate">
-                                1 Traveller(s), Economy{" "}
-                              </span>
-                            </button>
-                            <div
-                              className="dropdown-menu"
-                              aria-labelledby="travellerInfoMulti"
-                            >
-                              <ul className="drop-rest">
-                                <li>
-                                  <div className="d-flex">Select Adults</div>
-                                  <div className="ms-auto input-group plus-minus-input">
-                                    <div className="input-group-button">
-                                      <button
-                                        type="button"
-                                        className="circle"
-                                        data-quantity="minus"
-                                        data-field="onewayAdult"
-                                      >
-                                        <i className="bi bi-dash"></i>
-                                      </button>
-                                    </div>
-                                    <input
-                                      className="input-group-field"
-                                      type="number"
-                                      name="onewayAdult"
-                                      value="0"
-                                    />
-                                    <div className="input-group-button">
-                                      <button
-                                        type="button"
-                                        className="circle"
-                                        data-quantity="plus"
-                                        data-field="onewayAdult"
-                                      >
-                                        <i className="bi bi-plus"></i>
-                                      </button>
-                                    </div>
-                                  </div>
-                                </li>
-                                <li>
-                                  <div className="d-flex">Select Child</div>
-                                  <div className="ms-auto input-group plus-minus-input">
-                                    <div className="input-group-button">
-                                      <button
-                                        type="button"
-                                        className="circle"
-                                        data-quantity="minus"
-                                        data-field="onewayChild"
-                                      >
-                                        <i className="bi bi-dash"></i>
-                                      </button>
-                                    </div>
-                                    <input
-                                      className="input-group-field"
-                                      type="number"
-                                      name="onewayChild"
-                                      value="0"
-                                    />
-                                    <div className="input-group-button">
-                                      <button
-                                        type="button"
-                                        className="circle"
-                                        data-quantity="plus"
-                                        data-field="onewayChild"
-                                      >
-                                        <i className="bi bi-plus"></i>
-                                      </button>
-                                    </div>
-                                  </div>
-                                </li>
-                                <li>
-                                  <div className="d-flex">Select Infants</div>
-                                  <div className="ms-auto input-group plus-minus-input">
-                                    <div className="input-group-button">
-                                      <button
-                                        type="button"
-                                        className="circle"
-                                        data-quantity="minus"
-                                        data-field="onewayInfant"
-                                      >
-                                        <i className="bi bi-dash"></i>
-                                      </button>
-                                    </div>
-                                    <input
-                                      className="input-group-field"
-                                      type="number"
-                                      name="onewayInfant"
-                                      value="0"
-                                    />
-                                    <div className="input-group-button">
-                                      <button
-                                        type="button"
-                                        className="circle"
-                                        data-quantity="plus"
-                                        data-field="onewayInfant"
-                                      >
-                                        <i className="bi bi-plus"></i>
-                                      </button>
-                                    </div>
-                                  </div>
-                                </li>
-                                <li>
-                                  <label className="radio-inline">
-                                    <input
-                                      type="radio"
-                                      name="class"
-                                      value="Economy"
-                                      className="me-2"
-                                    />
-                                    Economy{" "}
-                                  </label>
-                                </li>
-                                <li>
-                                  <label className="radio-inline">
-                                    <input
-                                      type="radio"
-                                      name="class"
-                                      value="Special"
-                                      className="me-2"
-                                    />
-                                    Premium Economy{" "}
-                                  </label>
-                                </li>
-                                <li>
-                                  <label className="radio-inline">
-                                    <input
-                                      type="radio"
-                                      name="class"
-                                      value="Business"
-                                      className="me-2"
-                                    />
-                                    Business
-                                  </label>
-                                </li>
-                                <li>
-                                  <label className="radio-inline">
-                                    <input
-                                      type="radio"
-                                      name="class"
-                                      value="First"
-                                      className="me-2"
-                                    />
-                                    First Class{" "}
-                                  </label>
-                                </li>
-                                <li>
-                                  <button
-                                    type="button"
-                                    className="btn btn"
-                                    onclick=""
-                                  >
-                                    Done
-                                  </button>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="row mt-0 mt-md-0 mt-lg-0 mt-xl-2">
-                        <div className="col-12 col-lg-4 col-xl-3 ps-0 mb-2 mb-xl-0 pe-0 pe-lg-2">
-                          <div className="form-group">
-                            <i className="bi bi-geo-alt-fill position-absolute h2 icon-pos"></i>
-                            <input
-                              type="text"
-                              className="form-control ps-5"
-                              id="multiOrigin2"
-                              placeholder="Origin"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12 col-lg-4 col-xl-3 ps-0 mb-2 mb-xl-0 pe-0 pe-lg-2">
-                          <div className="form-group">
-                            <i className="bi bi-geo-alt-fill position-absolute h2 icon-pos"></i>
-                            <input
-                              type="text"
-                              className="form-control ps-5"
-                              id="multiDestination2"
-                              placeholder="Destination"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-12 col-lg-4 col-xl-2 ps-0 mb-2 mb-xl-0 pe-0 pe-lg-0 pe-xl-2">
-                          <div className="form-control form-group d-flex">
-                            <i className="bi bi-calendar3 position-absolute h2 icon-pos"></i>
-                            <span className="dep-date-input">
-                              <input
-                                type="text"
-                                className="cal-input"
-                                placeholder="Depart Date"
-                                id="datepicker4"
-                              />
-                            </span>
-                          </div>
-                        </div>
-                        <div className="col-12 col-lg-12 col-xl-4 px-0">
-                          <div className="row">
-                            <div className="col-12 col-lg-6 col-xl-7 mb-2 mb-md-2 mb-lg-0 d-flex justify-content-center align-items-center">
-                              <button
-                                type="submit"
-                                className="btn btn-light"
-                                id="add-button"
-                              >
-                                <span className="fw-bold">+ Add City</span>{" "}
-                              </button>
-                              <button
-                                type="submit"
-                                className="btn"
-                                id="remove-button"
-                              >
-                                {" "}
-                                <span className="fw-bold">Close</span>{" "}
-                              </button>
-                            </div>
-                            <div className="col-12 col-lg-6 col-xl-5">
-                              <button
-                                type="submit"
-                                className="btn btn-search"
-                                onclick="window.location.href='';"
-                              >
-                                <span className="fw-bold">Search</span>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+           
           </div>
         </div>
       </div>
