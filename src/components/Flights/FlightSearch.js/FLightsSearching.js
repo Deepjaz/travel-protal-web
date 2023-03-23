@@ -6,7 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { baseUrl } from "../../../env/env";
 import {Routes, Route, useNavigate} from 'react-router-dom';
-
+import Iata  from "../../../Iata"
 const formobject = {
   "currencyCode": "USD",
   "originDestinations": [
@@ -108,11 +108,12 @@ const handleCountChange3 = (action) => {
 
 
   const callBackFUNc=()=>{
-    var travelersData = formobject.travelers;
+    var travelersData =[];
+    formobject.travelers  = travelersData
     for(let i = 1; i <= count; i++){
       // console.log(i)
       travelersData.push({
-        "id" : `tp_${i}`,
+        "id" : i,
         "travelerType" : 'ADULT',
         "fareOptions":["STANDARD"]
       })
@@ -121,36 +122,112 @@ const handleCountChange3 = (action) => {
     for(let i = 1; i <= counting; i++){
       // console.log(i)      
       travelersData.push({
-        "id" : `tp_${i}`,
+        "id" : 10+i,
         "travelerType" : 'CHILD',
         "fareOptions":["STANDARD"]
 
       })
     }
-    for(let i = 1; i <= counting2; i++){
-      // console.log(i)
+    // for(let i = 1; i <= counting2; i++){
+    //   // console.log(i)
       
-      travelersData.push({
-        "id" : `tp_${i}`,
-        "travelerType" : 'Infants',
-        "fareOptions":["STANDARD"]
+    //   travelersData.push({
+    //     "id" : 20+i,
+    //     "travelerType" : 'Infants',
+    //     "fareOptions":["STANDARD"]
 
-      })
-    }
+    //   })
+    // }
   }
+
+
+
+// origin code starting from here 
+
+
+
+const [inputValue, setInputValue] = useState('');
+const [suggestions, setSuggestions] = useState([]);
+const [selectedItem, setSelectedItem] = useState(null);
+
+const handleInputChange = (event) => {
+    const value = event.target.value;
+    setInputValue(value);
+
+    const filteredSuggestions = Iata.filter((item) => {
+        return item.city.toLowerCase().startsWith(value.toLowerCase());
+    });
+
+    setSuggestions(filteredSuggestions);
+};
+
+const handleSelectItem = (item) => {
+    setSelectedItem(item);
+    setInputValue(item.city);
+    setSuggestions([]);
+}; function handleInputClear() {
+  setInputValue("");
+  setSelectedItem(null);
+  setSuggestions(false);
+}
+console.log(selectedItem,"selectedItem")
+// origin code end here 
+
+//Destination code starting here
+
+const [inputValue2, setInputValue2] = useState('');
+const [suggestions2, setSuggestions2] = useState([]);
+const [selectedItem2, setSelectedItem2] = useState(null);
+
+const handleInputChange2 = (event) => {
+    const value2 = event.target.value;
+    setInputValue2(value2);
+
+    const filteredSuggestion2 = Iata.filter((item) => {
+        return item.city.toLowerCase().startsWith(value2.toLowerCase());
+    });
+
+    setSuggestions2(filteredSuggestion2);
+};
+
+const handleSelectItem2 = (item) => {
+    setSelectedItem2(item);
+    setInputValue2(item.city);
+    setSuggestions2([]);
+}; 
+function handleInputClear2() {
+  setInputValue2("");
+  setSelectedItem2(null);
+  setSuggestions2(false);
+}
+console.log(selectedItem2,"selectedItem")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   
   const handleClick = (event) => {
     event.preventDefault();
     callBackFUNc()
-    formValue.originDestinations[0].originLocationCode = newformValue.originLocationCode;
-    formValue.originDestinations[0].destinationLocationCode = newformValue.destinationLocationCode;
+    formValue.originDestinations[0].originLocationCode = selectedItem.iata_code;
+    formValue.originDestinations[0].destinationLocationCode = selectedItem2.iata_code;
     formobject.originDestinations[0].departureDateTimeRange.date =selectedDate;
     console.log('formValueformValueformValue' , formValue)
     axios.post(`${baseUrl}/api/flight-booking`, formobject).then((res) => {
       console.log('res.data')
     })
-    navigate('/DetailofFlight');
+    // navigate('/DetailofFlight');
   };
 
 
@@ -177,9 +254,6 @@ const handleOptionChange = (event) => {
   setSelectedOption(event.target.value);
 };
 console.log(selectedOption,"selectedOption")
-
-
-
 
 
 
@@ -218,15 +292,28 @@ console.log(selectedOption,"selectedOption")
                     <div className="col-12 col-lg-4 col-xl-2 ps-0 mb-2 mb-xl-0 pe-0 pe-lg-2">
                       <div className="form-group">
                         <i className="bi bi-geo-alt-fill position-absolute h2 icon-pos"></i>
-                        <input
-                          type="text"
-                          className="form-control ps-5"
-                          id="onewayOrigin"
-                          placeholder="Origin"
-                          name={"originLocationCode"}
-                          value={newformValue.originLocationCode}
-                          onChange={handleChange}
-                        />
+                        <div>
+                                                                <input
+                                                                    type="text"
+                                                                    value={inputValue}
+                                                                    onChange={handleInputChange}
+                                                                    className="form-control ps-5"
+                                                                              id="onewayDestination"
+                                                                              placeholder="origin"
+                                                                />
+                                                                {suggestions.length > 0 &&
+                                                                    <ul>
+                                                                        {suggestions.map((item) => (
+                                                                            <li key={item.iata_code} onClick={() => handleSelectItem(item)}>
+                                                                                {item.city}
+                                                                            </li>
+                                                                        ))}
+                                                                    </ul>
+                                                                }
+                                                                {/* {selectedItem &&
+                                                                    <button onClick={handleInputClear}>Clear</button>
+                                                                } */}
+                         </div>
                         <button className="pos-swap">
                           <i className="bi bi-arrow-left-right pl-1"></i>
                         </button>
@@ -235,7 +322,7 @@ console.log(selectedOption,"selectedOption")
                     <div className="col-12 col-lg-4 col-xl-2 ps-0 mb-2 mb-xl-0 pe-0 pe-lg-2">
                       <div className="form-group">
                         <i className="bi bi-geo-alt-fill position-absolute h2 icon-pos"></i>
-                        <input
+                        {/* <input
                           type="text"
                           className="form-control ps-5"
                           id="onewayDestination"
@@ -243,7 +330,29 @@ console.log(selectedOption,"selectedOption")
                           value={newformValue.destinationLocationCode}
                           onChange={handleChange}
                           name={"destinationLocationCode"}
-                        />
+                        /> */}
+                         <div>
+                                                                <input
+                                                                    type="text"
+                                                                    value={inputValue2}
+                                                                    onChange={handleInputChange2}
+                                                                    className="form-control ps-5"
+                                                                              id="onewayDestination"
+                                                                              placeholder="Destination"
+                                                                />
+                                                                {suggestions2.length > 0 &&
+                                                                    <ul>
+                                                                        {suggestions2.map((item) => (
+                                                                            <li key={item.iata_code} onClick={() => handleSelectItem2(item)}>
+                                                                                {item.city}
+                                                                            </li>
+                                                                        ))}
+                                                                    </ul>
+                                                                }
+                                                                {/* {selectedItem2 &&
+                                                                    <button onClick={handleInputClear2}>Clear</button>
+                                                                } */}
+                         </div>
                       </div>
                     </div>
                     <div className="col-12 col-lg-4 col-xl-3 ps-0 mb-2 mb-xl-0 pe-0 pe-lg-0 pe-xl-2">
