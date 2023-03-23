@@ -1,3 +1,3 @@
 export const baseUrl = [
-    "http://18.215.160.28/",
+    "http://54.146.95.37",
 ]
