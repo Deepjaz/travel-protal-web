@@ -19,11 +19,11 @@ const SignInform = () => {
       e.preventDefault();
       try {
         let url= `${baseUrl}/api/auth/login`
-        const signInResponse = await axios.post(url , signForm )
+        const signInResponse = await axios.post(url , signForm)
         console.log(signInResponse)
 
       }catch(err){
-        console.log(err)
+        console.log('this is the erros' , err)
       }
 
     }
