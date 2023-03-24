@@ -5,16 +5,10 @@ import "react-calendar/dist/Calendar.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { baseUrl } from "../../../env/env";
-<<<<<<< HEAD
-import { Routes, Route, useNavigate } from "react-router-dom";
-import Iata from "../../../Iata";
-export const formobject = {
-=======
 import {Routes, Route, useNavigate} from 'react-router-dom';
 import Iata  from "../../../Iata"
 
 const formobject = {
->>>>>>> a8df5c3432d3783bef0398af6382b2be891b6930
   currencyCode: "USD",
   originDestinations: [
     {
