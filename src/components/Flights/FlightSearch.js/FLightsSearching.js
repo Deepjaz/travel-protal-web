@@ -1,3 +1,4 @@
+…
 import React, { createContext, useState } from "react";
 //import FlightSearchApi from './Hooks/FlightSearchApi';
 import axios from "axios";
@@ -199,15 +200,11 @@ const FLightsSearching = (props) => {
     formobject.originDestinations[0].departureDateTimeRange.date = selectedDate;
     console.log("formValueformValueformValue", formValue);
     axios.post(`${baseUrl}/api/flight-booking`, formobject).then((res) => {
-      console.log("res.data", res.data);
-      setApiRes(res.data)
-      if(res.data){
-        navigate(`/DetailofFlight/?${selectedItem.iata_code}/${selectedItem2.iata_code}/${count}/${counting}`);
-        
-
-      }
-
-    });
+      console.log('res.data',res.data)
+      callBackData(res.data)
+    })
+    
+    navigate(`/DetailofFlight/?originLocationCode=${selectedItem.iata_code}/destinationLocationCode=${selectedItem2.iata_code}/adults=${count}/Child=${counting}/Date=${selectedDate}`);
   };
 
   // this is dropdown code
