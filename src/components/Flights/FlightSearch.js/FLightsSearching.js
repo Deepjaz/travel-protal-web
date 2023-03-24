@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { baseUrl } from "../../../env/env";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Iata from "../../../Iata";
-const formobject = {
+export const formobject = {
   currencyCode: "USD",
   originDestinations: [
     {
@@ -190,10 +190,13 @@ const FLightsSearching = ({ callBackData }) => {
     axios.post(`${baseUrl}/api/flight-booking`, formobject).then((res) => {
       console.log("res.data", res.data);
       setApiRes(res.data)
-      
+      if(res.data){
+        navigate(`/DetailofFlight/?${selectedItem.iata_code}/${selectedItem2.iata_code}/${count}/${counting}`);
+        
+
+      }
 
     });
-    navigate(`/DetailofFlight/?=&${selectedItem.iata_code}/?=${selectedItem2.iata_code}`);
   };
 
   // this is dropdown code

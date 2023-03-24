@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useEffect} from "react";
 import SixE from "../../assets/images/icons/6E.jpg";
-
 import TravelDeal from "../TravelDeal/TravelDeal";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const TravelDeals = () => {
+
   return (
     <>
       <section className="travel-deal py-5 border-top" id="travelDeals">
