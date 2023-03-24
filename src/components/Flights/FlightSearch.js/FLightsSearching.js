@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { baseUrl } from "../../../env/env";
 import {Routes, Route, useNavigate} from 'react-router-dom';
 import Iata  from "../../../Iata"
+
 const formobject = {
   "currencyCode": "USD",
   "originDestinations": [
@@ -35,7 +36,16 @@ const formobject = {
 };
 
 
-const FLightsSearching = ({ callBackData }) => {
+
+
+
+
+
+
+
+const FLightsSearching = (props) => {
+ 
+  const {callBackData} = props
   const navigate = useNavigate();
   const [count ,setCount] = useState(0);
   const [counting, setCounting] = useState(0);
@@ -225,9 +235,11 @@ console.log(selectedItem2,"selectedItem")
     formobject.originDestinations[0].departureDateTimeRange.date =selectedDate;
     console.log('formValueformValueformValue' , formValue)
     axios.post(`${baseUrl}/api/flight-booking`, formobject).then((res) => {
-      console.log('res.data')
+      console.log('res.data',res.data)
+      callBackData(res.data)
     })
-    // navigate('/DetailofFlight');
+    
+    navigate(`/DetailofFlight/?originLocationCode=${selectedItem.iata_code}/destinationLocationCode=${selectedItem2.iata_code}/adults=${count}/Child=${counting}/Date=${selectedDate}`);
   };
 
 
