@@ -24,14 +24,7 @@ const TravelDeals = () => {
           <div className="row aos-init aos-animate" data-aos="fade-down">
             {/* {travelDealsList} */}
             <TravelDeal img={SixE} />
-            <TravelDeal img={SixE} />
-            <TravelDeal img={SixE} />
-            <TravelDeal img={SixE} />
-            <TravelDeal img={SixE} />
-            <TravelDeal img={SixE} />
-            <TravelDeal img={SixE} />
-            <TravelDeal img={SixE} />
-            <TravelDeal img={SixE} />
+         
           </div>
         </div>
       </section>
