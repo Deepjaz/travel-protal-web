@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> d86714f590e244a9e4407b64397171e92add6327
 import React, { createContext, useState } from "react";
 //import FlightSearchApi from './Hooks/FlightSearchApi';
 import axios from "axios";
@@ -59,7 +55,7 @@ const FLightsSearching = (props) => {
 
   // date format handlechange
   const [selectedDate, setSelectedDate] = useState("");
-
+  const [selectedMonth, setSelectedMonth] = useState(null);
   const handleDateChange = (date) => {
     if (date instanceof Date && !isNaN(date)) {
       const year = date.getFullYear();
@@ -69,11 +65,39 @@ const FLightsSearching = (props) => {
         .toString()
         .padStart(2, "0")}`;
       setSelectedDate(formattedDate);
-      // formValue.originDestinations[0].departureDateTimeRange.date = selectedDate
+      const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      const selectedMonthName = monthNames[date.getMonth()];
+      setSelectedMonth(selectedMonthName);
     } else {
       console.error(`Invalid date: ${date}`);
     }
   };
+  formValue.originDestinations[0].departureDateTimeRange.date = selectedDate
+  const [year, month, day] = selectedDate.split('-')
+  console.log(selectedMonth,"selectedMonth")
+
+  // second input return field 
+//   const [selectedDate2, setSelectedDate2] = useState(null);
+// const [selectedMonth2, setSelectedMonth2] = useState(null);
+//   const handleDateChange2 = (date) => {
+//     if (date instanceof Date && !isNaN(date)) {
+//       const year = date.getFullYear();
+//       const month = date.getMonth() + 1;
+//       const day = date.getDate();
+//       const formattedDate = `${year}-${month.toString().padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
+//       setSelectedDate2(formattedDate);
+  
+//       const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+//       const selectedMonthName = monthNames[date.getMonth()];
+//       setSelectedMonth2(selectedMonthName);
+//     } else {
+//       console.error(`Invalid date: ${date}`);
+//     }
+//   };
+//   const [year1, month1, day1] = selectedMonth2.split('-')
+//   console.log(selectedMonth2,"selectedMonth")
+
+
 
   // create count of adults code here for first one
 
@@ -298,19 +322,31 @@ const FLightsSearching = (props) => {
                   <label htmlFor="fromCity">
                     <span className="lbl_input  appendBottom10">From</span>
                     <input
-                      id="fromCity"
-                      type="text"
-                      className="fsw_inputField lineHeight36 latoBlack font30"
-                      name="originLocationCode"
-                      value={newformValue.originLocationCode}
-                      onChange={e =>handleChange(e)}    
-                    />
+                            type="text"
+                            value={inputValue}
+                            onChange={handleInputChange}
+                            className="form-control ps-5"
+                            id="onewayDestination"
+                            placeholder="origin"
+                          />
+                          {suggestions.length > 0 && (
+                            <ul>
+                              {suggestions.map((item) => (
+                                <li
+                                  key={item.iata_code}
+                                  onClick={() => handleSelectItem(item)}
+                                >
+                                  {item.city}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
                     <p
                       className="code makeRelative"
                       title="BOM, Chhatrapati Shivaji International Airport India"
                     >
                       <span className="truncate airPortName " title="">
-                        BOM, Chhatrapati Shivaji International Airport India
+                        {inputValue}, Chhatrapati Shivaji International Airport India
                       </span>
                     </p>
                   </label>
@@ -322,21 +358,31 @@ const FLightsSearching = (props) => {
                   <label htmlFor="toCity">
                     <span className="lbl_input  appendBottom10">To</span>
                     <input
-                      data-cy="toCity"
-                      id="toCity"
-                      type="text"
-                      className="fsw_inputField lineHeight36 latoBlack font30"
-                      name="destinationLocationCode"
-                      value={newformValue.destinationLocationCode}
-                      onChange={e =>handleChange(e)}    
-
-                    />
+                            type="text"
+                            value={inputValue2}
+                            onChange={handleInputChange2}
+                            className="form-control ps-5"
+                            id="onewayDestination"
+                            placeholder="Destination"
+                          />
+                          {suggestions2.length > 0 && (
+                            <ul>
+                              {suggestions2.map((item) => (
+                                <li
+                                  key={item.iata_code}
+                                  onClick={() => handleSelectItem2(item)}
+                                >
+                                  {item.city}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
                     <p
                       className="code makeRelative"
                       title="DEL, Indira Gandhi International Airport India"
                     >
                       <span className="truncate airPortName " title="">
-                        DEL, Indira Gandhi International Airport India
+                        {inputValue2}, Indira Gandhi International Airport India
                       </span>
                     </p>
                   </label>
@@ -344,14 +390,14 @@ const FLightsSearching = (props) => {
                 <div className="fsw_inputBox dates inactiveWidget ">
                   <label htmlFor="departure">
                     <span className="lbl_input appendBottom10">Departure</span>
-                    <input
+                    {/* <input
                       data-cy="departure"
                       id="departure"
                       type="text"
                       name="destinationLocationCode"
-                    />
+                    /> */}
                     <DatePicker
-                      // className="fsw_inputField font20"
+                      className="fsw_inputField font20"
 
                             selected={
                               selectedDate &&
@@ -359,17 +405,18 @@ const FLightsSearching = (props) => {
                             }
                             onChange={(date) => handleDateChange(date)}
                             dateFormat="yyyy-MM-dd"
+                            minDate={new Date()}
                           />
                     <p
                       data-cy="departureDate"
                       className="blackText font20 code lineHeight36"
                     >
-                      <span className="font30 latoBlack">10 </span>
-                      <span>May</span>
-                      <span className="shortYear">23</span>
+                      <span className="font30 latoBlack">{day ?? "1"} </span>
+                      <span>{selectedMonth ?? "March"} </span>
+                      {/* <span className="shortYear">{month}</span> */}
                     </p>
                     <p data-cy="departureDay" className="code ">
-                      Wednesday
+                      {year ?? "2023"}
                     </p>
                   </label>
                 </div>
@@ -381,34 +428,215 @@ const FLightsSearching = (props) => {
                       if plan changes
                     </p>
                   </div>
-                  <label htmlFor="return">
-                    <span className="lbl_input appendBottom10">Return</span>
-                    <input
-                      data-cy="return"
-                      id="return"
-                      type="text"
-                      className="fsw_inputField font20"
-                      value="Thursday, 11 May 2023"
-                    />
-                    <p
-                      data-cy="returnDate"
-                      className="blackText font20 code lineHeight36"
-                    >
-                      <span className="font30 latoBlack">11</span>
-                      <span>May</span>
-                      <span className="shortYear">23</span>
-                    </p>
-                    <p data-cy="returnDay" className="code ">
-                      Thursday
-                    </p>
-                  </label>
-                  <p
-                    className="dateErrorMsgForFlight whiteText"
-                    id="range_error"
-                  >
-                    You are booking for more than 30 days
-                  </p>
-                  <span className="returnCross landingSprite"></span>
+                  <div className="dropdown" id="myDDReturn">
+                        <button
+                          className="dropdown-toggle form-control"
+                          type="button"
+                          id="travellerInfoReturn"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                          onClick={handleButtonClick}
+                        >
+                          <i className="bi bi-person-lines-fill position-absolute h2 icon-pos"></i>
+                          <span className="text-truncate">
+                            1 Traveller(s), Economy
+                          </span>
+                        </button>
+                        {isOpen && (
+                          <div
+                          className="dropdown-menu"
+                          aria-labelledby="travellerInfoOneway"
+                        >
+                          <ul className="drop-rest">
+                            <li>
+                              <div className="d-flex">Select Adults</div>
+                              <div className="ms-auto input-group plus-minus-input">
+                                <div className="input-group-button">
+                                  <button
+                                    type="button"
+                                    className="circle"
+                                    data-quantity="minus"
+                                    data-field="onewayAdult"
+                                    onClick={() =>
+                                      handleCountChange("decrement")
+                                    }
+                                  >
+                                    <i className="bi bi-dash"></i>
+                                  </button>
+                                </div>
+                                <input
+                                  className="input-group-field"
+                                  type="number"
+                                  name="onewayAdult"
+                                  value={count}
+                                />
+                                <div className="input-group-button">
+                                  <button
+                                    type="button"
+                                    className="circle"
+                                    data-quantity="plus"
+                                    data-field="onewayAdult"
+                                    onClick={() =>
+                                      handleCountChange("increment")
+                                    }
+                                  >
+                                    <i className="bi bi-plus"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div className="d-flex">Select Child</div>
+                              <div className="ms-auto input-group plus-minus-input">
+                                <div className="input-group-button">
+                                  <button
+                                    type="button"
+                                    className="circle"
+                                    data-quantity="minus"
+                                    data-field="onewayChild"
+                                    onClick={() =>
+                                      handleCountChange2("decrement")
+                                    }
+                                  >
+                                    <i className="bi bi-dash"></i>
+                                  </button>
+                                </div>
+                                <input
+                                  className="input-group-field"
+                                  type="number"
+                                  name="onewayChild"
+                                  value={counting}
+                                />
+                                <div className="input-group-button">
+                                  <button
+                                    type="button"
+                                    className="circle"
+                                    data-quantity="plus"
+                                    data-field="onewayChild"
+                                    onClick={() =>
+                                      handleCountChange2("increment")
+                                    }
+                                  >
+                                    <i className="bi bi-plus"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div className="d-flex">Select Infants</div>
+                              <div className="ms-auto input-group plus-minus-input">
+                                <div className="input-group-button">
+                                  <button
+                                    type="button"
+                                    className="circle"
+                                    data-quantity="minus"
+                                    data-field="onewayInfant"
+                                    onClick={() =>
+                                      handleCountChange3("decrement")
+                                    }
+                                  >
+                                    <i className="bi bi-dash"></i>
+                                  </button>
+                                </div>
+                                <input
+                                  className="input-group-field"
+                                  type="number"
+                                  name="onewayInfant"
+                                  value={counting2}
+                                />
+                                <div className="input-group-button">
+                                  <button
+                                    type="button"
+                                    className="circle"
+                                    data-quantity="plus"
+                                    data-field="onewayInfant"
+                                    onClick={() =>
+                                      handleCountChange3("increment")
+                                    }
+                                  >
+                                    <i className="bi bi-plus"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <input
+                                type="radio"
+                                name="class"
+                                value="Economy"
+                                className="me-2"
+                                checked={selectedOption === "Economy"}
+                                onChange={handleOptionChange}
+                              />
+                              <label
+                                className="radio-inline"
+                                htmlFor="Economy"
+                              >
+                                Economy{" "}
+                              </label>
+                            </li>
+                            <li>
+                              <input
+                                type="radio"
+                                name="class"
+                                value="Special"
+                                className="me-2"
+                                checked={selectedOption === "Special"}
+                                onChange={handleOptionChange}
+                              />
+                              {/* Premium Economy{" "} */}
+                              <label
+                                className="radio-inline"
+                                htmlFor="Premium_Economy"
+                              >
+                                Premium Economy
+                              </label>
+                            </li>
+                            <li>
+                              <input
+                                type="radio"
+                                name="class"
+                                value="Business"
+                                className="me-2"
+                                checked={selectedOption === "Business"}
+                                onChange={handleOptionChange}
+                              />
+
+                              <label
+                                className="radio-inline"
+                                htmlFor="Business"
+                              >
+                                Business{" "}
+                              </label>
+                            </li>
+                            <li>
+                              <label className="radio-inline">
+                                <input
+                                  type="radio"
+                                  name="class"
+                                  value="First"
+                                  className="me-2"
+                                  checked={selectedOption === "First"}
+                                  onChange={handleOptionChange}
+                                />
+                                First Class{" "}
+                              </label>
+                            </li>
+                            <li>
+                              <button
+                                type="button"
+                                className="btn btn"
+                                onClick={handleDoneClick}
+                              >
+                                Done
+                              </button>
+                            </li>
+                          </ul>
+                        </div>
+                        )}
+                      </div>
+                 
+                  {/* <span className="returnCross landingSprite"></span> */}
                 </div>
                 {/* <div data-cy="flightTraveller" className="fsw_inputBox flightTravllers inactiveWidget "><label
                     htmlFor="travellers"><span className="lbl_input appendBottom5">Travellers &amp; Class</span><input
@@ -553,9 +781,13 @@ const FLightsSearching = (props) => {
                 </div>
               </div>
               <p data-cy="submit" className="makeFlex vrtlCenter ">
-                <a className="primaryBtn font24 latoBold widgetSearchBtn ">
-                  Search
-                </a>
+              <button
+                        type="submit"
+                        className="btn btn-search"
+                        onClick={handleClick}
+                      >
+                        <span className="fw-bold">Search</span>
+                      </button>
               </p>
             </div>
           </div>
