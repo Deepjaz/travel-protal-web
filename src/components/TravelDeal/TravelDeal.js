@@ -5,17 +5,14 @@ import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
 import { baseUrl } from './../../env/env';
 const TravelDeal = (props) => {
-    const [DataApi, setDataApi] = useState([]);
+    const [DataApi, setDataApi] = useState();
     useEffect(() => {
-       
-      axios.post(`${baseUrl}/api/flight-analytics/most-booked?originCityCode=NCE&period=2017-11`).then((res) => {
-        console.log(res,"yo data is here ")
-    }).then((res)=>{
-          setDataApi(res.data.data);
-
-      });
-    }, [DataApi]);
-    console.log(DataApi,"DataApi from starting page...");
+      axios.get(`${baseUrl}/api/flight-analytics/most-booked?originCityCode=NCE&period=2017-11`).then((res) => {
+        // console.log(res.data,"yo data is here ")
+        setDataApi(res.data.data);
+    })
+    },[DataApi]);
+    console.log(DataApi,"yo bhai")
   return (
 
     <>
@@ -23,12 +20,15 @@ const TravelDeal = (props) => {
         <div className="col-12 col-md-6 col-xl-4 mb-3">
                 <div className="p-3 d-flex flex-row border theme-box-shadow theme-bg-white theme-border-radius cardeffect">
                     <div className="flex-grow-1">
+                        <div>
+
                     <h6 className="fw-bold">
-                        Berlin BER
+                    NCE
                         <i className="bi bi-arrow-right mx-2" />
-                        Japan AXT
+                     {val.destination}
                     </h6>
-                    <p className="mb-3">Sun, 31/03 - Thu, 04/04</p>
+                    <p className="mb-3">2017-11-06</p>
+                        </div>
                     <div className="float-start">
                         <img
                         src={props.img}
@@ -44,13 +44,13 @@ const TravelDeal = (props) => {
                     </div>
                     <div className="float-end">
                         <span className="float-end h5 fw-bold theme-text-secondary">
-                        <i className="bi bi-currency-dollar" /> 3,096
+                        Score  {val.analytics.flights.score}
                         </span>
                     </div>
                     </div>
                 </div>
         </div>
- ))}
+))} 
  
     </>
       
