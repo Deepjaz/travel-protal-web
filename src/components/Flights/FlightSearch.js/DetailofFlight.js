@@ -97,18 +97,15 @@ const DetailofFlight = () => {
     });
   }, [DataApi]);
 
-
-
-  console.log(DataApi, "this is new state");
 const PriceCheckData =  async (e , selectID) => {
   console.log(selectID.id)
     try{
 
       const url= `${baseUrl}/api/flight-booking/priceCheck`
       const validData = DataApi.filter((val , index) =>  val.id === selectID.id);
-      console.log('this is the new data ' , validData)
-       axios.post(url , validData).then(res => {
-        console.log(res.data)
+      
+       axios.post(url , validData[0]).then(res => {
+        console.log("deep jaswal" ,res.data)
       })
 
     }catch(err){
