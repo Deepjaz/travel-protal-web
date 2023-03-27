@@ -314,7 +314,7 @@ const FLightsSearching = (props) => {
                 </div>
               </div>
             </div>
-            <div className="widgetLoader landingSearchWidget IN"></div>
+          
           </div>
 
           <div
@@ -354,9 +354,15 @@ const FLightsSearching = (props) => {
                       className="code makeRelative"
                       // title="BOM, Chhatrapati Shivaji International Airport India"
                     >
+<<<<<<< HEAD
                       {/* <span className="truncate airPortName " title="">
                         {inputValue}, Chhatrapati Shivaji International Airport India
                       </span> */}
+=======
+                      <span className="truncate airPortName " title="">
+                        {newformValue.originLocationCode}  International Airport India
+                      </span>
+>>>>>>> 20a96b0d1a076c0d95d8f11d20f9c690137f8742
                     </p>
                   </label>
                 </div>
@@ -380,7 +386,7 @@ const FLightsSearching = (props) => {
                       title="DEL, Indira Gandhi International Airport India"
                     >
                       <span className="truncate airPortName " title="">
-                        {inputValue2}, Indira Gandhi International Airport India
+                        {newformValue.destinationLocationCode}  International Airport India
                       </span>
                     </p> */}
                   </label>
@@ -418,7 +424,11 @@ const FLightsSearching = (props) => {
                     </p>
                   </label>
                 </div>
+<<<<<<< HEAD
                
+=======
+                
+>>>>>>> 20a96b0d1a076c0d95d8f11d20f9c690137f8742
                 <div className="col-12 col-lg-6 col-xl-3 ps-0 mb-2 mb-lg-0 mb-xl-0 pe-0 pe-lg-2">
                   <div className="dropdown" id="myDD">
                     <button
@@ -607,7 +617,7 @@ const FLightsSearching = (props) => {
                           <li>
                             <button
                               type="button"
-                              className="btn btn"
+                              className="btn primaryBtn font24 latoBold widgetSearchBtn "
                               onClick={handleDoneClick}
                             >
                               Done

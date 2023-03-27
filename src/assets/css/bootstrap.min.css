@@ -4021,9 +4021,32 @@ fieldset:disabled .btn {
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, .15);
-    border-radius: .25rem
+    border-radius: .25rem;
+    /* width: 100px !important; */
+    left: 18px;
+   
 }
-
+.ms-auto.input-group.plus-minus-input {
+    display: flex;
+    justify-content: center;
+}
+.drop-rest{
+    padding-left: 0;
+}
+.dropdown-menu {
+    padding: 14px;
+}
+button#travellerInfoOneway {
+    padding: 43px 0px;
+    border: none;
+}
+i.bi.bi-person-lines-fill.position-absolute.h2.icon-pos{
+    display:none
+}
+input.input-group-field {
+    width: 40px;
+    text-align: center;
+}
 .dropdown-menu[data-bs-popper] {
     top: 100%;
     left: 0;
