@@ -1,10 +1,11 @@
-import React, {useEffect} from "react";
+import React, {useEffect , useState} from "react";
 import SixE from "../../assets/images/icons/6E.jpg";
 import TravelDeal from "../TravelDeal/TravelDeal";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 
 const TravelDeals = () => {
+
 
   return (
     <>

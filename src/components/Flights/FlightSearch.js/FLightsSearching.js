@@ -1,4 +1,3 @@
-…
 import React, { createContext, useState } from "react";
 //import FlightSearchApi from './Hooks/FlightSearchApi';
 import axios from "axios";
@@ -6,16 +5,15 @@ import "react-calendar/dist/Calendar.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { baseUrl } from "../../../env/env";
-import {Routes, Route, useNavigate} from 'react-router-dom';
-import Iata  from "../../../Iata"
+import { Routes, Route, useNavigate } from "react-router-dom";
+import Iata from "../../../Iata";
 
 const formobject = {
   currencyCode: "USD",
   originDestinations: [
     {
       id: "1",
-      // "originLocationCode": "BOS",
-      // "destinationLocationCode": "MAD",
+
       originLocationCode: "",
       destinationLocationCode: "",
       departureDateTimeRange: {
@@ -34,22 +32,13 @@ const formobject = {
   sources: ["GDS"],
 };
 
-
-
-
-
-
-
-
-
 const FLightsSearching = (props) => {
- 
-  const {callBackData} = props
+  const { callBackData } = props;
   const navigate = useNavigate();
   const [count, setCount] = useState(0);
   const [counting, setCounting] = useState(0);
   const [counting2, setCounting2] = useState(0);
-  const [apiRes , setApiRes] = useState()
+  const [apiRes, setApiRes] = useState();
 
   // this code is used for form Data objects
   const [formValue, setFormValue] = useState(formobject);
@@ -130,7 +119,6 @@ const FLightsSearching = (props) => {
         fareOptions: ["STANDARD"],
       });
     }
-    
   };
 
   // origin code starting from here
@@ -160,11 +148,6 @@ const FLightsSearching = (props) => {
     setSelectedItem(null);
     setSuggestions(false);
   }
-  console.log(selectedItem, "selectedItem");
-  // origin code end here
-
-  //Destination code starting here
-
   const [inputValue2, setInputValue2] = useState("");
   const [suggestions2, setSuggestions2] = useState([]);
   const [selectedItem2, setSelectedItem2] = useState(null);
@@ -196,15 +179,18 @@ const FLightsSearching = (props) => {
     event.preventDefault();
     callBackFUNc();
     formValue.originDestinations[0].originLocationCode = selectedItem.iata_code;
-    formValue.originDestinations[0].destinationLocationCode =selectedItem2.iata_code;
+    formValue.originDestinations[0].destinationLocationCode =
+      selectedItem2.iata_code;
     formobject.originDestinations[0].departureDateTimeRange.date = selectedDate;
     console.log("formValueformValueformValue", formValue);
     axios.post(`${baseUrl}/api/flight-booking`, formobject).then((res) => {
-      console.log('res.data',res.data)
-      callBackData(res.data)
-    })
-    
-    navigate(`/DetailofFlight/?originLocationCode=${selectedItem.iata_code}/destinationLocationCode=${selectedItem2.iata_code}/adults=${count}/Child=${counting}/Date=${selectedDate}`);
+      console.log("res.data", res.data);
+      callBackData(res.data);
+    });
+
+    navigate(
+      `/DetailofFlight/?originLocationCode=${selectedItem.iata_code}/destinationLocationCode=${selectedItem2.iata_code}/adults=${count}/Child=${counting}/Date=${selectedDate}`
+    );
   };
 
   // this is dropdown code
@@ -228,110 +214,141 @@ const FLightsSearching = (props) => {
   };
   console.log(selectedOption, "selectedOption");
 
+  // trip select
+  const option = ["One Way", "Round Trip", "Multi City"];
+  const [selectOption, setSelectOption] = useState("");
+  const selectFeild = (e, value) => {
+    console.log("thi is the e", e.target.value);
+    setSelectOption(value);
+  };
   return (
     <>
       <div className="flight-search">
         <div className="container">
-          <ul className="nav nav-tabs border-0" role="tablist">
-            <li className="nav-item">
-              <button
-                className="nav-link active"
-                id="oneway-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#oneway"
-                type="button"
-                role="tab"
-                aria-controls="oneway"
-                aria-selected="true"
-              >
-                <span className="d-inline-block icon-20 rounded-circle bg-white align-middle me-2"></span>
-                One-way
-              </button>
-            </li>
-          </ul>
+          <div
+            className="page-section sticky-scroll topSection appendBottom40"
+            id="SW"
+          >
+            <div data-cy="landingContainer" className="landingContainer eng">
+              <div className="headerOuter">
+                <span className="headerModuleFedTest2"></span>
+                <div className="chHeaderWrapper navOnly">
+                  <div className="chHeaderContainer">
+                    <nav className="Name">
+                      <ul className="makeFlex font12">
+                        <li className="menu_Flights">
+                          <div>
+                            <a
+                              href="#"
+                              className="makeFlex hrtlCenter column active"
+                            >
+                              <span className="chNavIcon appendBottom2 chSprite chFlights active"></span>
+                              <span className="chNavText darkGreyText">
+                                Flights
+                              </span>
+                            </a>
+                          </div>
+                        </li>
+                        <li className="menu_Hotels">
+                          <div>
+                            <a href="#" className="makeFlex hrtlCenter column">
+                              <span className="chNavIcon appendBottom2 chSprite chHotels"></span>
+                              <span className="chNavText darkGreyText">
+                                {" "}
+                                Hotels
+                              </span>
+                            </a>
+                          </div>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="widgetLoader landingSearchWidget IN"></div>
+          </div>
 
-          <div className="tab-content">
-            <div id="oneway" className="tab-pane active">
-              <div className="row">
-                <div className="col-12">
-                  <div className="search-pan row mx-0 theme-border-radius">
-                    <div className="col-12 col-lg-4 col-xl-2 ps-0 mb-2 mb-xl-0 pe-0 pe-lg-2">
-                      <div className="form-group">
-                        <i className="bi bi-geo-alt-fill position-absolute h2 icon-pos"></i>
-                        <div>
-                          <input
-                            type="text"
-                            value={inputValue}
-                            onChange={handleInputChange}
-                            className="form-control ps-5"
-                            id="onewayDestination"
-                            placeholder="origin"
-                          />
-                          {suggestions.length > 0 && (
-                            <ul>
-                              {suggestions.map((item) => (
-                                <li
-                                  key={item.iata_code}
-                                  onClick={() => handleSelectItem(item)}
-                                >
-                                  {item.city}
-                                </li>
-                              ))}
-                            </ul>
-                          )}
-                          {/* {selectedItem &&
-                                                                    <button onClick={handleInputClear}>Clear</button>
-                                                                } */}
-                        </div>
-                        <button className="pos-swap">
-                          <i className="bi bi-arrow-left-right pl-1"></i>
-                        </button>
-                      </div>
-                    </div>
-                    <div className="col-12 col-lg-4 col-xl-2 ps-0 mb-2 mb-xl-0 pe-0 pe-lg-2">
-                      <div className="form-group">
-                        <i className="bi bi-geo-alt-fill position-absolute h2 icon-pos"></i>
-                        {/* <input
-                          type="text"
-                          className="form-control ps-5"
-                          id="onewayDestination"
-                          placeholder="Destination"
-                          value={newformValue.destinationLocationCode}
-                          onChange={handleChange}
-                          name={"destinationLocationCode"}
-                        /> */}
-                        <div>
-                          <input
-                            type="text"
-                            value={inputValue2}
-                            onChange={handleInputChange2}
-                            className="form-control ps-5"
-                            id="onewayDestination"
-                            placeholder="Destination"
-                          />
-                          {suggestions2.length > 0 && (
-                            <ul>
-                              {suggestions2.map((item) => (
-                                <li
-                                  key={item.iata_code}
-                                  onClick={() => handleSelectItem2(item)}
-                                >
-                                  {item.city}
-                                </li>
-                              ))}
-                            </ul>
-                          )}
-                          {/* {selectedItem2 &&
-                                                                    <button onClick={handleInputClear2}>Clear</button>
-                                                                } */}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-12 col-lg-4 col-xl-3 ps-0 mb-2 mb-xl-0 pe-0 pe-lg-0 pe-xl-2">
-                      <div className="form-control form-group d-flex">
-                        <i className="bi bi-calendar3 position-absolute h2 icon-pos"></i>
-                        <span className="dep-date-input">
-                          <DatePicker
+          <div
+            data-cy="flightSW"
+            className="widgetSection appendBottom40 primaryTraveler "
+          >
+            <div className="makeFlex hrtlCenter">
+              <ul className="fswTabs latoRegular darkGreyText">
+                {option?.map((val, index) => (
+                  <li
+                    key={index}
+                    className={`${selectOption === val ? "selected" : ""}`}
+                    value="One Way"
+                    onClick={(e) => selectFeild(e, val)}
+                  >
+                    <span className="tabsCircle appendRight5"></span>
+                    {val}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="fsw ">
+              <div className="fsw_inner returnPersuasion">
+                <div className="fsw_inputBox searchCity inactiveWidget ">
+                  <label htmlFor="fromCity">
+                    <span className="lbl_input  appendBottom10">From</span>
+                    <input
+                      id="fromCity"
+                      type="text"
+                      className="fsw_inputField lineHeight36 latoBlack font30"
+                      name="originLocationCode"
+                      value={newformValue.originLocationCode}
+                      onChange={e =>handleChange(e)}    
+                    />
+                    <p
+                      className="code makeRelative"
+                      title="BOM, Chhatrapati Shivaji International Airport India"
+                    >
+                      <span className="truncate airPortName " title="">
+                        BOM, Chhatrapati Shivaji International Airport India
+                      </span>
+                    </p>
+                  </label>
+                </div>
+                <span className="swipCircle">
+                  <span className="landingSprite swipIcon"></span>
+                </span>
+                <div className="fsw_inputBox searchToCity inactiveWidget ">
+                  <label htmlFor="toCity">
+                    <span className="lbl_input  appendBottom10">To</span>
+                    <input
+                      data-cy="toCity"
+                      id="toCity"
+                      type="text"
+                      className="fsw_inputField lineHeight36 latoBlack font30"
+                      name="destinationLocationCode"
+                      value={newformValue.destinationLocationCode}
+                      onChange={e =>handleChange(e)}    
+
+                    />
+                    <p
+                      className="code makeRelative"
+                      title="DEL, Indira Gandhi International Airport India"
+                    >
+                      <span className="truncate airPortName " title="">
+                        DEL, Indira Gandhi International Airport India
+                      </span>
+                    </p>
+                  </label>
+                </div>
+                <div className="fsw_inputBox dates inactiveWidget ">
+                  <label htmlFor="departure">
+                    <span className="lbl_input appendBottom10">Departure</span>
+                    <input
+                      data-cy="departure"
+                      id="departure"
+                      type="text"
+                      name="destinationLocationCode"
+                    />
+                    <DatePicker
+                      // className="fsw_inputField font20"
+
                             selected={
                               selectedDate &&
                               new Date(selectedDate + "T00:00:00")
@@ -339,494 +356,203 @@ const FLightsSearching = (props) => {
                             onChange={(date) => handleDateChange(date)}
                             dateFormat="yyyy-MM-dd"
                           />
-                        </span>
-                      </div>
-                    </div>
-                    <div className="col-12 col-lg-6 col-xl-3 ps-0 mb-2 mb-lg-0 mb-xl-0 pe-0 pe-lg-2">
-                      <div className="dropdown" id="myDD">
-                        <button
-                          className="dropdown-toggle form-control"
-                          type="button"
-                          id="travellerInfoOneway"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                          onClick={handleButtonClick}
-                        >
-                          <i className="bi bi-person-lines-fill position-absolute h2 icon-pos"></i>
-                          <span className="text-truncate">
-                            1 Traveller(s), Economy
-                          </span>
-                        </button>
-                        {isOpen && (
-                          <div
-                            className="dropdown-menu"
-                            aria-labelledby="travellerInfoOneway"
-                          >
-                            <ul className="drop-rest">
-                              <li>
-                                <div className="d-flex">Select Adults</div>
-                                <div className="ms-auto input-group plus-minus-input">
-                                  <div className="input-group-button">
-                                    <button
-                                      type="button"
-                                      className="circle"
-                                      data-quantity="minus"
-                                      data-field="onewayAdult"
-                                      onClick={() =>
-                                        handleCountChange("decrement")
-                                      }
-                                    >
-                                      <i className="bi bi-dash"></i>
-                                    </button>
-                                  </div>
-                                  <input
-                                    className="input-group-field"
-                                    type="number"
-                                    name="onewayAdult"
-                                    value={count}
-                                  />
-                                  <div className="input-group-button">
-                                    <button
-                                      type="button"
-                                      className="circle"
-                                      data-quantity="plus"
-                                      data-field="onewayAdult"
-                                      onClick={() =>
-                                        handleCountChange("increment")
-                                      }
-                                    >
-                                      <i className="bi bi-plus"></i>
-                                    </button>
-                                  </div>
-                                </div>
-                              </li>
-                              <li>
-                                <div className="d-flex">Select Child</div>
-                                <div className="ms-auto input-group plus-minus-input">
-                                  <div className="input-group-button">
-                                    <button
-                                      type="button"
-                                      className="circle"
-                                      data-quantity="minus"
-                                      data-field="onewayChild"
-                                      onClick={() =>
-                                        handleCountChange2("decrement")
-                                      }
-                                    >
-                                      <i className="bi bi-dash"></i>
-                                    </button>
-                                  </div>
-                                  <input
-                                    className="input-group-field"
-                                    type="number"
-                                    name="onewayChild"
-                                    value={counting}
-                                  />
-                                  <div className="input-group-button">
-                                    <button
-                                      type="button"
-                                      className="circle"
-                                      data-quantity="plus"
-                                      data-field="onewayChild"
-                                      onClick={() =>
-                                        handleCountChange2("increment")
-                                      }
-                                    >
-                                      <i className="bi bi-plus"></i>
-                                    </button>
-                                  </div>
-                                </div>
-                              </li>
-                              <li>
-                                <div className="d-flex">Select Infants</div>
-                                <div className="ms-auto input-group plus-minus-input">
-                                  <div className="input-group-button">
-                                    <button
-                                      type="button"
-                                      className="circle"
-                                      data-quantity="minus"
-                                      data-field="onewayInfant"
-                                      onClick={() =>
-                                        handleCountChange3("decrement")
-                                      }
-                                    >
-                                      <i className="bi bi-dash"></i>
-                                    </button>
-                                  </div>
-                                  <input
-                                    className="input-group-field"
-                                    type="number"
-                                    name="onewayInfant"
-                                    value={counting2}
-                                  />
-                                  <div className="input-group-button">
-                                    <button
-                                      type="button"
-                                      className="circle"
-                                      data-quantity="plus"
-                                      data-field="onewayInfant"
-                                      onClick={() =>
-                                        handleCountChange3("increment")
-                                      }
-                                    >
-                                      <i className="bi bi-plus"></i>
-                                    </button>
-                                  </div>
-                                </div>
-                              </li>
-                              <li>
-                                <input
-                                  type="radio"
-                                  name="class"
-                                  value="Economy"
-                                  className="me-2"
-                                  checked={selectedOption === "Economy"}
-                                  onChange={handleOptionChange}
-                                />
-                                <label
-                                  className="radio-inline"
-                                  htmlFor="Economy"
-                                >
-                                  Economy{" "}
-                                </label>
-                              </li>
-                              <li>
-                                <input
-                                  type="radio"
-                                  name="class"
-                                  value="Special"
-                                  className="me-2"
-                                  checked={selectedOption === "Special"}
-                                  onChange={handleOptionChange}
-                                />
-                                {/* Premium Economy{" "} */}
-                                <label
-                                  className="radio-inline"
-                                  htmlFor="Premium_Economy"
-                                >
-                                  Premium Economy
-                                </label>
-                              </li>
-                              <li>
-                                <input
-                                  type="radio"
-                                  name="class"
-                                  value="Business"
-                                  className="me-2"
-                                  checked={selectedOption === "Business"}
-                                  onChange={handleOptionChange}
-                                />
-
-                                <label
-                                  className="radio-inline"
-                                  htmlFor="Business"
-                                >
-                                  Business{" "}
-                                </label>
-                              </li>
-                              <li>
-                                <label className="radio-inline">
-                                  <input
-                                    type="radio"
-                                    name="class"
-                                    value="First"
-                                    className="me-2"
-                                    checked={selectedOption === "First"}
-                                    onChange={handleOptionChange}
-                                  />
-                                  First Class{" "}
-                                </label>
-                              </li>
-                              <li>
-                                <button
-                                  type="button"
-                                  className="btn btn"
-                                  onClick={handleDoneClick}
-                                >
-                                  Done
-                                </button>
-                              </li>
-                            </ul>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    <div className="col-12 col-lg-6 col-xl-2 px-0">
-                      <button
-                        type="submit"
-                        className="btn btn-search"
-                        onClick={handleClick}
-                      >
-                        <span className="fw-bold">Search</span>
-                      </button>
-                    </div>
-                  </div>
+                    <p
+                      data-cy="departureDate"
+                      className="blackText font20 code lineHeight36"
+                    >
+                      <span className="font30 latoBlack">10 </span>
+                      <span>May</span>
+                      <span className="shortYear">23</span>
+                    </p>
+                    <p data-cy="departureDay" className="code ">
+                      Wednesday
+                    </p>
+                  </label>
                 </div>
-                <div className="col-12 mt-4">
-                  <div className="row">
-                    <div className="col-12">
-                      <div className="form-check-inline">
-                        <label className="check-wrap">
-                          Refundable Flights
-                          <input type="checkbox" />
-                          <span className="checkmark"></span>{" "}
-                        </label>
-                      </div>
-                      <div className="form-check-inline">
-                        <label className="check-wrap">
-                          {" "}
-                          Non Stop Flights
-                          <input type="checkbox" />
-                          <span className="checkmark"></span>{" "}
-                        </label>
-                      </div>
-                      <div className="form-check-inline">
-                        <label className="check-wrap">
-                          {" "}
-                          GDS Special Return
-                          <input type="checkbox" />
-                          <span className="checkmark"></span>{" "}
-                        </label>
-                      </div>
-                    </div>
+                <div className="fsw_inputBox dates reDates inactiveWidget  ">
+                  <div className="returnPersuasionTooltip hide">
+                    <p>
+                      Return fares may hike due to high demand. Book now using
+                      myBiz special fare &amp; cancel/change date for FREE later
+                      if plan changes
+                    </p>
                   </div>
+                  <label htmlFor="return">
+                    <span className="lbl_input appendBottom10">Return</span>
+                    <input
+                      data-cy="return"
+                      id="return"
+                      type="text"
+                      className="fsw_inputField font20"
+                      value="Thursday, 11 May 2023"
+                    />
+                    <p
+                      data-cy="returnDate"
+                      className="blackText font20 code lineHeight36"
+                    >
+                      <span className="font30 latoBlack">11</span>
+                      <span>May</span>
+                      <span className="shortYear">23</span>
+                    </p>
+                    <p data-cy="returnDay" className="code ">
+                      Thursday
+                    </p>
+                  </label>
+                  <p
+                    className="dateErrorMsgForFlight whiteText"
+                    id="range_error"
+                  >
+                    You are booking for more than 30 days
+                  </p>
+                  <span className="returnCross landingSprite"></span>
+                </div>
+                {/* <div data-cy="flightTraveller" className="fsw_inputBox flightTravllers inactiveWidget "><label
+                    htmlFor="travellers"><span className="lbl_input appendBottom5">Travellers &amp; Class</span><input
+                        data-cy="travellers" id="travellers" type="text" className="fsw_inputField font30 latoBlack"
+                         value="0 Infant, 0 Adult, 1 Children" />
+                    <p className="blackText font20 code lineHeight36"><span data-cy="travellerText"
+                            className="appendRight10"><span className="font30 latoBlack">1&nbsp;</span>Traveller</span></p>
+                    <p className="appendBottom1 ">Economy/Premium Economy</p>
+                    <div className="introGBFlt">
+                        <p className="introGBFltTag ecoGBFlt whiteText">Group Bookings Available!</p>
+                        <div className="introGBFltTooltip whiteText">Save on bookings with more than 9 travellers</div>
+                    </div>
+                </label></div> */}
+              </div>
+              <div className="makeFlex hrtlCenter appendBottom20 flightFare">
+                <div className="makeFlex hrtlCenter">
+                  <span className="font12 latoBold noShrink appendRight5 selectFareText">
+                    Select A<br />
+                    Fare Type:
+                  </span>
+                  <ul className="specialFareNew">
+                    <li className="font12 blackText wrapFilter activeItem ">
+                      <p className="Name">
+                        Regular <br /> Fares
+                      </p>
+                    </li>
+                    <li className="font12 blackText wrapFilter  ">
+                      <p className="Name">
+                        Armed Forces <br /> Fares
+                      </p>
+                      <div className="specialFareTooltip whiteText">
+                        <p className="font12 latoBold appendBottom5">
+                          Armed Forces Fares
+                        </p>
+                        <p className="font11">
+                          Applicable for serving and retired personnel of Armed
+                          Forces and Paramilitary Forces, their recognised
+                          dependants like spouses and children, and war widows.
+                          It is mandatory to show a valid ID or dependant card
+                          at the airport, without which boarding might be
+                          denied.
+                        </p>
+                      </div>
+                    </li>
+                    <li className="font12 blackText wrapFilter  ">
+                      <p className="Name">
+                        Student <br /> Fares
+                      </p>
+                      <div className="specialFareTooltip whiteText">
+                        <p className="font12 latoBold appendBottom5">
+                          Student Fares
+                        </p>
+                        <p className="font11">
+                          Only students above 12 years of age are eligible for
+                          special fares and/or additional baggage allowances.
+                          Carrying valid student ID cards and student visas
+                          (where applicable) is mandatory, else the passenger
+                          may be denied boarding or asked to pay for extra
+                          baggage.
+                        </p>
+                      </div>
+                    </li>
+                    <li className="font12 blackText wrapFilter  ">
+                      <p className="Name">
+                        Senior Citizen <br /> Fares
+                      </p>
+                      <div className="specialFareTooltip whiteText">
+                        <p className="font12 latoBold appendBottom5">
+                          Senior Citizen Fares
+                        </p>
+                        <p className="font11">
+                          Only senior citizens above the age of 60 years can
+                          avail this special fare. It is mandatory to produce
+                          proof of Date of Birth at the airport, without which
+                          prevailing fares will be charged.
+                        </p>
+                      </div>
+                    </li>
+                    <li className="font12 blackText wrapFilter  ">
+                      <p className="Name">
+                        Doctors &amp; Nurses <br /> Fares
+                      </p>
+                      <div className="specialFareTooltip whiteText">
+                        <p className="font12 latoBold appendBottom5">
+                          Doctors &amp; Nurses Fares
+                        </p>
+                        <p className="font11">
+                          Applicable only for medical personnel. It is mandatory
+                          to show a valid ID at the airport, without which
+                          boarding may be denied.
+                        </p>
+                      </div>
+                    </li>
+                    <li className="font12 blackText wrapFilter  isItemDisabled">
+                      <p className="disabled">
+                        Double Seat <br /> Fares
+                      </p>
+                      <div className="specialFareTooltip whiteText">
+                        <p className="font12 latoBold appendBottom5">
+                          Fly Safer with Double Seat
+                        </p>
+                        <p className="font11">
+                          Double Seat service is available only for domestic
+                          one-way economy flights. You can continue to book at
+                          the regular fare or change your search parameter(s) to
+                          avail of this service.
+                        </p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div className="makeFlex perfectCenter appendleft10 recentSearchGrid ">
+                  <span className="font12 latoBold">Recent Searches:</span>
+                  <ul className="flt-recentSearches makeFlex">
+                    <li className="appendLeft10">
+                      <a
+                        className="darkGreyText"
+                        href="https://www.makemytrip.com/flight/search?itinerary=BOM-DEL-10/05/2023_DEL-BOM-11/05/2023&amp;tripType=R&amp;paxType=A-5_C-3_I-2&amp;intl=false&amp;cabinClassName=E&amp;ccde=IN&amp;lang=eng&amp;isGrpBkg=true"
+                      >
+                        <p className="font12 appendBottom3">
+                          Mumbai
+                          <span className=" blueRoundTripIcon landingSprite appendLeft5 appendRight5"></span>
+                          New Delhi
+                        </p>
+                        <p className="greyText font10">10 May 23 - 11 May 23</p>
+                      </a>
+                    </li>
+                    <li className="appendLeft10">
+                      <a
+                        className="darkGreyText"
+                        href="https://www.makemytrip.com/flight/search?itinerary=DEL-BLR-05/04/2023_BLR-DEL-02/05/2023&amp;tripType=R&amp;paxType=A-3_C-3_I-2&amp;intl=false&amp;cabinClassName=E&amp;ccde=IN&amp;lang=eng"
+                      >
+                        <p className="font12 appendBottom3">
+                          Delhi
+                          <span className=" blueRoundTripIcon landingSprite appendLeft5 appendRight5"></span>
+                          Bengaluru
+                        </p>
+                        <p className="greyText font10">5 Apr 23 - 2 May 23</p>
+                      </a>
+                    </li>
+                  </ul>
                 </div>
               </div>
-            </div>
-
-            <div id="return" className="tab-pane fade">
-              <div className="row">
-                <div className="col-sm-12 col-md-12">
-                  <div className="search-pan row mx-0 theme-border-radius">
-                    <div className="col-12 col-lg-4 col-xl-2 ps-0 mb-2 mb-xl-0 pe-0 pe-lg-2">
-                      <div className="form-group">
-                        <i className="bi bi-geo-alt-fill position-absolute h2 icon-pos"></i>
-                        <input
-                          type="text"
-                          className="form-control ps-5"
-                          id="returnOrigin"
-                          placeholder="Origin"
-                        />
-                        <button className="pos-swap">
-                          <i className="bi bi-arrow-left-right pl-1"></i>
-                        </button>
-                      </div>
-                    </div>
-                    <div className="col-12 col-lg-4 col-xl-2 ps-0 mb-2 mb-xl-0 pe-0 pe-lg-2">
-                      <div className="form-group">
-                        <i className="bi bi-geo-alt-fill position-absolute h2 icon-pos"></i>
-                        <input
-                          type="text"
-                          className="form-control ps-5"
-                          id="returnDestination"
-                          placeholder="Destination"
-                        />
-                      </div>
-                    </div>
-                    <div className="col-12 col-lg-4 col-xl-3 ps-0 mb-2 mb-xl-0 pe-0 pe-lg-0 pe-xl-2">
-                      <div className="form-control form-group d-flex">
-                        <i className="bi bi-calendar3 position-absolute h2 icon-pos"></i>
-                        <span className="dep-date-input">
-                          <input
-                            type="text"
-                            className="cal-input"
-                            placeholder="Depart Date"
-                            id="datepicker1"
-                          />
-                        </span>
-                        <span className="arv-date-input ms-2">
-                          <input
-                            type="text"
-                            className="cal-input"
-                            placeholder="Return Date"
-                            id="datepickerNull"
-                          />
-                        </span>
-                      </div>
-                    </div>
-                    <div className="col-12 col-lg-6 col-xl-3 ps-0 mb-2 mb-lg-0 mb-xl-0 pe-0 pe-lg-2">
-                      <div className="dropdown" id="myDDReturn">
-                        <button
-                          className="dropdown-toggle form-control"
-                          type="button"
-                          id="travellerInfoReturn"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          <i className="bi bi-person-lines-fill position-absolute h2 icon-pos"></i>
-                          <span className="text-truncate">
-                            1 Traveller(s), Economy
-                          </span>
-                        </button>
-                        {isOpen && (
-                          <div
-                            className="dropdown-menu"
-                            aria-labelledby="travellerInfoReturn"
-                          >
-                            <ul className="drop-rest">
-                              <li>
-                                <div className="d-flex">Select Adults</div>
-                                <div className="ms-auto input-group plus-minus-input">
-                                  <div className="input-group-button">
-                                    <button
-                                      type="button"
-                                      className="circle"
-                                      data-quantity="minus"
-                                      data-field="onewayAdult"
-                                    >
-                                      <i className="bi bi-dash"></i>
-                                    </button>
-                                  </div>
-                                  <input
-                                    className="input-group-field"
-                                    type="number"
-                                    name="onewayAdult"
-                                    value="0"
-                                  />
-                                  <div className="input-group-button">
-                                    <button
-                                      type="button"
-                                      className="circle"
-                                      data-quantity="plus"
-                                      data-field="onewayAdult"
-                                    >
-                                      <i className="bi bi-plus"></i>
-                                    </button>
-                                  </div>
-                                </div>
-                              </li>
-                              <li>
-                                <div className="d-flex">Select Child</div>
-                                <div className="ms-auto input-group plus-minus-input">
-                                  <div className="input-group-button">
-                                    <button
-                                      type="button"
-                                      className="circle"
-                                      data-quantity="minus"
-                                      data-field="onewayChild"
-                                    >
-                                      <i className="bi bi-dash"></i>
-                                    </button>
-                                  </div>
-                                  <input
-                                    className="input-group-field"
-                                    type="number"
-                                    name="onewayChild"
-                                    value="0"
-                                  />
-                                  <div className="input-group-button">
-                                    <button
-                                      type="button"
-                                      className="circle"
-                                      data-quantity="plus"
-                                      data-field="onewayChild"
-                                    >
-                                      <i className="bi bi-plus"></i>
-                                    </button>
-                                  </div>
-                                </div>
-                              </li>
-                              <li>
-                                <div className="d-flex">Select Infants</div>
-                                <div className="ms-auto input-group plus-minus-input">
-                                  <div className="input-group-button">
-                                    <button
-                                      type="button"
-                                      className="circle"
-                                      data-quantity="minus"
-                                      data-field="onewayInfant"
-                                    >
-                                      <i className="bi bi-dash"></i>
-                                    </button>
-                                  </div>
-                                  <input
-                                    className="input-group-field"
-                                    type="number"
-                                    name="onewayInfant"
-                                    value="0"
-                                  />
-                                  <div className="input-group-button">
-                                    <button
-                                      type="button"
-                                      className="circle"
-                                      data-quantity="plus"
-                                      data-field="onewayInfant"
-                                    >
-                                      <i className="bi bi-plus"></i>
-                                    </button>
-                                  </div>
-                                </div>
-                              </li>
-                              <li>
-                                <label className="radio-inline">
-                                  <input
-                                    type="radio"
-                                    name="class"
-                                    value="Economy"
-                                    className="me-2"
-                                  />
-                                  Economy{" "}
-                                </label>
-                              </li>
-                              <li>
-                                <label className="radio-inline">
-                                  <input
-                                    type="radio"
-                                    name="class"
-                                    value="Special"
-                                    className="me-2"
-                                  />
-                                  Premium Economy{" "}
-                                </label>
-                              </li>
-                              <li>
-                                <label className="radio-inline">
-                                  <input
-                                    type="radio"
-                                    name="class"
-                                    value="Business"
-                                    className="me-2"
-                                  />
-                                  Business{" "}
-                                </label>
-                              </li>
-                              <li>
-                                <label className="radio-inline">
-                                  <input
-                                    type="radio"
-                                    name="class"
-                                    value="First"
-                                    className="me-2"
-                                  />
-                                  First Class{" "}
-                                </label>
-                              </li>
-                              <li>
-                                <button
-                                  type="button"
-                                  className="btn btn"
-                                  onclick={handleDoneClick}
-                                >
-                                  Done
-                                </button>
-                              </li>
-                            </ul>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    <div className="col-12 col-lg-6 col-xl-2 px-0">
-                      <button
-                        type="submit"
-                        className="btn btn-search"
-                        onclick="window.location.href='flight-listing-round-trip.html';"
-                      >
-                        <span className="fw-bold">Search</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <p data-cy="submit" className="makeFlex vrtlCenter ">
+                <a className="primaryBtn font24 latoBold widgetSearchBtn ">
+                  Search
+                </a>
+              </p>
             </div>
           </div>
         </div>

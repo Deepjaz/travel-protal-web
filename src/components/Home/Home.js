@@ -47,7 +47,7 @@ const Home = () => {
                 to="blog.html"
                 className="d-inline-flex mt-2 text-link text-link-effect"
               >
-                <span className="py-4 px-4">See more Popular Experiences</span>
+                <span className="py-4 px-4 btn-primary  text-white">See more Popular Experiences</span>
               </Link>
             </div>
           </div>
