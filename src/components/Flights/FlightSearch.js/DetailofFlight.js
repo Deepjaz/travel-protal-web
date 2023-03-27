@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 //import FlightSearchApi from './Hooks/FlightSearchApi';
 import axios from "axios";
 import { baseUrl } from "../../../env/env";
+import { ThreeDots } from "react-loader-spinner";
 const DetailofFlight = () => {
   //const { postApi } = FlightSearchApi()
   const [postApi, setPostApi] = useState([]);
@@ -17,8 +18,7 @@ const DetailofFlight = () => {
     params[key] = value;
   });
 
-  const { originLocationCode, destinationLocationCode, adults, Child, Date } =
-    params;
+  const { originLocationCode, destinationLocationCode, adults, Child, Date } = params;
 
   console.log(originLocationCode, "originLocationCode");
   console.log(destinationLocationCode, "destinationLocationCode");
@@ -36,8 +36,6 @@ const DetailofFlight = () => {
     originDestinations: [
       {
         id: "1",
-        // "originLocationCode": "BOS",
-        // "destinationLocationCode": "MAD",
         originLocationCode: "",
         destinationLocationCode: "",
         departureDateTimeRange: {
@@ -47,11 +45,11 @@ const DetailofFlight = () => {
       },
     ],
     travelers: [
-      // {
-      //   "id": "1",
-      //   "travelerType": "ADULT",
-      //   "fareOptions":["STANDARD"]
-      // }
+      {
+        "id": "1",
+        "travelerType": "ADULT",
+        "fareOptions":["STANDARD"]
+      }
     ],
     sources: ["GDS"],
   };
@@ -83,27 +81,17 @@ const DetailofFlight = () => {
         fareOptions: ["STANDARD"],
       });
     }
-    // for(let i = 1; i <= counting2; i++){
-    //   // console.log(i)
-
-    //   travelersData.push({
-    //     "id" : 20+i,
-    //     "travelerType" : 'Infants',
-    //     "fareOptions":["STANDARD"]
-
-    //   })
-    // }
+   
   };
 
   const [DataApi, setDataApi] = useState([]);
   useEffect(() => {
       callBackFUNc();
-    formValue.originDestinations[0].originLocationCode = originLocationCode;
-    formValue.originDestinations[0].destinationLocationCode =
-      destinationLocationCode;
-    formobject.originDestinations[0].departureDateTimeRange.date = Date;
+      formValue.originDestinations[0].originLocationCode = originLocationCode;
+      formValue.originDestinations[0].destinationLocationCode =destinationLocationCode;
+      formobject.originDestinations[0].departureDateTimeRange.date = Date;
     console.log("formValueformValueformValue", formValue);
-    axios.post(`${baseUrl}/api/flight-booking`, formobject).then((res) => {
+    axios.post(`${baseUrl}/api/flight-booking`, formValue).then((res) => {
       setDataApi(res.data.data);
     });
   }, [DataApi]);
@@ -113,7 +101,6 @@ const DetailofFlight = () => {
   return (
     <>
       {/* <FLightsSearching callBackData={callBackData} /> */}
-
       <div className="content-section bottom-spcae">
         <div className="srp py-2">
           <div className="container">
@@ -250,8 +237,8 @@ const DetailofFlight = () => {
                         </div>
                       </div>
                       <div className="col-4 col-lg-2">
-                        <div className="fw-bold">{val.itineraries.segments.arrival[0].at}</div>
-                        <div className="font-small">BER</div>
+                        <div className="fw-bold">{val.itineraries[0].segments[0].arrival.at}</div>
+                        <div className="font-small">{val.itineraries[0].segments[0].arrival.iataCode}</div>
                       </div>
                       <div className="col-4 col-lg-2">
                         <div className="font-small">03h 15m</div>
@@ -259,7 +246,7 @@ const DetailofFlight = () => {
                         <div className="font-small">Non Stop</div>
                       </div>
                       <div className="col-4 col-lg-2">
-                        <div className="fw-bold">08:20</div>
+                        <div className="fw-bold">{val.itineraries[0].segments[0].departure.at}</div>
                         <div className="font-small">LHR</div>
                       </div>
                       <div className="col-12 col-lg-3 text-center mt-2 mt-lg-0">
@@ -276,7 +263,17 @@ const DetailofFlight = () => {
                 ))}
               </div>
             ) : (
-              <p>Loading data...</p>
+              <p>
+                <ThreeDots 
+              height="80" 
+              width="80" 
+              radius="9"
+              color="#4fa94d" 
+              ariaLabel="three-dots-loading"
+              wrapperStyle={{}}
+              wrapperClassName=""
+              visible={true}
+               /></p>
             )}
           </div>
         </div>
