@@ -7,7 +7,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { baseUrl } from "../../../env/env";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Iata from "../../../Iata";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const formobject = {
   currencyCode: "USD",
   originDestinations: [
@@ -212,18 +213,31 @@ const FLightsSearching = (props) => {
     formValue.originDestinations[0].destinationLocationCode =
       newformValue.destinationLocationCode;
     // formValue.travelers =
+    
+
     formobject.originDestinations[0].departureDateTimeRange.date = selectedDate;
     console.log("formValueformValueformValue", formValue);
     axios.post(`${baseUrl}/api/flight-booking`, formobject).then((res) => {
+      if(!newformValue.originLocationCode){
+        toast.error('Please fil the Detial of originLocationCode')
+      }
+      if(!newformValue.destinationLocationCode){
+        toast.error('Please fil the Detial of destinationLocationCode')
+      }
+      if(!formValue.originDestinations[0].departureDateTimeRange.date){
+        toast.error('Please fill the Date')
+  
+      }
       console.log("res.data", res.data);
       callBackData(res.data);
       setApiRes(res.data);
-      
     });
-    
+    if(newformValue.originLocationCode && newformValue.destinationLocationCode && formValue.originDestinations[0].departureDateTimeRange.date){
       navigate(
-        `/DetailofFlight/?originLocationCode=${formValue.originDestinations[0].originLocationCode}/destinationLocationCode=${formValue.originDestinations[0].destinationLocationCode}/adults=${count}/Child=${counting}/Date=${selectedDate}`
+        `/DetailofFlight/?originLocationCode=${formValue.originDestinations[0].originLocationCode}/destinationLocationCode=${formValue.originDestinations[0].destinationLocationCode}/adults=${count}/Child=${counting}/selectedDate=${selectedDate}`
       );
+    }
+    
     
   };
 
@@ -340,9 +354,15 @@ const FLightsSearching = (props) => {
                       className="code makeRelative"
                       // title="BOM, Chhatrapati Shivaji International Airport India"
                     >
+<<<<<<< HEAD
+                      {/* <span className="truncate airPortName " title="">
+                        {inputValue}, Chhatrapati Shivaji International Airport India
+                      </span> */}
+=======
                       <span className="truncate airPortName " title="">
                         {newformValue.originLocationCode}  International Airport India
                       </span>
+>>>>>>> 20a96b0d1a076c0d95d8f11d20f9c690137f8742
                     </p>
                   </label>
                 </div>
@@ -361,14 +381,14 @@ const FLightsSearching = (props) => {
                       value={newformValue.destinationLocationCode}
                       onChange={(e) => handleChange(e)}
                     />
-                    <p
+                    {/* <p
                       className="code makeRelative"
                       title="DEL, Indira Gandhi International Airport India"
                     >
                       <span className="truncate airPortName " title="">
                         {newformValue.destinationLocationCode}  International Airport India
                       </span>
-                    </p>
+                    </p> */}
                   </label>
                 </div>
                 <div className="fsw_inputBox dates inactiveWidget ">
@@ -404,7 +424,11 @@ const FLightsSearching = (props) => {
                     </p>
                   </label>
                 </div>
+<<<<<<< HEAD
+               
+=======
                 
+>>>>>>> 20a96b0d1a076c0d95d8f11d20f9c690137f8742
                 <div className="col-12 col-lg-6 col-xl-3 ps-0 mb-2 mb-lg-0 mb-xl-0 pe-0 pe-lg-2">
                   <div className="dropdown" id="myDD">
                     <button
