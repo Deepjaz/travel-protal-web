@@ -3158,7 +3158,7 @@ html[dir='ltr'] .tabsCircle:after{content:'';display:block;width:3px;height:6px;
 html[dir='ltr'] .widgetSection .fsw .fsw_inputBox:first-of-type:hover{background:#eaf5ff;border-radius:8px 0 0 8px;padding: 10px;}
 .widgetSection .fsw .fsw_inputBox:hover{background:#eaf5ff;}
 .fsw_inputBox .lineHeight36{line-height:36px;}
-.fsw_inputBox.dates input,.fsw_inputBox.reDates input{opacity:0!important;position:absolute;}
+.fsw_inputBox.dates input,.fsw_inputBox.reDates input{opacity:0!important;position:absolute;z-index:7;height: 7rem;}
 .fsw_inputBox.flightTravllers .lbl_input:after{position:absolute;}
 .shortYear::before{content:"'";}
 .ecoGBFlt{height:14px;font-size:calc(var(--font-scale, 1) * 12px);font-weight:bold;text-align:left;color:#cf8100;}
