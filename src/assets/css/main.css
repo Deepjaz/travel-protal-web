@@ -3227,3 +3227,8 @@ html[dir='ltr'] .widgetSection .fsw .fsw_inputBox:first-of-type:hover{background
   width: 100%;
   height: 80px;
 }
+.loader-spinner{
+  width: 100%;
+    display: flex;
+    justify-content: center;
+}

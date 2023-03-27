@@ -7,7 +7,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { baseUrl } from "../../../env/env";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Iata from "../../../Iata";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const formobject = {
   currencyCode: "USD",
   originDestinations: [
@@ -212,18 +213,31 @@ const FLightsSearching = (props) => {
     formValue.originDestinations[0].destinationLocationCode =
       newformValue.destinationLocationCode;
     // formValue.travelers =
+    
+
     formobject.originDestinations[0].departureDateTimeRange.date = selectedDate;
     console.log("formValueformValueformValue", formValue);
     axios.post(`${baseUrl}/api/flight-booking`, formobject).then((res) => {
+      if(!newformValue.originLocationCode){
+        toast.error('Please fil the Detial of originLocationCode')
+      }
+      if(!newformValue.destinationLocationCode){
+        toast.error('Please fil the Detial of destinationLocationCode')
+      }
+      if(!formValue.originDestinations[0].departureDateTimeRange.date){
+        toast.error('Please fill the Date')
+  
+      }
       console.log("res.data", res.data);
       callBackData(res.data);
       setApiRes(res.data);
-      
     });
-    
+    if(newformValue.originLocationCode && newformValue.destinationLocationCode && formValue.originDestinations[0].departureDateTimeRange.date){
       navigate(
-        `/DetailofFlight/?originLocationCode=${formValue.originDestinations[0].originLocationCode}/destinationLocationCode=${formValue.originDestinations[0].destinationLocationCode}/adults=${count}/Child=${counting}/Date=${selectedDate}`
+        `/DetailofFlight/?originLocationCode=${formValue.originDestinations[0].originLocationCode}/destinationLocationCode=${formValue.originDestinations[0].destinationLocationCode}/adults=${count}/Child=${counting}/selectedDate=${selectedDate}`
       );
+    }
+    
     
   };
 
@@ -340,9 +354,9 @@ const FLightsSearching = (props) => {
                       className="code makeRelative"
                       // title="BOM, Chhatrapati Shivaji International Airport India"
                     >
-                      <span className="truncate airPortName " title="">
+                      {/* <span className="truncate airPortName " title="">
                         {inputValue}, Chhatrapati Shivaji International Airport India
-                      </span>
+                      </span> */}
                     </p>
                   </label>
                 </div>
@@ -361,14 +375,14 @@ const FLightsSearching = (props) => {
                       value={newformValue.destinationLocationCode}
                       onChange={(e) => handleChange(e)}
                     />
-                    <p
+                    {/* <p
                       className="code makeRelative"
                       title="DEL, Indira Gandhi International Airport India"
                     >
                       <span className="truncate airPortName " title="">
                         {inputValue2}, Indira Gandhi International Airport India
                       </span>
-                    </p>
+                    </p> */}
                   </label>
                 </div>
                 <div className="fsw_inputBox dates inactiveWidget ">
@@ -404,224 +418,7 @@ const FLightsSearching = (props) => {
                     </p>
                   </label>
                 </div>
-                <div className="fsw_inputBox dates reDates inactiveWidget  ">
-                  <div className="returnPersuasionTooltip hide">
-                    <p>
-                      Return fares may hike due to high demand. Book now using
-                      myBiz special fare &amp; cancel/change date for FREE later
-                      if plan changes
-                    </p>
-                  </div>
-                  <div className="dropdown" id="myDDReturn">
-                        <button
-                          className="dropdown-toggle form-control"
-                          type="button"
-                          id="travellerInfoReturn"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                          onClick={handleButtonClick}
-                        >
-                          <i className="bi bi-person-lines-fill position-absolute h2 icon-pos"></i>
-                          <span className="text-truncate">
-                            1 Traveller(s), Economy
-                          </span>
-                        </button>
-                        {isOpen && (
-                          <div
-                          className="dropdown-menu"
-                          aria-labelledby="travellerInfoOneway"
-                        >
-                          <ul className="drop-rest">
-                            <li>
-                              <div className="d-flex">Select Adults</div>
-                              <div className="ms-auto input-group plus-minus-input">
-                                <div className="input-group-button">
-                                  <button
-                                    type="button"
-                                    className="circle"
-                                    data-quantity="minus"
-                                    data-field="onewayAdult"
-                                    onClick={() =>
-                                      handleCountChange("decrement")
-                                    }
-                                  >
-                                    <i className="bi bi-dash"></i>
-                                  </button>
-                                </div>
-                                <input
-                                  className="input-group-field"
-                                  type="number"
-                                  name="onewayAdult"
-                                  value={count}
-                                />
-                                <div className="input-group-button">
-                                  <button
-                                    type="button"
-                                    className="circle"
-                                    data-quantity="plus"
-                                    data-field="onewayAdult"
-                                    onClick={() =>
-                                      handleCountChange("increment")
-                                    }
-                                  >
-                                    <i className="bi bi-plus"></i>
-                                  </button>
-                                </div>
-                              </div>
-                            </li>
-                            <li>
-                              <div className="d-flex">Select Child</div>
-                              <div className="ms-auto input-group plus-minus-input">
-                                <div className="input-group-button">
-                                  <button
-                                    type="button"
-                                    className="circle"
-                                    data-quantity="minus"
-                                    data-field="onewayChild"
-                                    onClick={() =>
-                                      handleCountChange2("decrement")
-                                    }
-                                  >
-                                    <i className="bi bi-dash"></i>
-                                  </button>
-                                </div>
-                                <input
-                                  className="input-group-field"
-                                  type="number"
-                                  name="onewayChild"
-                                  value={counting}
-                                />
-                                <div className="input-group-button">
-                                  <button
-                                    type="button"
-                                    className="circle"
-                                    data-quantity="plus"
-                                    data-field="onewayChild"
-                                    onClick={() =>
-                                      handleCountChange2("increment")
-                                    }
-                                  >
-                                    <i className="bi bi-plus"></i>
-                                  </button>
-                                </div>
-                              </div>
-                            </li>
-                            <li>
-                              <div className="d-flex">Select Infants</div>
-                              <div className="ms-auto input-group plus-minus-input">
-                                <div className="input-group-button">
-                                  <button
-                                    type="button"
-                                    className="circle"
-                                    data-quantity="minus"
-                                    data-field="onewayInfant"
-                                    onClick={() =>
-                                      handleCountChange3("decrement")
-                                    }
-                                  >
-                                    <i className="bi bi-dash"></i>
-                                  </button>
-                                </div>
-                                <input
-                                  className="input-group-field"
-                                  type="number"
-                                  name="onewayInfant"
-                                  value={counting2}
-                                />
-                                <div className="input-group-button">
-                                  <button
-                                    type="button"
-                                    className="circle"
-                                    data-quantity="plus"
-                                    data-field="onewayInfant"
-                                    onClick={() =>
-                                      handleCountChange3("increment")
-                                    }
-                                  >
-                                    <i className="bi bi-plus"></i>
-                                  </button>
-                                </div>
-                              </div>
-                            </li>
-                            <li>
-                              <input
-                                type="radio"
-                                name="class"
-                                value="Economy"
-                                className="me-2"
-                                checked={selectedOption === "Economy"}
-                                onChange={handleOptionChange}
-                              />
-                              <label
-                                className="radio-inline"
-                                htmlFor="Economy"
-                              >
-                                Economy{" "}
-                              </label>
-                            </li>
-                            <li>
-                              <input
-                                type="radio"
-                                name="class"
-                                value="Special"
-                                className="me-2"
-                                checked={selectedOption === "Special"}
-                                onChange={handleOptionChange}
-                              />
-                              {/* Premium Economy{" "} */}
-                              <label
-                                className="radio-inline"
-                                htmlFor="Premium_Economy"
-                              >
-                                Premium Economy
-                              </label>
-                            </li>
-                            <li>
-                              <input
-                                type="radio"
-                                name="class"
-                                value="Business"
-                                className="me-2"
-                                checked={selectedOption === "Business"}
-                                onChange={handleOptionChange}
-                              />
-
-                              <label
-                                className="radio-inline"
-                                htmlFor="Business"
-                              >
-                                Business{" "}
-                              </label>
-                            </li>
-                            <li>
-                              <label className="radio-inline">
-                                <input
-                                  type="radio"
-                                  name="class"
-                                  value="First"
-                                  className="me-2"
-                                  checked={selectedOption === "First"}
-                                  onChange={handleOptionChange}
-                                />
-                                First Class{" "}
-                              </label>
-                            </li>
-                            <li>
-                              <button
-                                type="button"
-                                className="btn btn"
-                                onClick={handleDoneClick}
-                              >
-                                Done
-                              </button>
-                            </li>
-                          </ul>
-                        </div>
-                        )}
-                      </div>
-                 
-                  {/* <span className="returnCross landingSprite"></span> */}
-                </div>
+               
                 <div className="col-12 col-lg-6 col-xl-3 ps-0 mb-2 mb-lg-0 mb-xl-0 pe-0 pe-lg-2">
                   <div className="dropdown" id="myDD">
                     <button

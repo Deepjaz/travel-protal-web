@@ -9,25 +9,22 @@ const DetailofFlight = () => {
   //const { postApi } = FlightSearchApi()
   const [postApi, setPostApi] = useState([]);
   const { search } = useLocation();
-  console.log(search);
+  const [flightDate , setflightDate] = useState('')
   const data = search.slice(search.indexOf("?") + 1);
-  console.log(data, "ajaja bhai");
   const params = {};
   data.split("/").forEach((pair) => {
     const [key, value] = pair.split("=");
     params[key] = value;
   });
-
-  const { originLocationCode, destinationLocationCode, adults, Child, Date } = params;
-
-  console.log(originLocationCode, "originLocationCode");
-  console.log(destinationLocationCode, "destinationLocationCode");
-  console.log(adults, "adults");
-  console.log(Child, "Child");
-  console.log(Date, "Date");
+  const { originLocationCode, destinationLocationCode, adults, Child, selectedDate } = params;
+  // console.log(originLocationCode, "originLocationCode");
+  // console.log(destinationLocationCode, "destinationLocationCode");
+  // console.log(adults, "adults");
+  // console.log(Child, "Child");
+  // console.log(Date, "Date");
 
   const callBackData = (data) => {
-    console.log("Data in CallBack DetailofFlight", data);
+   
     setPostApi(data);
   };
 
@@ -89,15 +86,35 @@ const DetailofFlight = () => {
       callBackFUNc();
       formValue.originDestinations[0].originLocationCode = originLocationCode;
       formValue.originDestinations[0].destinationLocationCode =destinationLocationCode;
-      formobject.originDestinations[0].departureDateTimeRange.date = Date;
-    console.log("formValueformValueformValue", formValue);
-    axios.post(`${baseUrl}/api/flight-booking`, formValue).then((res) => {
-      setDataApi(res.data.data);
+      formobject.originDestinations[0].departureDateTimeRange.date = selectedDate;
+      const options = { day: 'numeric', month: 'short', date: 'numeric' };
+      const formattedDate = new Date(selectedDate).toLocaleDateString('en-US', options);
+      setflightDate(formattedDate)
+      console.log('formattedDateformattedDateformattedDate' , formattedDate)
+      console.log("formValueformValueformValue", formValue);
+      axios.post(`${baseUrl}/api/flight-booking`, formValue).then((res) => {
+        setDataApi(res.data.data);
     });
   }, [DataApi]);
 
-  console.log(DataApi, "this is new state");
 
+
+  console.log(DataApi, "this is new state");
+const PriceCheckData =  async (e , selectID) => {
+  console.log(selectID.id)
+    try{
+
+      const url= `${baseUrl}/api/flight-booking/priceCheck`
+      const validData = DataApi.filter((val , index) =>  val.id === selectID.id);
+      console.log('this is the new data ' , validData)
+       axios.post(url , validData).then(res => {
+        console.log(res.data)
+      })
+
+    }catch(err){
+
+    }
+}
   return (
     <>
       {/* <FLightsSearching callBackData={callBackData} /> */}
@@ -109,30 +126,17 @@ const DetailofFlight = () => {
                 <div className="d-flex justify-content-between align-items-start">
                   <div>
                     <div className="fw-bold">
-                      Berlin (BER)<i className="bi bi-arrow-right mx-2"></i>London
-                      (LHR)
+                      {originLocationCode}<i className="bi bi-arrow-right mx-2"></i>{destinationLocationCode}
+                      {/* (LHR) */}
                     </div>
-                    <div className="mb-1 font-small">Sun, Mar 30</div>
+                    <div className="mb-1 font-small">{flightDate}</div>
                   </div>
                   <div>
-                    <span className="font-small">Showing 118 of 118 flights.</span>
+                    <span className="font-small">Showing {(DataApi && DataApi.length)&&  DataApi.length} flights.</span>
                   </div>
                 </div>
               </div>
-              <div className="col-6 col-md-6 col-xl-6 my-2">
-                <div className="d-flex justify-content-between align-items-start">
-                  <div>
-                    <div className="fw-bold">
-                      London (LHR)<i className="bi bi-arrow-right mx-2"></i>Berlin
-                      (BER)
-                    </div>
-                    <div className="mb-1 font-small">Wed, Apr 15</div>
-                  </div>
-                  <div>
-                    <span className="font-small">Showing 146 of 146 flights.</span>
-                  </div>
-                </div>
-              </div>
+              
             </div>
             <div className="row">
               <div className="col-6 col-md-6 col-xl-6 mb-3">
@@ -206,9 +210,9 @@ const DetailofFlight = () => {
                 </div>
               </div>
             </div>
-            {DataApi ? (
+            {(DataApi  && DataApi.length > 0) ? (
               <div className="row">
-                {DataApi?.map((val, index) => (
+                {DataApi?.slice(0 ,20).map((val, index) => (
                   <div
                     className="col-6 col-md-6 col-xl-6 mb-3"
                     data-aos="fade-up"
@@ -254,7 +258,7 @@ const DetailofFlight = () => {
                           <i className="bi bi-currency-dollar ms-2"></i>
                           {val.price.total}
                         </div>
-                        <button type="submit" className="btn-select btn btn-effect">
+                        <button type="submit" className="btn-select btn btn-effect" onClick={e => PriceCheckData(e ,val)}>
                           <span className="font-small">Select</span>
                         </button>
                       </div>
@@ -263,7 +267,7 @@ const DetailofFlight = () => {
                 ))}
               </div>
             ) : (
-              <p>
+              <p className="loader-spinner">
                 <ThreeDots 
               height="80" 
               width="80" 
