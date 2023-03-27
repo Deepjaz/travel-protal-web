@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> d86714f590e244a9e4407b64397171e92add6327
 import React, { createContext, useState } from "react";
 //import FlightSearchApi from './Hooks/FlightSearchApi';
 import axios from "axios";
