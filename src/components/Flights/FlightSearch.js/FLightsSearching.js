@@ -300,7 +300,7 @@ const FLightsSearching = (props) => {
                 </div>
               </div>
             </div>
-            <div className="widgetLoader landingSearchWidget IN"></div>
+          
           </div>
 
           <div
@@ -341,7 +341,7 @@ const FLightsSearching = (props) => {
                       // title="BOM, Chhatrapati Shivaji International Airport India"
                     >
                       <span className="truncate airPortName " title="">
-                        {inputValue}, Chhatrapati Shivaji International Airport India
+                        {newformValue.originLocationCode}  International Airport India
                       </span>
                     </p>
                   </label>
@@ -366,7 +366,7 @@ const FLightsSearching = (props) => {
                       title="DEL, Indira Gandhi International Airport India"
                     >
                       <span className="truncate airPortName " title="">
-                        {inputValue2}, Indira Gandhi International Airport India
+                        {newformValue.destinationLocationCode}  International Airport India
                       </span>
                     </p>
                   </label>
@@ -404,224 +404,7 @@ const FLightsSearching = (props) => {
                     </p>
                   </label>
                 </div>
-                <div className="fsw_inputBox dates reDates inactiveWidget  ">
-                  <div className="returnPersuasionTooltip hide">
-                    <p>
-                      Return fares may hike due to high demand. Book now using
-                      myBiz special fare &amp; cancel/change date for FREE later
-                      if plan changes
-                    </p>
-                  </div>
-                  <div className="dropdown" id="myDDReturn">
-                        <button
-                          className="dropdown-toggle form-control"
-                          type="button"
-                          id="travellerInfoReturn"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                          onClick={handleButtonClick}
-                        >
-                          <i className="bi bi-person-lines-fill position-absolute h2 icon-pos"></i>
-                          <span className="text-truncate">
-                            1 Traveller(s), Economy
-                          </span>
-                        </button>
-                        {isOpen && (
-                          <div
-                          className="dropdown-menu"
-                          aria-labelledby="travellerInfoOneway"
-                        >
-                          <ul className="drop-rest">
-                            <li>
-                              <div className="d-flex">Select Adults</div>
-                              <div className="ms-auto input-group plus-minus-input">
-                                <div className="input-group-button">
-                                  <button
-                                    type="button"
-                                    className="circle"
-                                    data-quantity="minus"
-                                    data-field="onewayAdult"
-                                    onClick={() =>
-                                      handleCountChange("decrement")
-                                    }
-                                  >
-                                    <i className="bi bi-dash"></i>
-                                  </button>
-                                </div>
-                                <input
-                                  className="input-group-field"
-                                  type="number"
-                                  name="onewayAdult"
-                                  value={count}
-                                />
-                                <div className="input-group-button">
-                                  <button
-                                    type="button"
-                                    className="circle"
-                                    data-quantity="plus"
-                                    data-field="onewayAdult"
-                                    onClick={() =>
-                                      handleCountChange("increment")
-                                    }
-                                  >
-                                    <i className="bi bi-plus"></i>
-                                  </button>
-                                </div>
-                              </div>
-                            </li>
-                            <li>
-                              <div className="d-flex">Select Child</div>
-                              <div className="ms-auto input-group plus-minus-input">
-                                <div className="input-group-button">
-                                  <button
-                                    type="button"
-                                    className="circle"
-                                    data-quantity="minus"
-                                    data-field="onewayChild"
-                                    onClick={() =>
-                                      handleCountChange2("decrement")
-                                    }
-                                  >
-                                    <i className="bi bi-dash"></i>
-                                  </button>
-                                </div>
-                                <input
-                                  className="input-group-field"
-                                  type="number"
-                                  name="onewayChild"
-                                  value={counting}
-                                />
-                                <div className="input-group-button">
-                                  <button
-                                    type="button"
-                                    className="circle"
-                                    data-quantity="plus"
-                                    data-field="onewayChild"
-                                    onClick={() =>
-                                      handleCountChange2("increment")
-                                    }
-                                  >
-                                    <i className="bi bi-plus"></i>
-                                  </button>
-                                </div>
-                              </div>
-                            </li>
-                            <li>
-                              <div className="d-flex">Select Infants</div>
-                              <div className="ms-auto input-group plus-minus-input">
-                                <div className="input-group-button">
-                                  <button
-                                    type="button"
-                                    className="circle"
-                                    data-quantity="minus"
-                                    data-field="onewayInfant"
-                                    onClick={() =>
-                                      handleCountChange3("decrement")
-                                    }
-                                  >
-                                    <i className="bi bi-dash"></i>
-                                  </button>
-                                </div>
-                                <input
-                                  className="input-group-field"
-                                  type="number"
-                                  name="onewayInfant"
-                                  value={counting2}
-                                />
-                                <div className="input-group-button">
-                                  <button
-                                    type="button"
-                                    className="circle"
-                                    data-quantity="plus"
-                                    data-field="onewayInfant"
-                                    onClick={() =>
-                                      handleCountChange3("increment")
-                                    }
-                                  >
-                                    <i className="bi bi-plus"></i>
-                                  </button>
-                                </div>
-                              </div>
-                            </li>
-                            <li>
-                              <input
-                                type="radio"
-                                name="class"
-                                value="Economy"
-                                className="me-2"
-                                checked={selectedOption === "Economy"}
-                                onChange={handleOptionChange}
-                              />
-                              <label
-                                className="radio-inline"
-                                htmlFor="Economy"
-                              >
-                                Economy{" "}
-                              </label>
-                            </li>
-                            <li>
-                              <input
-                                type="radio"
-                                name="class"
-                                value="Special"
-                                className="me-2"
-                                checked={selectedOption === "Special"}
-                                onChange={handleOptionChange}
-                              />
-                              {/* Premium Economy{" "} */}
-                              <label
-                                className="radio-inline"
-                                htmlFor="Premium_Economy"
-                              >
-                                Premium Economy
-                              </label>
-                            </li>
-                            <li>
-                              <input
-                                type="radio"
-                                name="class"
-                                value="Business"
-                                className="me-2"
-                                checked={selectedOption === "Business"}
-                                onChange={handleOptionChange}
-                              />
-
-                              <label
-                                className="radio-inline"
-                                htmlFor="Business"
-                              >
-                                Business{" "}
-                              </label>
-                            </li>
-                            <li>
-                              <label className="radio-inline">
-                                <input
-                                  type="radio"
-                                  name="class"
-                                  value="First"
-                                  className="me-2"
-                                  checked={selectedOption === "First"}
-                                  onChange={handleOptionChange}
-                                />
-                                First Class{" "}
-                              </label>
-                            </li>
-                            <li>
-                              <button
-                                type="button"
-                                className="btn btn"
-                                onClick={handleDoneClick}
-                              >
-                                Done
-                              </button>
-                            </li>
-                          </ul>
-                        </div>
-                        )}
-                      </div>
-                 
-                  {/* <span className="returnCross landingSprite"></span> */}
-                </div>
+                
                 <div className="col-12 col-lg-6 col-xl-3 ps-0 mb-2 mb-lg-0 mb-xl-0 pe-0 pe-lg-2">
                   <div className="dropdown" id="myDD">
                     <button
@@ -810,7 +593,7 @@ const FLightsSearching = (props) => {
                           <li>
                             <button
                               type="button"
-                              className="btn btn"
+                              className="btn primaryBtn font24 latoBold widgetSearchBtn "
                               onClick={handleDoneClick}
                             >
                               Done

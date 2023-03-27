@@ -1,12 +1,25 @@
 import React from 'react';
 import '../../assets/css/main.css'
-// import 
-
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { ThreeDots } from "react-loader-spinner";
+import { baseUrl } from './../../env/env';
 const TravelDeal = (props) => {
+    const [DataApi, setDataApi] = useState([]);
+    useEffect(() => {
+       
+      axios.post(`${baseUrl}/api/flight-analytics/most-booked?originCityCode=NCE&period=2017-11`).then((res) => {
+        console.log(res,"yo data is here ")
+    }).then((res)=>{
+          setDataApi(res.data.data);
 
+      });
+    }, [DataApi]);
+    console.log(DataApi,"DataApi from starting page...");
   return (
 
     <>
+   {DataApi?.map((val, index) => (
         <div className="col-12 col-md-6 col-xl-4 mb-3">
                 <div className="p-3 d-flex flex-row border theme-box-shadow theme-bg-white theme-border-radius cardeffect">
                     <div className="flex-grow-1">
@@ -37,7 +50,8 @@ const TravelDeal = (props) => {
                     </div>
                 </div>
         </div>
-
+ ))}
+ 
     </>
       
   )
