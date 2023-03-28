@@ -2,7 +2,7 @@ import React from "react";
 import Home from "../Home/Home";
 import SignIn from "../SignIn/SignIn";
 import SignUp from "../Signup/SignUp";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useParams } from "react-router-dom";
 import Hotels from "../Hotels/Hotels";
 import PrivateRoute from "./PrivateRoute";
 import TopDestinations from "../TopDestinations/TopDestinations";
@@ -15,6 +15,7 @@ import Payment from "./../Payment/Payment";
 import Privacy from './../Privacy/Privacy';
 import DetailofFlight from './../Flights/FlightSearch.js/DetailofFlight';
 import Demo from './../../Demo';
+import Checkout from "../Flights/FlightCheckout/Checkout";
 
 const AllRoutes = () => {
   return (
@@ -32,6 +33,7 @@ const AllRoutes = () => {
           <Route path="/Privacy" element={<Privacy />}></Route>
           <Route path="/DetailofFlight" element={<DetailofFlight />}></Route>
           <Route path="/Demo" element={<Demo />}></Route>
+          <Route path= '/checkout/' element={<Checkout/>}></Route>
         </Route>
         <Route path="/sign-up" element={<SignUp />}></Route>
         <Route path="/sign-in" element={<SignIn />}></Route>

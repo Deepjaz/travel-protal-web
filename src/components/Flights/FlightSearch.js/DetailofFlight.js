@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import FLightsSearching from "./FLightsSearching";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 //import FlightSearchApi from './Hooks/FlightSearchApi';
 import axios from "axios";
 import { baseUrl } from "../../../env/env";
 import { ThreeDots } from "react-loader-spinner";
-const DetailofFlight = () => {
+const DetailofFlight = () => {  
+
   //const { postApi } = FlightSearchApi()
   const [postApi, setPostApi] = useState([]);
+  const [UrlData , SeturlData] =useState()
   const { search } = useLocation();
+  const navigate =useNavigate()
   const [flightDate , setflightDate] = useState('')
   const data = search.slice(search.indexOf("?") + 1);
   const params = {};
@@ -23,6 +26,7 @@ const DetailofFlight = () => {
   // console.log(Child, "Child");
   // console.log(Date, "Date");
 
+  console.log('UrlDataUrlDataUrlDataUrlDataUrlData' , UrlData)
   const callBackData = (data) => {
    
     setPostApi(data);
@@ -103,9 +107,12 @@ const PriceCheckData =  async (e , selectID) => {
 
       const url= `${baseUrl}/api/flight-booking/priceCheck`
       const validData = DataApi.filter((val , index) =>  val.id === selectID.id);
-      
+      // SeturlData(validData)
        axios.post(url , validData[0]).then(res => {
-        console.log("deep jaswal" ,res.data)
+        console.log("deep jaswal" ,)
+        SeturlData(res.data)
+        navigate('/checkout/' , {state : `${JSON.stringify(res.data)}`})
+
       })
 
     }catch(err){
@@ -256,7 +263,7 @@ const PriceCheckData =  async (e , selectID) => {
                           {val.price.total}
                         </div>
                         <button type="submit" className="btn-select btn btn-effect" onClick={e => PriceCheckData(e ,val)}>
-                          <span className="font-small">Select</span>
+                          <Link  className="font-small" >Select</Link>
                         </button>
                       </div>
                     </div>
