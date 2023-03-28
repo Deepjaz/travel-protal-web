@@ -15,6 +15,7 @@ import Payment from "./../Payment/Payment";
 import Privacy from './../Privacy/Privacy';
 import DetailofFlight from './../Flights/FlightSearch.js/DetailofFlight';
 import Demo from './../../Demo';
+import FlightCheckout from "../../components/Flights/FlightCheckout/FlightCheckout";
 
 const AllRoutes = () => {
   return (
@@ -32,6 +33,7 @@ const AllRoutes = () => {
           <Route path="/Privacy" element={<Privacy />}></Route>
           <Route path="/DetailofFlight" element={<DetailofFlight />}></Route>
           <Route path="/Demo" element={<Demo />}></Route>
+          <Route path="/FlightCheckout" element={<FlightCheckout />}></Route>
         </Route>
         <Route path="/sign-up" element={<SignUp />}></Route>
         <Route path="/sign-in" element={<SignIn />}></Route>

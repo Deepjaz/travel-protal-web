@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import FLightsSearching from "./FLightsSearching";
-import { useLocation } from "react-router-dom";
+import { redirect, useLocation,useNavigate } from "react-router-dom";
 //import FlightSearchApi from './Hooks/FlightSearchApi';
 import axios from "axios";
 import { baseUrl } from "../../../env/env";
@@ -22,7 +22,7 @@ const DetailofFlight = () => {
   // console.log(adults, "adults");
   // console.log(Child, "Child");
   // console.log(Date, "Date");
-
+  const navigate = useNavigate();
   const callBackData = (data) => {
    
     setPostApi(data);
@@ -80,6 +80,7 @@ const DetailofFlight = () => {
     }
    
   };
+  
 
   const [DataApi, setDataApi] = useState([]);
   useEffect(() => {
@@ -106,12 +107,17 @@ const PriceCheckData =  async (e , selectID) => {
       
        axios.post(url , validData[0]).then(res => {
         console.log("deep jaswal" ,res.data)
+        navigate(`/FlightCheckout/?res=${res.data}`)
       })
 
     }catch(err){
 
     }
 }
+
+
+
+
   return (
     <>
       {/* <FLightsSearching callBackData={callBackData} /> */}
@@ -210,6 +216,8 @@ const PriceCheckData =  async (e , selectID) => {
             {(DataApi  && DataApi.length > 0) ? (
               <div className="row">
                 {DataApi?.slice(0 ,20).map((val, index) => (
+             
+                
                   <div
                     className="col-6 col-md-6 col-xl-6 mb-3"
                     data-aos="fade-up"
@@ -220,7 +228,7 @@ const PriceCheckData =  async (e , selectID) => {
                         <div>
                           <span className="font-small d-inline-flex mb-0 align-middle lh-1">
                             {" "}
-                            |{val.id}
+                            {val.id}
                           </span>
                         </div>
                         <div>
