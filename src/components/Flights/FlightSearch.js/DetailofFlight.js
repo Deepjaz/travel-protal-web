@@ -9,6 +9,7 @@ const DetailofFlight = () => {
   const [postApi, setPostApi] = useState([]);
   const { search } = useLocation();
   const [flightDate, setflightDate] = useState("");
+  const [flightvalue , setFlightValue] =useState([])
   const data = search.slice(search.indexOf("?") + 1);
   const params = {};
   data.split("/").forEach((pair) => {
@@ -98,9 +99,44 @@ const DetailofFlight = () => {
       const validData = DataApi.filter((val , index) =>  val.id === selectID.id);
       // SeturlData(validData)
        axios.post(url , validData[0]).then(res => {
-        console.log("deep jaswal" ,)
-    
-        navigate('/FlightCheckout/' , {state : `${JSON.stringify(res.data)}`})
+        console.log("deep jaswal" ,res.data)
+        console.log("deep jaswal1" ,res.data.flightOffers)
+        res.data.flightOffers.forEach((val, index) => {
+          console.log('this is the my value', val);
+        
+          const arivalData = val.itineraries[0].segments.map((segment) => {
+            return {
+              arrival: segment.arrival.at,
+              departure: segment.departure.at,
+              arrivaliataCode : segment.arrival.iataCode,
+              arrivaltermial : segment.arrival.terminal,
+              departureiataCode :segment.departure.iataCode,
+              departuretermial :segment.departure.terminal,
+              // cotwoEmissions : segment.co2Emissions.weight
+            };
+          });
+          
+        
+          const newValues = {
+            id: val.id,
+            currency: val.price.currency,
+            total: val.price.total,
+            basePrice: val.price.base,
+            ArivalData: arivalData,
+            // cotwoEmissions :co2Emissions
+          };
+          // setFlightValue()
+            
+          console.log('this is the new value data' , newValues)
+          navigate('/FlightCheckout/' , {state : `${JSON.stringify(newValues)}`})
+
+        });
+
+
+        // if(flightvalue.length === 0){
+          // navigate('/FlightCheckout/' , {state : `${JSON.stringify(flightvalue)}`})
+
+        // }
 
       })
     } catch (err) {}
