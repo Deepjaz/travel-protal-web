@@ -2,7 +2,7 @@ import React from "react";
 import Home from "../Home/Home";
 import SignIn from "../SignIn/SignIn";
 import SignUp from "../Signup/SignUp";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useParams } from "react-router-dom";
 import Hotels from "../Hotels/Hotels";
 import PrivateRoute from "./PrivateRoute";
 import TopDestinations from "../TopDestinations/TopDestinations";

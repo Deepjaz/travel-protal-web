@@ -7,6 +7,7 @@ import { ThreeDots } from "react-loader-spinner";
 
 const DetailofFlight = () => {
   const [postApi, setPostApi] = useState([]);
+  const [UrlData , SeturlData] =useState()
   const { search } = useLocation();
   const [flightDate, setflightDate] = useState("");
   const data = search.slice(search.indexOf("?") + 1);
@@ -19,6 +20,7 @@ const DetailofFlight = () => {
 
   const navigate = useNavigate();
 
+  console.log('UrlDataUrlDataUrlDataUrlDataUrlData' , UrlData)
   const callBackData = (data) => {
     setPostApi(data);
   };
@@ -107,6 +109,15 @@ const DetailofFlight = () => {
   };
 
 
+      const url= `${baseUrl}/api/flight-booking/priceCheck`
+      const validData = DataApi.filter((val , index) =>  val.id === selectID.id);
+      // SeturlData(validData)
+       axios.post(url , validData[0]).then(res => {
+        console.log("deep jaswal" ,)
+        SeturlData(res.data)
+        navigate('/checkout/' , {state : `${JSON.stringify(res.data)}`})
+
+      })
 
 
   return (
@@ -255,7 +266,7 @@ const DetailofFlight = () => {
                           {val.price.total}
                         </div>
                         <button type="submit" className="btn-select btn btn-effect" onClick={e => PriceCheckData(e ,val)}>
-                          <span className="font-small">Select</span>
+                          <Link  className="font-small" >Select</Link>
                         </button>
                       </div>
                     </div>
