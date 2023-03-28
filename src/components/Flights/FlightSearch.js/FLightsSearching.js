@@ -7,8 +7,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { baseUrl } from "../../../env/env";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Iata from "../../../Iata";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const formobject = {
   currencyCode: "USD",
   originDestinations: [
@@ -66,39 +66,50 @@ const FLightsSearching = (props) => {
         .toString()
         .padStart(2, "0")}`;
       setSelectedDate(formattedDate);
-      const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      const monthNames = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
       const selectedMonthName = monthNames[date.getMonth()];
       setSelectedMonth(selectedMonthName);
     } else {
       console.error(`Invalid date: ${date}`);
     }
   };
-  formValue.originDestinations[0].departureDateTimeRange.date = selectedDate
-  const [year, month, day] = selectedDate.split('-')
-  console.log(selectedMonth,"selectedMonth")
+  formValue.originDestinations[0].departureDateTimeRange.date = selectedDate;
+  const [year, month, day] = selectedDate.split("-");
+  console.log(selectedMonth, "selectedMonth");
 
-  // second input return field 
-//   const [selectedDate2, setSelectedDate2] = useState(null);
-// const [selectedMonth2, setSelectedMonth2] = useState(null);
-//   const handleDateChange2 = (date) => {
-//     if (date instanceof Date && !isNaN(date)) {
-//       const year = date.getFullYear();
-//       const month = date.getMonth() + 1;
-//       const day = date.getDate();
-//       const formattedDate = `${year}-${month.toString().padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
-//       setSelectedDate2(formattedDate);
-  
-//       const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-//       const selectedMonthName = monthNames[date.getMonth()];
-//       setSelectedMonth2(selectedMonthName);
-//     } else {
-//       console.error(`Invalid date: ${date}`);
-//     }
-//   };
-//   const [year1, month1, day1] = selectedMonth2.split('-')
-//   console.log(selectedMonth2,"selectedMonth")
+  // second input return field
+  //   const [selectedDate2, setSelectedDate2] = useState(null);
+  // const [selectedMonth2, setSelectedMonth2] = useState(null);
+  //   const handleDateChange2 = (date) => {
+  //     if (date instanceof Date && !isNaN(date)) {
+  //       const year = date.getFullYear();
+  //       const month = date.getMonth() + 1;
+  //       const day = date.getDate();
+  //       const formattedDate = `${year}-${month.toString().padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
+  //       setSelectedDate2(formattedDate);
 
-
+  //       const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  //       const selectedMonthName = monthNames[date.getMonth()];
+  //       setSelectedMonth2(selectedMonthName);
+  //     } else {
+  //       console.error(`Invalid date: ${date}`);
+  //     }
+  //   };
+  //   const [year1, month1, day1] = selectedMonth2.split('-')
+  //   console.log(selectedMonth2,"selectedMonth")
 
   // create count of adults code here for first one
 
@@ -208,37 +219,36 @@ const FLightsSearching = (props) => {
     // alert("this is the hitted data")
     event.preventDefault();
     callBackFUNc();
-    formValue.originDestinations[0].originLocationCode =
-      newformValue.originLocationCode;
+    formValue.originDestinations[0].originLocationCode = newformValue.originLocationCode;
     formValue.originDestinations[0].destinationLocationCode =
       newformValue.destinationLocationCode;
     // formValue.travelers =
-    
 
     formobject.originDestinations[0].departureDateTimeRange.date = selectedDate;
     console.log("formValueformValueformValue", formValue);
     axios.post(`${baseUrl}/api/flight-booking`, formobject).then((res) => {
-      if(!newformValue.originLocationCode){
-        toast.error('Please fil the Detial of originLocationCode')
+      if (!newformValue.originLocationCode) {
+        toast.error("Please fil the Detial of originLocationCode");
       }
-      if(!newformValue.destinationLocationCode){
-        toast.error('Please fil the Detial of destinationLocationCode')
+      if (!newformValue.destinationLocationCode) {
+        toast.error("Please fil the Detial of destinationLocationCode");
       }
-      if(!formValue.originDestinations[0].departureDateTimeRange.date){
-        toast.error('Please fill the Date')
-  
+      if (!formValue.originDestinations[0].departureDateTimeRange.date) {
+        toast.error("Please fill the Date");
       }
       console.log("res.data", res.data);
       callBackData(res.data);
       setApiRes(res.data);
     });
-    if(newformValue.originLocationCode && newformValue.destinationLocationCode && formValue.originDestinations[0].departureDateTimeRange.date){
+    if (
+      newformValue.originLocationCode &&
+      newformValue.destinationLocationCode &&
+      formValue.originDestinations[0].departureDateTimeRange.date
+    ) {
       navigate(
         `/DetailofFlight/?originLocationCode=${formValue.originDestinations[0].originLocationCode}/destinationLocationCode=${formValue.originDestinations[0].destinationLocationCode}/adults=${count}/Child=${counting}/selectedDate=${selectedDate}`
       );
     }
-    
-    
   };
 
   // this is dropdown code
@@ -314,7 +324,6 @@ const FLightsSearching = (props) => {
                 </div>
               </div>
             </div>
-          
           </div>
 
           <div
@@ -355,7 +364,8 @@ const FLightsSearching = (props) => {
                       // title="BOM, Chhatrapati Shivaji International Airport India"
                     >
                       <span className="truncate airPortName " title="">
-                        {newformValue.originLocationCode}  International Airport India
+                        {newformValue.originLocationCode} International Airport
+                        India
                       </span>
                     </p>
                   </label>
@@ -396,15 +406,13 @@ const FLightsSearching = (props) => {
                     /> */}
                     <DatePicker
                       className="fsw_inputField font20"
-
-                            selected={
-                              selectedDate &&
-                              new Date(selectedDate + "T00:00:00")
-                            }
-                            onChange={(date) => handleDateChange(date)}
-                            dateFormat="yyyy-MM-dd"
-                            minDate={new Date()}
-                          />
+                      selected={
+                        selectedDate && new Date(selectedDate + "T00:00:00")
+                      }
+                      onChange={(date) => handleDateChange(date)}
+                      dateFormat="yyyy-MM-dd"
+                      minDate={new Date()}
+                    />
                     <p
                       data-cy="departureDate"
                       className="blackText font20 code lineHeight36"
@@ -418,7 +426,7 @@ const FLightsSearching = (props) => {
                     </p>
                   </label>
                 </div>
-                
+
                 <div className="col-12 col-lg-6 col-xl-3 ps-0 mb-2 mb-lg-0 mb-xl-0 pe-0 pe-lg-2">
                   <div className="dropdown" id="myDD">
                     <button
