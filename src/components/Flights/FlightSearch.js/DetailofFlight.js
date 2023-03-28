@@ -94,13 +94,15 @@ const DetailofFlight = () => {
 
   const PriceCheckData = async (e, selectID) => {
     try {
-      const url = `${baseUrl}/api/flight-booking/priceCheck`;
+      const url= `${baseUrl}/api/flight-booking/priceCheck`
+      const validData = DataApi.filter((val , index) =>  val.id === selectID.id);
+      // SeturlData(validData)
+       axios.post(url , validData[0]).then(res => {
+        console.log("deep jaswal" ,)
 
-      const validData = DataApi.filter((val, index) => val.id === selectID.id);
+        navigate('/FlightCheckout/' , {state : `${JSON.stringify(res.data)}`})
 
-      axios.post(url, validData[0]).then((res) => {
-        navigate(`/FlightCheckout/?res=${res.data}`);
-      });
+      })
     } catch (err) {}
   };
 

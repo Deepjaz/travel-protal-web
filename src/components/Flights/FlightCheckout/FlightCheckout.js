@@ -1,6 +1,10 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom'
 
 const FlightCheckout = () => {
+  const {state} = useLocation()
+
+  console.log('statestatestatestatestatestate' , state)
   return (
     <>  <div>
     <div className='main-div-sd'>
