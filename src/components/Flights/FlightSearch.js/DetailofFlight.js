@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import FLightsSearching from "./FLightsSearching";
-import { redirect, useLocation,useNavigate } from "react-router-dom";
-//import FlightSearchApi from './Hooks/FlightSearchApi';
+import { redirect, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../../../env/env";
 import { ThreeDots } from "react-loader-spinner";
+
 const DetailofFlight = () => {
-  //const { postApi } = FlightSearchApi()
   const [postApi, setPostApi] = useState([]);
   const { search } = useLocation();
-  const [flightDate , setflightDate] = useState('')
+  const [flightDate, setflightDate] = useState("");
   const data = search.slice(search.indexOf("?") + 1);
   const params = {};
   data.split("/").forEach((pair) => {
@@ -17,14 +16,10 @@ const DetailofFlight = () => {
     params[key] = value;
   });
   const { originLocationCode, destinationLocationCode, adults, Child, selectedDate } = params;
-  // console.log(originLocationCode, "originLocationCode");
-  // console.log(destinationLocationCode, "destinationLocationCode");
-  // console.log(adults, "adults");
-  // console.log(Child, "Child");
-  // console.log(Date, "Date");
+
   const navigate = useNavigate();
+
   const callBackData = (data) => {
-   
     setPostApi(data);
   };
 
@@ -43,10 +38,10 @@ const DetailofFlight = () => {
     ],
     travelers: [
       {
-        "id": "1",
-        "travelerType": "ADULT",
-        "fareOptions":["STANDARD"]
-      }
+        id: "1",
+        travelerType: "ADULT",
+        fareOptions: ["STANDARD"],
+      },
     ],
     sources: ["GDS"],
   };
@@ -57,12 +52,12 @@ const DetailofFlight = () => {
     destinationLocationCode: "",
     selectedData: "",
   });
-  console.log("this is the formValue", formValue);
+
   const callBackFUNc = () => {
     var travelersData = [];
     formobject.travelers = travelersData;
+
     for (let i = 1; i <= adults; i++) {
-      // console.log(i)
       travelersData.push({
         id: i,
         travelerType: "ADULT",
@@ -71,49 +66,43 @@ const DetailofFlight = () => {
     }
 
     for (let i = 1; i <= Child; i++) {
-      // console.log(i)
       travelersData.push({
         id: 10 + i,
         travelerType: "CHILD",
         fareOptions: ["STANDARD"],
       });
     }
-   
   };
-  
+
+  useEffect(() => {
+    callBackFUNc();
+
+    formValue.originDestinations[0].originLocationCode = originLocationCode;
+    formValue.originDestinations[0].destinationLocationCode = destinationLocationCode;
+    formobject.originDestinations[0].departureDateTimeRange.date = selectedDate;
+
+    const options = { day: "numeric", month: "short", date: "numeric" };
+    const formattedDate = new Date(selectedDate).toLocaleDateString("en-US", options);
+    setflightDate(formattedDate);
+
+    axios.post(`${baseUrl}/api/flight-booking`, formValue).then((res) => {
+      setDataApi(res.data.data);
+    });
+  }, []);
 
   const [DataApi, setDataApi] = useState([]);
-  useEffect(() => {
-      callBackFUNc();
-      formValue.originDestinations[0].originLocationCode = originLocationCode;
-      formValue.originDestinations[0].destinationLocationCode =destinationLocationCode;
-      formobject.originDestinations[0].departureDateTimeRange.date = selectedDate;
-      const options = { day: 'numeric', month: 'short', date: 'numeric' };
-      const formattedDate = new Date(selectedDate).toLocaleDateString('en-US', options);
-      setflightDate(formattedDate)
-      console.log('formattedDateformattedDateformattedDate' , formattedDate)
-      console.log("formValueformValueformValue", formValue);
-      axios.post(`${baseUrl}/api/flight-booking`, formValue).then((res) => {
-        setDataApi(res.data.data);
-    });
-  }, [DataApi]);
 
-const PriceCheckData =  async (e , selectID) => {
-  console.log(selectID.id)
-    try{
+  const PriceCheckData = async (e, selectID) => {
+    try {
+      const url = `${baseUrl}/api/flight-booking/priceCheck`;
 
-      const url= `${baseUrl}/api/flight-booking/priceCheck`
-      const validData = DataApi.filter((val , index) =>  val.id === selectID.id);
-      
-       axios.post(url , validData[0]).then(res => {
-        console.log("deep jaswal" ,res.data)
-        navigate(`/FlightCheckout/?res=${res.data}`)
-      })
+      const validData = DataApi.filter((val, index) => val.id === selectID.id);
 
-    }catch(err){
-
-    }
-}
+      axios.post(url, validData[0]).then((res) => {
+        navigate(`/FlightCheckout/?res=${res.data}`);
+      });
+    } catch (err) {}
+  };
 
 
 

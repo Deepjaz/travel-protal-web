@@ -7,12 +7,31 @@ import { baseUrl } from './../../env/env';
 const TravelDeal = (props) => {
     const [DataApi, setDataApi] = useState();
     useEffect(() => {
-      axios.get(`${baseUrl}/api/flight-analytics/most-booked?originCityCode=NCE&period=2017-11`).then((res) => {
-        // console.log(res.data,"yo data is here ")
-        setDataApi(res.data.data);
-    })
-    },[DataApi]);
-    console.log(DataApi,"yo bhai")
+        let source = axios.CancelToken.source();
+      
+        axios.get(`${baseUrl}/api/flight-analytics/most-booked?originCityCode=NCE&period=2017-11`, {
+            cancelToken: source.token
+          })
+          .then((res) => {
+            setDataApi(res.data.data);
+          })
+          .catch((err) => {
+            if (axios.isCancel(err)) {
+              console.log('Request canceled');
+            } else {
+              console.log('Error', err);
+            }
+          });
+      
+        return () => {
+          source.cancel();
+        };
+      }, []);
+      
+      
+      
+      
+      
   return (
 
     <>
