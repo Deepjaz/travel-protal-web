@@ -1,6 +1,7 @@
 import React from 'react';
 import Navigation from './components/Navigation';
 import './App.css';
+import  './components/Flights/FlightCheckout/FlightCheck.css';
 import AllRoutes from './components/Routes/AllRoutes';
 
 
