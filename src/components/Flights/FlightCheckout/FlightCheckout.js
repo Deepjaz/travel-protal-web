@@ -18,6 +18,7 @@ const FlightCheckout = () => {
   const month = date.toLocaleDateString('en-us' , {month : 'long'})
   const time = date.toLocaleTimeString('en-us' , {timeStyle : "short"})
   const depTime = departureDate.toLocaleTimeString('en-us' , {timeStyle : "short"})
+
   // const timebetweenFlight = time  - depTime
   const getDate = date.getDate();
   console.log('dateStringdateStringdateString' ,day , month , getDate ,time ,depTime )
@@ -45,7 +46,7 @@ const FlightCheckout = () => {
                               {month}/{day}/{getDate}   {time}    
 
                             </span>
-                            <span className="fontSize14">1 Stop · 8h 0m</span>
+                            <span className="fontSize14">{val.ArivalData[0].numOfStops} Stop · 8h 0m</span>
                           </p>
                         </div>
                         <div className="makeFlex column">
@@ -133,17 +134,17 @@ const FlightCheckout = () => {
                                   ADULT
                                 </span>
                                 <span className="fontSize12 blackFont">
-                                  15 Kgs (1 piece only)
+                                  {val.co2Emissions[0].carryWeight} {val.co2Emissions[0].weightUnit} (1 piece only)
                                 </span>
                                 <span className="fontSize12 blackFont">
-                                  7 Kgs (1 piece only)
+                                {val.co2Emissions[0].cabin}
                                 </span>
                               </li>
                             </ul>
                           </div>
                         </div>
                       </div>
-                      <div className="mmtConnectReviewInfo">
+                      {/* <div className="mmtConnectReviewInfo">
                         <ul>
                           <li>
                             <p>
@@ -155,8 +156,8 @@ const FlightCheckout = () => {
                             </p>
                           </li>
                         </ul>
-                      </div>
-                      <div className="flightItenaryWrap">
+                      </div> */}
+                      {/* <div className="flightItenaryWrap">
                         <div className="flightItenaryHdr">
                           <div className="makeFlex gap-x-10">
                             <span className="bgProperties icon24"></span>
@@ -241,9 +242,9 @@ const FlightCheckout = () => {
                             </ul>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                     </section>
-                    <div className="baggageTag">
+                    {/* <div className="baggageTag">
                       <div className="baggageContent">
                         <span className="addBaggageImg bgProperties appendRight10"></span>
                         <p className="fontSize12 boldFont">
@@ -256,14 +257,14 @@ const FlightCheckout = () => {
                           +ADD
                         </button>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
-                  <div className="reviewUpgradeFare appendTop20">
+                  {/* <div className="reviewUpgradeFare appendTop20">
                     <p className="blackText fontSize18 blackFont appendBottom5"></p>
                     <p className="appendBottom15"></p>
                     <div className="make_flex"></div>
-                  </div>
-                  <div className="appendTop20">
+                  </div> */}
+                  {/* <div className="appendTop20">
                     <section className="refundSection">
                       <div>
                         <div className="refundHdr">
@@ -349,8 +350,8 @@ const FlightCheckout = () => {
                         </div>
                       </div>
                     </section>
-                  </div>
-                  <div className="appendTop20">
+                  </div> */}
+                  {/* <div className="appendTop20">
                     <div className="appendTop20">
                       <section className="refundSection">
                         <h3 className="fontSize16 blackFont appendBottom20">
@@ -412,7 +413,7 @@ const FlightCheckout = () => {
                         </div>
                       </section>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div class="pageRightContainer customScroll">
@@ -421,16 +422,22 @@ const FlightCheckout = () => {
                     <div>
                       <p class="fontSize18 blackFont">Fare Summary</p>
                     </div>
+                    
                     <div class="fareTypeWrap">
-                      <div class="fareRow">
+                      {
+                        val.travlerPricing.map((val , index) => (
+                        <div class="fareRow">
                         <div class="makeFlex hrtlCenter pointer flexOne">
-                          <span class="appendRight10 appendTop5">
+                          {/* <span class="appendTop5">
                             <span class="iconPlusImg bgProperties"></span>
-                          </span>
-                          <span class="fareHeader">Base Fare</span>
+                          </span> */}
+                          <span class="fareHeader">{val.traverltype}</span>
                         </div>
-                        <span class="fontSize14 darkText">${val.basePrice}</span>
+                        <span class="fontSize14 darkText">${val.ticketPrice}</span>
                       </div>
+                        ))
+                      }
+                      
                     </div>
                     {/* <div class="fareTypeWrap">
                       <div class="fareRow">
@@ -474,129 +481,8 @@ const FlightCheckout = () => {
                     </div>
                   </section>
                 </div>
-                <div class="appendTop10">
-                  <section class="promocodeWrap">
-                    <div>
-                      <div class="promoHeader">
-                        <span class="fontSize18">
-                          <b>PROMO</b> CODES
-                        </span>
-                        <span class="promoIconWrapper appendLeft10">
-                          <span class="bgProperties iconPromoImg iconPromocode"></span>
-                        </span>
-                      </div>
-                      <div class="appendBottom15">
-                        <p class="relative">
-                          <input
-                            type="text"
-                            class="promoInput"
-                            placeholder="Enter promo code here"
-                            value=""
-                          />
-                        </p>
-                      </div>
-                      <div class="appendBottom20">
-                        <p class="promoTitle"></p>
-                        <div class="promoContent pointer">
-                          <div class="flexOne cpn-wrapper">
-                            <div class="makeFlex pointer gap-x-5">
-                              <span class="radioWrap">
-                                <span class="block radio customRadioBtn">
-                                  <span class="customRadioBtn sizeSm primaryRadiobox">
-                                    <input type="radio" value="" />
-                                    <span class="outer">
-                                      <span class="inner"></span>
-                                    </span>
-                                  </span>
-                                </span>
-                              </span>
-                              <div class="promoContentWrap flexOne">
-                                <span class="couponCode">MMTSUPER</span>
-                                <span class="promoCheckContent">
-                                  Use this coupon and get Rs 300 instant
-                                  discount on your flight booking.
-                                </span>
-                                <a
-                                  href="https://www.makemytrip.com/promos/df-amazon-2000-20012023.html"
-                                  class="fontSize12"
-                                  target="_blank"
-                                  rel="noreferrer"
-                                >
-                                  Terms &amp; Conditions
-                                </a>
-                              </div>
-                              <span class="offerIcon bgProperties"></span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="promoContent pointer">
-                          <div class="flexOne cpn-wrapper">
-                            <div class="makeFlex pointer gap-x-5">
-                              <span class="radioWrap">
-                                <span class="block radio customRadioBtn">
-                                  <span class="customRadioBtn sizeSm primaryRadiobox">
-                                    <input type="radio" value="" />
-                                    <span class="outer">
-                                      <span class="inner"></span>
-                                    </span>
-                                  </span>
-                                </span>
-                              </span>
-                              <div class="promoContentWrap flexOne">
-                                <span class="couponCode">MMTAU</span>
-                                <span class="promoCheckContent">
-                                  Use this coupon and get 548 instant discount
-                                  on your AU Credit and Debit cards.
-                                </span>
-                                <a
-                                  href="https://www.makemytrip.com/promos/au-offers-06072021.html?lob=df"
-                                  class="fontSize12"
-                                  target="_blank"
-                                  rel="noreferrer"
-                                >
-                                  Terms &amp; Conditions
-                                </a>
-                              </div>
-                              <span class="offerIcon bgProperties"></span>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="promoContent pointer">
-                          <div class="flexOne cpn-wrapper">
-                            <div class="makeFlex pointer gap-x-5">
-                              <span class="radioWrap">
-                                <span class="block radio customRadioBtn">
-                                  <span class="customRadioBtn sizeSm primaryRadiobox">
-                                    <input type="radio" value="" />
-                                    <span class="outer">
-                                      <span class="inner"></span>
-                                    </span>
-                                  </span>
-                                </span>
-                              </span>
-                              <div class="promoContentWrap flexOne">
-                                <span class="couponCode">MMTBFLEMI</span>
-                                <span class="promoCheckContent">
-                                  Use this coupon and get Rs 228 instant
-                                  discount on your flight booking on Bajaj
-                                  Finserv NO COST EMI paymode.
-                                </span>
-                                <a
-                                  href="https://www.makemytrip.com/promos/df-bajaj-25052022.html"
-                                  class="fontSize12"
-                                  target="_blank"
-                                  rel="noreferrer"
-                                >
-                                  Terms &amp; Conditions
-                                </a>
-                              </div>
-                              <span class="offerIcon bgProperties"></span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </section>
+                <div className="checkOutBtn">
+                  <button>Checkout</button>
                 </div>
               </div>
             </div>
