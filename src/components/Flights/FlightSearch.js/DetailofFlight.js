@@ -4,20 +4,28 @@ import { redirect, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../../../env/env";
 import { ThreeDots } from "react-loader-spinner";
+import moment from 'moment'
 
 const DetailofFlight = () => {
   const [postApi, setPostApi] = useState([]);
   const { search } = useLocation();
   const [flightDate, setflightDate] = useState("");
-  const [flightvalue , setFlightValue] =useState([])
-  const [arivalTime , setArivalTime] = useState('')
+  const [flightvalue, setFlightValue] = useState([]);
+  const [arivalTime, setArivalTime] = useState("");
   const data = search.slice(search.indexOf("?") + 1);
+  
   const params = {};
   data.split("/").forEach((pair) => {
     const [key, value] = pair.split("=");
     params[key] = value;
   });
-  const { originLocationCode, destinationLocationCode, adults, Child, selectedDate } = params;
+  const {
+    originLocationCode,
+    destinationLocationCode,
+    adults,
+    Child,
+    selectedDate,
+  } = params;
 
   const navigate = useNavigate();
 
@@ -80,124 +88,120 @@ const DetailofFlight = () => {
     callBackFUNc();
 
     formValue.originDestinations[0].originLocationCode = originLocationCode;
-    formValue.originDestinations[0].destinationLocationCode = destinationLocationCode;
+    formValue.originDestinations[0].destinationLocationCode =
+      destinationLocationCode;
     formobject.originDestinations[0].departureDateTimeRange.date = selectedDate;
 
     const options = { day: "numeric", month: "short", date: "numeric" };
-    const formattedDate = new Date(selectedDate).toLocaleDateString("en-US", options);
-    setflightDate(formattedDate); 
+    const formattedDate = new Date(selectedDate).toLocaleDateString(
+      "en-US",
+      options
+    );
+    setflightDate(formattedDate);
 
     axios.post(`${baseUrl}/api/flight-booking`, formValue).then((res) => {
       setDataApi(res.data.data);
-      const newval  = res.data.data.map((val , index) => {
-        return{
-         time  : new Date(val.itineraries[0].segments[0].arrival.at),
-         deptime : new Date(val.itineraries[0].segments[0].departure.at)
-        }
-         
-    })
-    console.log('newvalnewvalnewvalnewval' , newval[0].time)
-    newval.forEach(element  => {
-      const diffInMs = element.time.getHours()  - element.deptime.getHours()  
-      const diffInMinutes = diffInMs / (1000 * 60);
-      console.log('diffInMsdiffInMsdiffInMsdiffInMsdiffInMsdiffInMs', diffInMs)
+      const newval = res.data.data.map((val, index) => {
+            return{
+             time  : new Date(val.itineraries[0].segments[0].arrival.at),
+             deptime : new Date(val.itineraries[0].segments[0].departure.at)
+            }
+        })
+      //   console.log('newvalnewvalnewvalnewval' , newval[0].time)
+      //   newval.forEach(element  => {
+      //     const diffInMs = moment(newval.time).format('LT')  - moment(newval.deptime).format('LT')
+      //     const diffInMinutes = diffInMs / (1000 * 60);
+      //     var Hours = Math.floor(diffInMinutes /60);
+      //     console.log('diffInMsdiffInMsdiffInMsdiffInMsdiffInMsdiffInMs', moment(newval.time).format('LT'))
+      // });
 
+      // const diffInMs = time.getTime() - deptime.getTime();
     });
-
-  // const diffInMs = time.getTime() - deptime.getTime(); 
-
-  
-
-    });
-  
-      
   }, []);
 
   const [DataApi, setDataApi] = useState([]);
 
-
   const PriceCheckData = async (e, selectID) => {
     try {
-      const url= `${baseUrl}/api/flight-booking/priceCheck`
-      const validData = DataApi.filter((val , index) =>  val.id === selectID.id);
+      const url = `${baseUrl}/api/flight-booking/priceCheck`;
+      const validData = DataApi.filter((val, index) => val.id === selectID.id);
       // SeturlData(validData)
-       axios.post(url , validData[0]).then(res => {
-        console.log("deep jaswal" ,res.data)
-        console.log("deep jaswal1" ,res.data.flightOffers)
+      axios.post(url, validData[0]).then((res) => {
+        console.log("deep jaswal", res.data);
+        console.log("deep jaswal1", res.data.flightOffers);
         res.data.flightOffers.forEach((val, index) => {
-          console.log('this is the my value', val);
-        
+          console.log("this is the my value", val);
+
           const arivalData = val.itineraries[0].segments.map((segment) => {
             return {
               arrival: segment.arrival.at,
               departure: segment.departure.at,
-              arrivaliataCode : segment.arrival.iataCode,
-              arrivaltermial : segment.arrival.terminal,
-              departureiataCode :segment.departure.iataCode,
-              departuretermial :segment.departure.terminal,
-              numOfStops : segment.numberOfStops,
-              aircarftCode : segment.aircraft.code
+              arrivaliataCode: segment.arrival.iataCode,
+              arrivaltermial: segment.arrival.terminal,
+              departureiataCode: segment.departure.iataCode,
+              departuretermial: segment.departure.terminal,
+              numOfStops: segment.numberOfStops,
+              aircarftCode: segment.aircraft.code,
               // cotwoEmissions : segment.co2Emissions.weight
-              
             };
           });
-         
-          //cabin map 
-          var cabinDetailed;
-          if(!val.itineraries[0].segments[0].co2Emissions){
-              return
-          }else{
-          const cabinDetails = val.itineraries[0].segments[0].co2Emissions.map((cabin) => {
-            return{
-              carryWeight : cabin.weight,
-              weightUnit :cabin.weightUnit,
-              cabin  : cabin.cabin,
-            } 
-          })
-          cabinDetailed = cabinDetails
 
+          //cabin map
+          var cabinDetailed;
+          if (!val.itineraries[0].segments[0].co2Emissions) {
+            return;
+          } else {
+            const cabinDetails =
+              val.itineraries[0].segments[0].co2Emissions.map((cabin) => {
+                return {
+                  carryWeight: cabin.weight,
+                  weightUnit: cabin.weightUnit,
+                  cabin: cabin.cabin,
+                };
+              });
+            cabinDetailed = cabinDetails;
           }
           // const cabinDetails = val.itineraries[0].segments.co2Emissions.map((cabin) => {
           //   return{
           //     carryWeight : cabin.weight,
           //     weightUnit :cabin.weightUnit,
           //     cabin  : cabin.cabin,
-          //   } 
-            
-          // })
-          // travlersPrcing 
-          const travlerPricing = val.travelerPricings.map((val , index)  => {
-            return {
-              traverltype : val.travelerType,
-              ticketPrice : val.price.total
-            }
+          //   }
 
-          })
-        
+          // })
+          // travlersPrcing
+          const travlerPricing = val.travelerPricings.map((val, index) => {
+            return {
+              traverltype: val.travelerType,
+              ticketPrice: val.price.total,
+            };
+          });
+
           const newValues = {
             id: val.id,
             currency: val.price.currency,
             total: val.price.total,
             basePrice: val.price.base,
             ArivalData: arivalData,
-            co2Emissions : cabinDetailed,
-            travlerPricing : travlerPricing
+            co2Emissions: cabinDetailed,
+            travlerPricing: travlerPricing,
           };
           // setFlightValue()
-            
-          console.log('this is the new value data' , newValues) 
-          
+
+          console.log("this is the new value data", newValues);
+
           setTimeout(() => {
-              navigate('/FlightCheckout/' , {state : `${JSON.stringify(newValues)}`})
-          },1000)
+            navigate("/FlightCheckout/", {
+              state: `${JSON.stringify(newValues)}`,
+            });
+          }, 1000);
         });
-      })
+      });
     } catch (err) {}
   };
-// 
+  //
 
- // date 
-
+  // date
 
   return (
     <>
@@ -210,17 +214,21 @@ const DetailofFlight = () => {
                 <div className="d-flex justify-content-between align-items-start">
                   <div>
                     <div className="fw-bold">
-                      {originLocationCode}<i className="bi bi-arrow-right mx-2"></i>{destinationLocationCode}
+                      {originLocationCode}
+                      <i className="bi bi-arrow-right mx-2"></i>
+                      {destinationLocationCode}
                       {/* (LHR) */}
                     </div>
                     <div className="mb-1 font-small">{flightDate}</div>
                   </div>
                   <div>
-                    <span className="font-small">Showing {(DataApi && DataApi.length)&&  DataApi.length} flights.</span>
+                    <span className="font-small">
+                      Showing {DataApi && DataApi.length && DataApi.length}{" "}
+                      flights.
+                    </span>
                   </div>
                 </div>
               </div>
-              
             </div>
             <div className="row">
               <div className="col-12 col-md-12 col-xl-12 mb-3">
@@ -253,18 +261,17 @@ const DetailofFlight = () => {
                       type="button"
                     >
                       <i className="bi bi-sliders me-2"></i>
-                      <span className="visible-xs font-medium">Sort Depart</span>
+                      <span className="visible-xs font-medium">
+                        Sort Depart
+                      </span>
                     </button>
                   </div>
                 </div>
               </div>
-
             </div>
-            {(DataApi  && DataApi.length > 0) ? (
+            {DataApi && DataApi.length > 0 ? (
               <div className="row">
-                {DataApi?.slice(0 ,20).map((val, index) => (
-             
-                
+                {DataApi?.slice(0, 20).map((val, index) => (
                   <div
                     className="col-6 col-md-6 col-xl-6 mb-3"
                     data-aos="fade-up"
@@ -292,23 +299,40 @@ const DetailofFlight = () => {
                           </a>
                         </div>
                       </div>
+
                       <div className="col-4 col-lg-2">
-                      {new Date(val.itineraries[0].segments[0].arrival.at).toLocaleTimeString('en-us'  ,{timeStyle: "short"})}
+                        <div>
+                          {new Date(
+                            val.itineraries[0].segments[0].departure.at
+                          ).toLocaleDateString("en-us", { dateStyle: "short" })}
+                        </div>
+                        {new Date(
+                          val.itineraries[0].segments[0].departure.at
+                        ).toLocaleTimeString("en-us", { timeStyle: "short" })}
+
                         <div className="fw-bold"></div>
-                        <div className="font-small">{val.itineraries[0].segments[0].arrival.iataCode}</div>
+                        <div className="font-small">
+                          {val.itineraries[0].segments[0].arrival.iataCode}
+                        </div>
                       </div>
                       <div className="col-4 col-lg-2">
                         <div className="font-small">
-                       {/* {diffInMinutes} */}
+                          {/* {diffInMinutes} */}
                         </div>
                         <span className="stops"></span>
                         <div className="font-small">Non Stop</div>
                       </div>
                       <div className="col-4 col-lg-2">
-                        
+                        <div>
+                          {new Date(
+                            val.itineraries[0].segments[0].arrival.at
+                          ).toLocaleDateString("en-us", { dateStyle: "short" })}
+                        </div>
                         <div className="fw-bold">
-                          {new Date(val.itineraries[0].segments[0].departure.at).toLocaleTimeString('en-us'  ,{timeStyle: "short"})}
-                          </div>
+                          {new Date(
+                            val.itineraries[0].segments[0].arrival.at
+                          ).toLocaleTimeString("en-us", { timeStyle: "short" })}
+                        </div>
                         <div className="font-small">LHR</div>
                       </div>
                       <div className="col-12 col-lg-3 text-center mt-2 mt-lg-0">
@@ -316,7 +340,11 @@ const DetailofFlight = () => {
                           <i className="bi bi-currency-dollar ms-2"></i>
                           {val.price.total}
                         </div>
-                        <button type="submit" className="btn-select btn btn-effect" onClick={e => PriceCheckData(e ,val)}>
+                        <button
+                          type="submit"
+                          className="btn-select btn btn-effect"
+                          onClick={(e) => PriceCheckData(e, val)}
+                        >
                           <span className="font-small">Select</span>
                         </button>
                       </div>
@@ -326,16 +354,17 @@ const DetailofFlight = () => {
               </div>
             ) : (
               <p className="loader-spinner">
-                <ThreeDots 
-              height="80" 
-              width="80" 
-              radius="9"
-              color="#4fa94d" 
-              ariaLabel="three-dots-loading"
-              wrapperStyle={{}}
-              wrapperClassName=""
-              visible={true}
-               /></p>
+                <ThreeDots
+                  height="80"
+                  width="80"
+                  radius="9"
+                  color="#4fa94d"
+                  ariaLabel="three-dots-loading"
+                  wrapperStyle={{}}
+                  wrapperClassName=""
+                  visible={true}
+                />
+              </p>
             )}
           </div>
         </div>
