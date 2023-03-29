@@ -28,3 +28,6 @@ code {
   margin-left: -60px;
   z-index: 999999999 !important;
 }
+.react-datepicker {
+  display: flex;
+}
