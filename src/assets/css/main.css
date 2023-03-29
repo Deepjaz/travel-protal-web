@@ -3130,7 +3130,7 @@ html[dir='ltr'] .swipCircle{width:40px;height:40px;flex-shrink:0;margin-left:-22
 .returnCross{width:20px;height:20px;background-position:-145px -59px;}
 .blueRoundTripIcon{background-position:-46px -480px;width:16px;height:10px;}
 .widgetSection{margin:0 auto;position:relative;z-index:10;border-radius:8px;box-shadow:0 1px 5px 0 rgba(0, 0, 0, 0.1);background-color:#fff;padding:60px 20px 0;}
-.widgetSection .widgetSearchBtn{width:216px;padding:10px;margin-bottom:-32px;opacity:1;}
+.widgetSection .widgetSearchBtn{width:216px;padding:10px;opacity:1;}
 .fsw_inputBox.dates .lbl_input:after,.fsw_inputBox.flightTravllers .lbl_input:after{border:solid var(--color-link-primary);border-width:0 2px 2px 0;display:inline-block;padding:3px;content:'';-moz-transform:rotate(45deg);-ms-transform:rotate(45deg);-o-transform:rotate(45deg);transform:rotate(45deg);-webkit-transform:rotate(45deg);vertical-align:top;margin:3px 0 0 8px;-webkit-transition:all 0.3s ease-in-out;-o-transition:all 0.3s ease-in-out;-moz-transition:all 0.3s ease-in-out;transition:all 0.3s ease-in-out;}
 html[dir='ltr'] .specialFareTooltip::after{bottom:100%;left:40px;border:solid transparent;content:' ';height:0;width:0;position:absolute;pointer-events:none;border-color:rgba(36, 153, 149, 0);border-bottom-color:#249995;border-width:10px;margin-left:-10px;}
 .disabled{color:#c2c2c2!important;opacity:0.6;pointer-events:none;text-decoration-color:#c2c2c2!important;}
@@ -3231,4 +3231,29 @@ html[dir='ltr'] .widgetSection .fsw .fsw_inputBox:first-of-type:hover{background
   width: 100%;
     display: flex;
     justify-content: center;
+}
+
+
+
+
+#myDD .plus-minus-input {
+    justify-content: flex-start;
+    margin-bottom: 8px;
+}
+#myDD .plus-minus-input button.circle {
+    padding: 2px 10px;
+    border: solid 1px #e2e2e2;
+}
+#myDD .plus-minus-input input {
+    padding: 0px 0px;
+    width: 50px;
+    border: solid 1px #e2e2e2;
+    font-size: 14px;
+}
+#myDD  li>div.d-flex {
+    font-size: 14px;
+    padding-bottom: 2px;
+}
+#myDD li label {
+    font-size: 15px;
 }

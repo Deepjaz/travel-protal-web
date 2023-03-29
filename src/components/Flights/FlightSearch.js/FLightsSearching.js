@@ -241,6 +241,7 @@ const FLightsSearching = (props) => {
       newformValue.destinationLocationCode &&
       formValue.originDestinations[0].departureDateTimeRange.date
     ) {
+      console.log(apiRes,"this is result")
       navigate(
         `/DetailofFlight/?originLocationCode=${formValue.originDestinations[0].originLocationCode}/destinationLocationCode=${formValue.originDestinations[0].destinationLocationCode}/adults=${count}/Child=${counting}/selectedDate=${selectedDate}`
       );
@@ -275,6 +276,7 @@ const FLightsSearching = (props) => {
     console.log("thi is the e", e.target.value);
     setSelectOption(value);
   };
+ 
   return (
     <>
       <div className="flight-search">
@@ -405,9 +407,11 @@ const FLightsSearching = (props) => {
                       selected={
                         selectedDate && new Date(selectedDate + "T00:00:00")
                       }
+                    
                       onChange={(date) => handleDateChange(date)}
                       dateFormat="yyyy-MM-dd"
                       minDate={new Date()}
+                      monthsShown={2}
                     />
                     <p
                       data-cy="departureDate"

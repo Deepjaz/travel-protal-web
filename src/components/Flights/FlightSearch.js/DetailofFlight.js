@@ -5,7 +5,7 @@ import axios from "axios";
 import { baseUrl } from "../../../env/env";
 import { ThreeDots } from "react-loader-spinner";
 import moment from 'moment'
-
+import flightimg from "../../../assets/images/6E.png"
 const DetailofFlight = () => {
   const [postApi, setPostApi] = useState([]);
   const { search } = useLocation();
@@ -190,11 +190,11 @@ const DetailofFlight = () => {
 
           console.log("this is the new value data", newValues);
 
-          setTimeout(() => {
+        
             navigate("/FlightCheckout/", {
               state: `${JSON.stringify(newValues)}`,
             });
-          }, 1000);
+         
         });
       });
     } catch (err) {}
@@ -279,25 +279,16 @@ const DetailofFlight = () => {
                   >
                     <div className="row g-0 border theme-border-radius theme-box-shadow p-2 align-items-center theme-bg-white">
                       <div className="col-12 col-lg-3">
-                        <div>
-                          <span className="font-small d-inline-flex mb-0 align-middle lh-1">
-                            {" "}
-                            {val.id}
-                          </span>
-                        </div>
+                       
                         <div>
                           <img
-                            src="assets/images/icons/6E.jpg"
+                            src={flightimg}
                             className="img-fluid theme-border-radius"
                             alt="Indigo"
                             title="airline Indigo"
                           />
                         </div>
-                        <div>
-                          <a href="#" className="font-small">
-                            Flight Details
-                          </a>
-                        </div>
+                       
                       </div>
 
                       <div className="col-4 col-lg-2">

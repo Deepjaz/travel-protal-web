@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import UserDetail from "./UserDetail";
 
 const FlightCheckout = () => {
@@ -463,7 +463,7 @@ const FlightCheckout = () => {
                               </p>
                             </div>
                             <div>
-                              <button className="loginBtn">LOGIN NOW</button>
+                              <Link className="loginBtn" to={'/sign-up'}>LOGIN NOW</Link>
                             </div>
                           </div>
                           <div className="appendBottom20" id="wrapper_ADULT">
