@@ -233,7 +233,7 @@ const FLightsSearching = (props) => {
         toast.error("Please fill the Date");
       }
       console.log("res.data", res.data);
-      callBackData(res.data);
+      // callBackData(res.data);
       setApiRes(res.data);
     });
     if (
