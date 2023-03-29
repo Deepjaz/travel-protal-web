@@ -1,20 +1,25 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
+import UserDetail from './UserDetail'
 
 const FlightCheckout = () => {
   const {state} = useLocation()
 
   console.log('statestatestatestatestatestate' , state)
   return (
-    <>  <div>
+    <>  
+    
+    
+    <div>
+      
     <div className='main-div-sd'>
     <div className="componentContainer padding20 appendBottom20">
     <div>
       <div className="appendBottom20">
-        <section className="flightDetailBlk">
+        <div className="flightDetailBlk">
           <div className="flDetailHdr">
             <div>
-              <h2 className="blackFont"><b>Mumbai → New Delhi</b></h2>
+              <h2 className="blackFont"><b> →</b></h2>
               <p className="appendTop10 makeFlex gap-x-10">
                 <span
                   className="scheduleDay"
@@ -193,7 +198,7 @@ const FlightCheckout = () => {
               </div>
             </div>
           </div>
-        </section>
+        </div>
         <div className="baggageTag" >
           <div className="baggageContent">
             <span
@@ -299,7 +304,7 @@ const FlightCheckout = () => {
           </div>
         </section>
       </div>
-      <div className="appendTop20">
+      
         <div className="appendTop20">
           <section className="refundSection">
             <h3 className="fontSize16 blackFont appendBottom20">
@@ -365,9 +370,10 @@ const FlightCheckout = () => {
               </div>
             </div>
           </section>
+     
         </div>
-      </div>
     </div>
+  <UserDetail/>
   </div>
   <div class="pageRightContainer customScroll">
     <div id="FARE_SUMMARY">
@@ -552,7 +558,8 @@ const FlightCheckout = () => {
     </div>
 
 
-  </div></>
+  </div>
+  </>
       )
 }
 
