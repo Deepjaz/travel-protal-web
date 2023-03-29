@@ -1,566 +1,747 @@
-import React from 'react'
-import { useLocation } from 'react-router-dom'
-import UserDetail from './UserDetail'
+import React from "react";
+import { useLocation } from "react-router-dom";
+import UserDetail from "./UserDetail";
 
 const FlightCheckout = () => {
-  const {state} = useLocation()
+  const { state } = useLocation();
 
-  console.log('statestatestatestatestatestate' , state)
+  const data = [];
+  // const {flightOffers} = state;
+  data.push(JSON.parse(state));
+  console.log("statestatestatestatestatestate1", data);
+
+  const dateString = data[0].ArivalData[0].arrival;
+  const departureDateVal = data[0].ArivalData[0].departure;
+  const date = new Date(dateString);
+  const departureDate = new Date(departureDateVal);
+  // const day
+  const day = date.toLocaleDateString("en-us", { weekday: "short" });
+  const month = date.toLocaleDateString("en-us", { month: "long" });
+  const time = date.toLocaleTimeString("en-us", { timeStyle: "short" });
+  const depTime = departureDate.toLocaleTimeString("en-us", {
+    timeStyle: "short",
+  });
+
+  // const timebetweenFlight = time  - depTime
+  const getDate = date.getDate();
+  console.log(
+    "dateStringdateStringdateString",
+    day,
+    month,
+    getDate,
+    time,
+    depTime
+  );
+
   return (
-    <>  
-    
-    
-    <div>
-      
-    <div className='main-div-sd'>
-    <div className="componentContainer padding20 appendBottom20">
-    <div>
-      <div className="appendBottom20">
-        <div className="flightDetailBlk">
-          <div className="flDetailHdr">
+    <>
+      {" "}
+      <div>
+        {data?.map((val, index) => (
+          <>
+            <div className="main-div-sd">
+              <div className="componentContainer padding20 appendBottom20">
+                <div>
+                  <div className="appendBottom20">
+                    <section className="flightDetailBlk">
+                      <div className="flDetailHdr">
+                        <div>
+                          <h2 className="blackFont">
+                            <b>
+                              {val.ArivalData[0].arrivaliataCode} →{" "}
+                              {val.ArivalData[0].departureiataCode}
+                            </b>
+                          </h2>
+                          <p className="appendTop10 makeFlex gap-x-10">
+                            <span className="scheduleDay">
+                              {month}/{day}/{getDate} {time}
+                            </span>
+                            <span className="fontSize14">
+                              {val.ArivalData[0].numOfStops} Stop · 8h 0m
+                            </span>
+                          </p>
+                        </div>
+                        <div className="makeFlex column">
+                          <p className="refundTag">
+                            <font color="#ffffff">Cancellation Fees Apply</font>
+                          </p>
+                          <p className="fontSize14 linkText appendTop10 textRight">
+                            <span>View Fare Rules</span>
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flightItenaryWrap">
+                        <div className="flightItenaryHdr">
+                          <div className="makeFlex gap-x-10">
+                            <span className="bgProperties icon24"></span>
+                            <p className="makeFlex gap-x-10">
+                              <span className="fontSize14 boldFont">
+                                AirAsia
+                              </span>
+                              <span className="fontSize14">I5 492</span>
+                            </p>
+                          </div>
+                          <div className="makeFlex">
+                            <div className="makeFlex hrtlCenter">
+                              <span className="fontSize14">
+                                Economy &gt;
+                                <font color="#249995">
+                                  <b>Economy</b>
+                                </font>
+                              </span>
+                              <span className="bgProperties icon16 appendLeft5 appendTop2"></span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flightItenary">
+                          <div className="flexOne">
+                            <div className="itenaryLeft">
+                              <div className="makeFlex gap-x-10">
+                                <div className="makeFlex time-info-ui">
+                                  <span className="fontSize14 blackFont">
+                                    {time}
+                                  </span>
+                                  <span className="layoverCircle"></span>
+                                </div>
+                                <div>
+                                  <span className="fontSize14 blackFont">
+                                    {val.ArivalData[0].arrivaliataCode}
+                                  </span>
+                                  {/* <span className="fontSize14">
+                                    . Chhatrapati Shivaji International Airport,
+                                    Terminal 2
+                                  </span> */}
+                                </div>
+                              </div>
+                              <div className="layover">
+                                <span className="fontSize14">1h 45m</span>
+                              </div>
+                              <div className="makeFlex gap-x-10 overideBg">
+                                <div className="makeFlex time-info-ui">
+                                  <span className="fontSize14 blackFont">
+                                    {depTime}
+                                  </span>
+                                  <span className="layoverCircle"></span>
+                                </div>
+                                <div>
+                                  <span className="fontSize14 blackFont">
+                                    {val.ArivalData[0].departureiataCode}
+                                  </span>
+                                  {/* <span className="fontSize14">
+                                    . Jaipur Airport
+                                  </span> */}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="itenaryRight">
+                            <ul className="itenaryList">
+                              <li>
+                                <span className="fontSize12">Baggage</span>
+                                <span className="fontSize12">Check-in</span>
+                                <span className="fontSize12">Cabin</span>
+                              </li>
+                              <li>
+                                <span className="fontSize12 blackFont">
+                                  ADULT
+                                </span>
+                                <span className="fontSize12 blackFont">
+                                  {val.co2Emissions[0].carryWeight}{" "}
+                                  {val.co2Emissions[0].weightUnit} (1 piece
+                                  only)
+                                </span>
+                                <span className="fontSize12 blackFont">
+                                  {val.co2Emissions[0].cabin}
+                                </span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      {/* <div className="mmtConnectReviewInfo">
+                        <ul>
+                          <li>
+                            <p>
+                              <b>
+                                <font color="#cf8100">Change of planes</font>
+                              </b>
+                              <br />
+                              <b>5h 15m</b> Layover in Jaipur
+                            </p>
+                          </li>
+                        </ul>
+                      </div> */}
+                      {/* <div className="flightItenaryWrap">
+                        <div className="flightItenaryHdr">
+                          <div className="makeFlex gap-x-10">
+                            <span className="bgProperties icon24"></span>
+                            <p className="makeFlex gap-x-10">
+                              <span className="fontSize14 boldFont">
+                                AirAsia
+                              </span>
+                              <span className="fontSize14">I5 830</span>
+                            </p>
+                          </div>
+                          <div className="makeFlex">
+                            <div className="makeFlex hrtlCenter">
+                              <span className="fontSize14">
+                                Economy &gt;
+                                <font color="#249995">
+                                  <b>Economy</b>
+                                </font>
+                              </span>
+                              <span className="bgProperties icon16 appendLeft5 appendTop2"></span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flightItenary">
+                          <div className="flexOne">
+                            <div className="itenaryLeft">
+                              <div className="makeFlex gap-x-10">
+                                <div className="makeFlex time-info-ui">
+                                  <span className="fontSize14 blackFont">
+                                    21:45
+                                  </span>
+                                  <span className="layoverCircle"></span>
+                                </div>
+                                <div>
+                                  <span className="fontSize14 blackFont">
+                                    Jaipur{" "}
+                                  </span>
+                                  <span className="fontSize14">
+                                    . Jaipur Airport
+                                  </span>
+                                </div>
+                              </div>
+                              <div className="layover">
+                                <span className="fontSize14">1h 0m</span>
+                              </div>
+                              <div className="makeFlex gap-x-10 overideBg">
+                                <div className="makeFlex time-info-ui">
+                                  <span className="fontSize14 blackFont">
+                                    22:45
+                                  </span>
+                                  <span className="layoverCircle"></span>
+                                </div>
+                                <div>
+                                  <span className="fontSize14 blackFont">
+                                    New Delhi{" "}
+                                  </span>
+                                  <span className="fontSize14">
+                                    . Indira Gandhi International Airport,
+                                    Terminal 3
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="itenaryRight">
+                            <ul className="itenaryList">
+                              <li>
+                                <span className="fontSize12">Baggage</span>
+                                <span className="fontSize12">Check-in</span>
+                                <span className="fontSize12">Cabin</span>
+                              </li>
+                              <li>
+                                <span className="fontSize12 blackFont">
+                                  ADULT
+                                </span>
+                                <span className="fontSize12 blackFont">
+                                  15 Kgs (1 piece only)
+                                </span>
+                                <span className="fontSize12 blackFont">
+                                  7 Kgs (1 piece only)
+                                </span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div> */}
+                    </section>
+                    <div id="TRAVELLER_DETAIL" class="oneCard-element">
+                      <div class="componentContainer appendTop15 appendBottom20">
+                        <div class="travellerWrapper">
+                          <div class="travellerHeading paddingTop20 appendBottom20">
+                            <h2 class="fontSize18 blackFont">
+                              Traveller Details
+                            </h2>
+                          </div>
+                          <div class="travellerLoginSection appendBottom20">
+                            <div class="makeFlex perfectCenter">
+                              <div class="appendRight10">
+                                <span class="loginUserImg bgProperties"></span>
+                              </div>
+                              <p class="fontSize14">
+                                Log in to view your
+                                <b>
+                                  saved traveller list, unlock amazing deals
+                                </b>{" "}
+                                &amp; much more!
+                              </p>
+                            </div>
+                            <div>
+                              <button class="loginBtn">LOGIN NOW</button>
+                            </div>
+                          </div>
+                          <div class="appendBottom20" id="wrapper_ADULT">
+                            <div class="adultDetailsHeading">
+                              <div class="makeFlex perfectCenter">
+                                <div class="appendRight10">
+                                  <span class="adultImg bgProperties"></span>
+                                </div>
+                                <p class="fontSize14">
+                                  <font class="boldFont">ADULT (12 yrs+)</font>
+                                </p>
+                              </div>
+                              <div class="makeFlex perfectCenter fontSize14 boldFont">
+                                <font color="#4a4a4a">0/1</font>
+                                <font color="#9b9b9b">&nbsp;added</font>
+                              </div>
+                            </div>
+                            <div class="adultListWrapper">
+                              <div class="collapse"></div>
+                              <div class="otherList">
+                                <span>
+                                  You have not added any adults to the list
+                                </span>
+                              </div>
+                              <div class="otherList">
+                                <button type="button" class="addTravellerBtn">
+                                  + ADD NEW ADULT
+                                </button>
+                              </div>
+                              <div class="AdultFormWrapper collapse show">
+  <div
+    class="alert-wrapper makeFlex appendBottom12 appendTop12 paxAlert"
+  >
+    <div class="makeFlex flexOne column">
+      <p class="darkText fontSize12 boldFont">
+        <span class="alert-text"
+          >Enter name as mentioned on your passport or Government approved
+          IDs.</span
+        >
+      </p>
+    </div>
+  </div>
+  <div class="adultDetailsForm">
+    <div class="adultDetailsInnner">
+      <div class="adultItemRow appendBottom15">
+        <div class="adultItem" style={{width: '30%'}}>
+          <div class="relative">
+            <input
+              autocomplete="none"
+              placeholder="First &amp; Middle Name"
+              class="tvlrInput"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+        <div class="adultItem" style={{ width: '30%'}}>
+          <div class="relative">
+            <input
+              autocomplete="none"
+              placeholder="Last Name"
+              class="tvlrInput"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+        <div class="adultItem" style={{width: '30%'}}>
+          <div class="selectTab">
             <div>
-              <h2 className="blackFont"><b> →</b></h2>
-              <p className="appendTop10 makeFlex gap-x-10">
-                <span
-                  className="scheduleDay"
-               
-                  >Wednesday, May 10</span
-                ><span className="fontSize14">1 Stop · 8h 0m</span>
-              </p>
-            </div>
-            <div className="makeFlex column">
-              <p
-                className="refundTag"
-                
+              <label tabindex="0"
+                ><input
+                  type="radio"
+                  name="gender_MANUAL_16cb94ae-f59f-405b-a3b7-102094725a23"
+                  value="MALE"
+                /><span class="selectTabText">MALE</span></label
+              ><label tabindex="1"
+                ><input
+                  type="radio"
+                  name="gender_MANUAL_16cb94ae-f59f-405b-a3b7-102094725a23"
+                  value="FEMALE"
+                /><span class="selectTabText">FEMALE</span></label
               >
-                <font color="#ffffff">Cancellation Fees Apply</font>
-              </p>
-              <p className="fontSize14 linkText appendTop10 textRight">
-                <span>View Fare Rules</span>
-              </p>
-            </div>
-          </div>
-          <div className="flightItenaryWrap">
-            <div className="flightItenaryHdr">
-              <div className="makeFlex gap-x-10">
-                <span
-                  className="bgProperties icon24"
-                 
-                ></span>
-                <p className="makeFlex gap-x-10">
-                  <span className="fontSize14 boldFont">AirAsia</span
-                  ><span className="fontSize14">I5 492</span>
-                </p>
-              </div>
-              <div className="makeFlex">
-                <div className="makeFlex hrtlCenter">
-                  <span className="fontSize14"
-                    >Economy &gt;
-                    <font color="#249995"><b>Economy</b></font></span
-                  ><span
-                    className="bgProperties icon16 appendLeft5 appendTop2"
-                    
-                  ></span>
-                </div>
-              </div>
-            </div>
-            <div className="flightItenary">
-              <div className="flexOne">
-                <div className="itenaryLeft">
-                  <div className="makeFlex gap-x-10">
-                    <div className="makeFlex time-info-ui">
-                      <span className="fontSize14 blackFont">14:45</span
-                      ><span className="layoverCircle"></span>
-                    </div>
-                    <div>
-                      <span className="fontSize14 blackFont">Mumbai </span
-                      ><span className="fontSize14"
-                        >. Chhatrapati Shivaji International Airport, Terminal
-                        2</span
-                      >
-                    </div>
-                  </div>
-                  <div className="layover">
-                    <span className="fontSize14">1h 45m</span>
-                  </div>
-                  <div className="makeFlex gap-x-10 overideBg">
-                    <div className="makeFlex time-info-ui">
-                      <span className="fontSize14 blackFont">16:30</span
-                      ><span className="layoverCircle"></span>
-                    </div>
-                    <div>
-                      <span className="fontSize14 blackFont">Jaipur </span
-                      ><span className="fontSize14">. Jaipur Airport</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="itenaryRight">
-                <ul className="itenaryList">
-                  <li>
-                    <span className="fontSize12">Baggage</span
-                    ><span className="fontSize12">Check-in</span
-                    ><span className="fontSize12">Cabin</span>
-                  </li>
-                  <li>
-                    <span className="fontSize12 blackFont">ADULT</span
-                    ><span className="fontSize12 blackFont"
-                      >15 Kgs (1 piece only)</span
-                    ><span className="fontSize12 blackFont"
-                      >7 Kgs (1 piece only)</span
-                    >
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div className="mmtConnectReviewInfo">
-            <ul>
-              <li>
-                <p>
-                  <b><font color="#cf8100">Change of planes</font></b
-                  ><br /><b>5h 15m</b> Layover in Jaipur
-                </p>
-              </li>
-            </ul>
-          </div>
-          <div className="flightItenaryWrap">
-            <div className="flightItenaryHdr">
-              <div className="makeFlex gap-x-10">
-                <span
-                  className="bgProperties icon24"
-                  
-                ></span>
-                <p className="makeFlex gap-x-10">
-                  <span className="fontSize14 boldFont">AirAsia</span
-                  ><span className="fontSize14">I5 830</span>
-                </p>
-              </div>
-              <div className="makeFlex">
-                <div className="makeFlex hrtlCenter">
-                  <span className="fontSize14"
-                    >Economy &gt;
-                    <font color="#249995"><b>Economy</b></font></span
-                  ><span
-                    className="bgProperties icon16 appendLeft5 appendTop2"
-                    
-                  ></span>
-                </div>
-              </div>
-            </div>
-            <div className="flightItenary">
-              <div className="flexOne">
-                <div className="itenaryLeft">
-                  <div className="makeFlex gap-x-10">
-                    <div className="makeFlex time-info-ui">
-                      <span className="fontSize14 blackFont">21:45</span
-                      ><span className="layoverCircle"></span>
-                    </div>
-                    <div>
-                      <span className="fontSize14 blackFont">Jaipur </span
-                      ><span className="fontSize14">. Jaipur Airport</span>
-                    </div>
-                  </div>
-                  <div className="layover">
-                    <span className="fontSize14">1h 0m</span>
-                  </div>
-                  <div className="makeFlex gap-x-10 overideBg">
-                    <div className="makeFlex time-info-ui">
-                      <span className="fontSize14 blackFont">22:45</span
-                      ><span className="layoverCircle"></span>
-                    </div>
-                    <div>
-                      <span className="fontSize14 blackFont">New Delhi </span
-                      ><span className="fontSize14"
-                        >. Indira Gandhi International Airport, Terminal
-                        3</span
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="itenaryRight">
-                <ul className="itenaryList">
-                  <li>
-                    <span className="fontSize12">Baggage</span
-                    ><span className="fontSize12">Check-in</span
-                    ><span className="fontSize12">Cabin</span>
-                  </li>
-                  <li>
-                    <span className="fontSize12 blackFont">ADULT</span
-                    ><span className="fontSize12 blackFont"
-                      >15 Kgs (1 piece only)</span
-                    ><span className="fontSize12 blackFont"
-                      >7 Kgs (1 piece only)</span
-                    >
-                  </li>
-                </ul>
-              </div>
             </div>
           </div>
         </div>
-        <div className="baggageTag" >
-          <div className="baggageContent">
-            <span
-              className="addBaggageImg bgProperties appendRight10"
-             
-            ></span>
-            <p className="fontSize12 boldFont">
-              Got excess luggage? Don't stress, buy extra check-in baggage
-              allowance at fab rates!
-            </p>
-          </div>
-          <div><button type="button" className="addBtn">+ADD</button></div>
-        </div>
       </div>
-      <div className="reviewUpgradeFare appendTop20">
-        <p className="blackText fontSize18 blackFont appendBottom5"></p>
-        <p className="appendBottom15"></p>
-        <div className="make_flex"></div>
-      </div>
-      <div className="appendTop20">
-        <section className="refundSection">
-          <div>
-            <div className="refundHdr">
-              <div className="makeFlex hrtlCenter">
-                <h3 className="fontSize16 blackFont">
-                  <font color="#000000">Cancellation Refund Policy</font>
-                </h3>
-              </div>
-              <div>
-                <p className="fontSize14 darkText textRight">
-                  <span className="linkText appendLeft3">View Policy</span>
-                </p>
-              </div>
-            </div>
-            <div className="flightDetails reviewCanPolicyWrapper">
-              <div className="cancSecWrap">
-                <p className="flightDetailsInfo makeFlex hrtlCenter">
-                  <span
-                    className="bgProperties icon24"
-                    
-                  ></span
-                  ><span className="blackFont darkText appendLeft10"
-                    >BOM-DEL</span
-                  >
-                </p>
-                <div className="timeLineDetailsInfo makeFlex">
-                  <div className="cancInfoLeft">
-                    <p className="appendBottom20">Cancellation Penalty :</p>
-                    <p>Cancel Between (IST) :</p>
-                  </div>
-                  <div className="flexOne">
-                    <div className="makeFlex">
-                      <span className="cancPriceInfo fontSize16">₹ 3,300</span
-                      ><span className="cancPriceInfo fontSize16">₹ 3,800</span
-                      ><span className="cancPriceInfo fontSize16">₹ 4,567</span>
+    </div>
+  </div>
+</div>
+
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <div class="bookingDetailsForm" id="contactDetails">
+                            <p class="fontSize14 boldFont appendBottom15">
+                              Booking details will be sent to
+                            </p>
+                            <div class="adultItemRow">
+                              <div
+                                class="adultItem"
+                                id="Country Code"
+                              
+                              >
+                                <label class="makeFlex hrtlCenter">
+                                  Country Code
+                                </label>
+                                <div class="selectItem relative">
+                                  <div class="selectList css-2b097c-container">
+                                    <div class="dropdown__control css-yk16xz-control">
+                                      <div class="dropdown__value-container dropdown__value-container--has-value css-1hwfws3">
+                                        <div class="dropdown__single-value css-1uccc91-singleValue">
+                                          India(91)
+                                        </div>
+                                        <div class="css-1g6gooi">
+                                          <div
+                                            class="dropdown__input"
+                                            
+                                          >
+                                            <input
+                                              autocapitalize="none"
+                                              autocomplete="off"
+                                              autocorrect="off"
+                                              id="react-select-2-input"
+                                              spellcheck="false"
+                                              tabindex="0"
+                                              type="text"
+                                              aria-autocomplete="list"
+                                              value=""
+                                            />
+                                            <div></div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="dropdown__indicators css-1wy0on6">
+                                        <span class="dropdown__indicator-separator css-1hyfx7x"></span>
+                                        <div
+                                          aria-hidden="true"
+                                          class="dropdown__indicator dropdown__dropdown-indicator css-1eew81i"
+                                        >
+                                          <svg
+                                            height="20"
+                                            width="20"
+                                            viewBox="0 0 20 20"
+                                            aria-hidden="true"
+                                            focusable="false"
+                                            class="css-19bqh2r"
+                                          >
+                                            <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path>
+                                          </svg>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                class="adultItem"
+                                id="Mobile No"
+                                
+                              >
+                                <div class="relative">
+                                  <label for="popup">Mobile No</label>
+                                  <input
+                                    autocomplete="none"
+                                    placeholder="Mobile No"
+                                    class="tvlrInput"
+                                    type="text"
+                                    value=""
+                                  />
+                                </div>
+                              </div>
+                              <div
+                                class="adultItem"
+                                id="Email"
+                               
+                              >
+                                <div class="relative">
+                                  <label for="popup">Email</label>
+                                  <input
+                                    autocomplete="none"
+                                    placeholder="Email"
+                                    class="tvlrInput"
+                                    type="text"
+                                    value=""
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="padding20" id="gstDetails">
+                            <label class="checkboxContainer">
+                              <span class="commonCheckbox sizeSm primaryCheckbox">
+                                <input type="checkbox" value="" />
+                                <span class="box">
+                                  <span class="check"></span>
+                                </span>
+                              </span>
+                              <div class="checkboxContent">
+                                <p class="checkboxTitle">
+                                  <span class="boldFont">
+                                    <font color="#000000">
+                                      I have a GST number
+                                    </font>
+                                    <font color="#9b9b9b">(Optional)</font>
+                                  </span>
+                                </p>
+                              </div>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <p
-                      className="cancGradline"
-                     
-                    ></p>
-                    <div className="cancTimeline">
-                      <div className="cancTimeNode">
-                        <p className="blackFont">Now</p>
-                      </div>
-                      <div className="cancTimeNode">
-                        <p className="blackFont">7 May</p>
-                        <p className="fontSize12 boldFont">14:45</p>
-                      </div>
-                      <div className="cancTimeNode">
-                        <p className="blackFont">10 May</p>
-                        <p className="fontSize12 boldFont">12:45</p>
-                      </div>
-                      <div className="cancTimeNode">
-                        <p className="blackFont">10 May</p>
-                        <p className="fontSize12 boldFont">14:45</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              className="refundUpgradeCard appendBottom10"
-            
-            >
-              <div className="makeFlex hrtlCenter">
-                <span className="appendRight10"
-                  ><span
-                    className="icon24 bgProperties"
-                   
-                  ></span></span
-                ><span className="boldFont fontSize12"
-                  >More fares with flexible refund &amp; date change policy
-                  available!</span
-                >
-              </div>
-              <div>
-                <span className="linkText boldFont fontSize12 padding5"
-                  >UPGRADE</span
-                >
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-      
-        <div className="appendTop20">
-          <section className="refundSection">
-            <h3 className="fontSize16 blackFont appendBottom20">
-              Unsure of your travel plans?
-            </h3>
-            <div id="0">
-              <div
-                className="unsureBanner makeFlex appendBottom10"
-                id="0"
-                
-              >
-                <span className="customCheckbox appendTop2"
-                  ><input
-                    className="pointer"
-                    type="checkbox"
-                    id="zc-fdc-checkbox"
-                    name="<font color='#3023AE'><b>Add Zero Cancellation</b></font>"
-                    readonly="" /><span className="box"
-                    ><span className="check"></span></span
-                ></span>
-                <div className="makeFlex flexOne column">
-                  <div className="makeFlex spaceBetween flexOne appendLeft10">
-                    <div className="flexOne">
-                      <div className="makeFlex appendBottom5 hrtlCenter">
-                        <span
-                          className="boldFont appendRight10 inlineB"
-                          
-                          ><font color="#FFFFFF"
-                            ><b>Add Zero Cancellation</b></font
-                          ></span
-                        >
-                      </div>
-                      <div className="fontSize12 makeFlex">
-                        <p className="darkText">
-                          <b>Get refund of up to ₹ 4,567</b> in case of a
-                          cancellation up to 24hrs before departure
+
+                    {/* <div className="baggageTag">
+                      <div className="baggageContent">
+                        <span className="addBaggageImg bgProperties appendRight10"></span>
+                        <p className="fontSize12 boldFont">
+                          Got excess luggage? Don't stress, buy extra check-in
+                          baggage allowance at fab rates!
                         </p>
-                        <span className="tncText"
-                          ><font color="#0091FF">View T&amp;C</font></span
-                        >
                       </div>
+                      <div>
+                        <button type="button" className="addBtn">
+                          +ADD
+                        </button>
+                      </div>
+                    </div> */}
+                  </div>
+                  {/* <div className="reviewUpgradeFare appendTop20">
+                    <p className="blackText fontSize18 blackFont appendBottom5"></p>
+                    <p className="appendBottom15"></p>
+                    <div className="make_flex"></div>
+                  </div> */}
+                  {/* <div className="appendTop20">
+                    <section className="refundSection">
+                      <div>
+                        <div className="refundHdr">
+                          <div className="makeFlex hrtlCenter">
+                            <h3 className="fontSize16 blackFont">
+                              <font color="#000000">
+                                Cancellation Refund Policy
+                              </font>
+                            </h3>
+                          </div>
+                          <div>
+                            <p className="fontSize14 darkText textRight">
+                              <span className="linkText appendLeft3">
+                                View Policy
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flightDetails reviewCanPolicyWrapper">
+                          <div className="cancSecWrap">
+                            <p className="flightDetailsInfo makeFlex hrtlCenter">
+                              <span className="bgProperties icon24"></span>
+                              <span className="blackFont darkText appendLeft10">
+                                BOM-DEL
+                              </span>
+                            </p>
+                            <div className="timeLineDetailsInfo makeFlex">
+                              <div className="cancInfoLeft">
+                                <p className="appendBottom20">
+                                  Cancellation Penalty :
+                                </p>
+                                <p>Cancel Between (IST) :</p>
+                              </div>
+                              <div className="flexOne">
+                                <div className="makeFlex">
+                                  <span className="cancPriceInfo fontSize16">
+                                    ₹ 3,300
+                                  </span>
+                                  <span className="cancPriceInfo fontSize16">
+                                    ₹ 3,800
+                                  </span>
+                                  <span className="cancPriceInfo fontSize16">
+                                    ₹ 4,567
+                                  </span>
+                                </div>
+                                <p className="cancGradline"></p>
+                                <div className="cancTimeline">
+                                  <div className="cancTimeNode">
+                                    <p className="blackFont">Now</p>
+                                  </div>
+                                  <div className="cancTimeNode">
+                                    <p className="blackFont">7 May</p>
+                                    <p className="fontSize12 boldFont">14:45</p>
+                                  </div>
+                                  <div className="cancTimeNode">
+                                    <p className="blackFont">10 May</p>
+                                    <p className="fontSize12 boldFont">12:45</p>
+                                  </div>
+                                  <div className="cancTimeNode">
+                                    <p className="blackFont">10 May</p>
+                                    <p className="fontSize12 boldFont">14:45</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="refundUpgradeCard appendBottom10">
+                          <div className="makeFlex hrtlCenter">
+                            <span className="appendRight10">
+                              <span className="icon24 bgProperties"></span>
+                            </span>
+                            <span className="boldFont fontSize12">
+                              More fares with flexible refund &amp; date change
+                              policy available!
+                            </span>
+                          </div>
+                          <div>
+                            <span className="linkText boldFont fontSize12 padding5">
+                              UPGRADE
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </div> */}
+                  {/* <div className="appendTop20">
+                    <div className="appendTop20">
+                      <section className="refundSection">
+                        <h3 className="fontSize16 blackFont appendBottom20">
+                          Unsure of your travel plans?
+                        </h3>
+                        <div id="0">
+                          <div
+                            className="unsureBanner makeFlex appendBottom10"
+                            id="0"
+                          >
+                            <span className="customCheckbox appendTop2">
+                              <input
+                                className="pointer"
+                                type="checkbox"
+                                id="zc-fdc-checkbox"
+                                name="<font color='#3023AE'><b>Add Zero Cancellation</b></font>"
+                                readonly=""
+                              />
+                              <span className="box">
+                                <span className="check"></span>
+                              </span>
+                            </span>
+                            <div className="makeFlex flexOne column">
+                              <div className="makeFlex spaceBetween flexOne appendLeft10">
+                                <div className="flexOne">
+                                  <div className="makeFlex appendBottom5 hrtlCenter">
+                                    <span className="boldFont appendRight10 inlineB">
+                                      <font color="#FFFFFF">
+                                        <b>Add Zero Cancellation</b>
+                                      </font>
+                                    </span>
+                                  </div>
+                                  <div className="fontSize12 makeFlex">
+                                    <p className="darkText">
+                                      <b>Get refund of up to ₹ 4,567</b> in case
+                                      of a cancellation up to 24hrs before
+                                      departure
+                                    </p>
+                                    <span className="tncText">
+                                      <font color="#0091FF">View T&amp;C</font>
+                                    </span>
+                                  </div>
+                                </div>
+                                <div className="unsureBannerRight">
+                                  <span className="bgProperties icon20"></span>
+                                  <p className="blackFont blackText">₹ 1,549</p>
+                                </div>
+                              </div>
+                              <p className="unsurePersuasion fontSize11">
+                                <span>
+                                  <font color="#FFFFFF">
+                                    6,480 customers purchased this on your route
+                                    <font></font>
+                                  </font>
+                                </span>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </section>
                     </div>
-                    <div className="unsureBannerRight">
-                      <span
-                        className="bgProperties icon20"
-                       
-                      ></span>
-                      <p className="blackFont blackText">₹ 1,549</p>
+                  </div> */}
+                </div>
+              </div>
+              <div class="pageRightContainer customScroll">
+                <div id="FARE_SUMMARY">
+                  <section class="fareSummary">
+                    <div>
+                      <p class="fontSize18 blackFont">Fare Summary</p>
                     </div>
-                  </div>
-                  <p
-                    className="unsurePersuasion fontSize11"
-                   
-                  >
-                    <span
-                    
-                      ><font color="#FFFFFF"
-                        >6,480 customers purchased this on your route<font
-                        ></font></font
-                    ></span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-     
-        </div>
-    </div>
-  <UserDetail/>
-  </div>
-  <div class="pageRightContainer customScroll">
-    <div id="FARE_SUMMARY">
-      <section class="fareSummary">
-        <div><p class="fontSize18 blackFont">Fare Summary</p></div>
-        <div class="fareTypeWrap">
-          <div class="fareRow">
-            <div class="makeFlex hrtlCenter pointer flexOne">
-              <span class="appendRight10 appendTop5"
-                ><span
-                  class="iconPlusImg bgProperties"
-                 
-                ></span></span
-              ><span class="fareHeader">Base Fare</span>
-            </div>
-            <span class="fontSize14 darkText">₹ 3,914</span>
-          </div>
-        </div>
-        <div class="fareTypeWrap">
-          <div class="fareRow">
-            <div class="makeFlex hrtlCenter pointer flexOne">
-              <span class="appendRight10 appendTop5"
-                ><span
-                  class="iconPlusImg bgProperties"
-                  
-                ></span></span
-              ><span class="fareHeader">Taxes and Surcharges</span>
-            </div>
-            <span class="fontSize14 darkText">₹ 653</span>
-          </div>
-        </div>
-        <div class="fareTypeWrap">
-          <div class="fareRow">
-            <div class="makeFlex hrtlCenter pointer flexOne">
-              <span class="appendRight10 appendTop5"
-                ><span
-                  class="iconMinusImg bgProperties"
-                 
-                ></span></span
-              ><span class="fareHeader">Other Services</span>
-            </div>
-          </div>
-          <div class="fareContentWrap">
-            <div class="fareSubList">
-              <p class="fareRow appendTop5">
-                <span class="makeFlex bottom"
-                  ><span class="fontSize14 darkText">Charity</span
-                  ><span class="charityAddTxt">REMOVE</span></span
-                ><span class="fontSize14 darkText"><span>₹ 10</span></span>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="fareFooter">
-          <p class="fareRow">
-            <span class="fontSize16 blackFont">Total Amount</span
-            ><span class="fontSize16 blackFont">₹ 4,577</span>
-          </p>
-        </div>
-      </section>
-    </div>
-    <div class="appendTop10">
-      <section class="promocodeWrap">
-        <div>
-          <div
-            class="promoHeader"
-            
-          >
-            <span class="fontSize18"><b>PROMO</b> CODES</span
-            ><span class="promoIconWrapper appendLeft10"
-              ><span
-                class="bgProperties iconPromoImg iconPromocode"
-                
-              ></span
-            ></span>
-          </div>
-          <div class="appendBottom15">
-            <p class="relative">
-              <input
-                type="text"
-                class="promoInput"
-                placeholder="Enter promo code here"
-                value=""
-              />
-            </p>
-          </div>
-          <div class="appendBottom20">
-            <p class="promoTitle"></p>
-            <div class="promoContent pointer">
-              <div class="flexOne cpn-wrapper">
-                <div class="makeFlex pointer gap-x-5">
-                  <span class="radioWrap"
-                    ><span class="block radio customRadioBtn"
-                      ><span class="customRadioBtn sizeSm primaryRadiobox"
-                        ><input type="radio" value="" /><span class="outer"
-                          ><span class="inner"></span></span></span></span
-                  ></span>
-                  <div class="promoContentWrap flexOne">
-                    <span class="couponCode">MMTSUPER</span
-                    ><span class="promoCheckContent"
-                      >Use this coupon and get Rs 300 instant discount on your
-                      flight booking.</span
-                    ><a
-                      href="https://www.makemytrip.com/promos/df-amazon-2000-20012023.html"
-                      class="fontSize12"
-                      target="_blank"
-                      rel="noreferrer"
-                      >Terms &amp; Conditions</a
-                    >
-                  </div>
-                  <span
-                    class="offerIcon bgProperties"
-                   
-                  ></span>
-                </div>
-              </div>
-            </div>
-            <div class="promoContent pointer">
-              <div class="flexOne cpn-wrapper">
-                <div class="makeFlex pointer gap-x-5">
-                  <span class="radioWrap"
-                    ><span class="block radio customRadioBtn"
-                      ><span class="customRadioBtn sizeSm primaryRadiobox"
-                        ><input type="radio" value="" /><span class="outer"
-                          ><span class="inner"></span></span></span></span
-                  ></span>
-                  <div class="promoContentWrap flexOne">
-                    <span class="couponCode">MMTAU</span
-                    ><span class="promoCheckContent"
-                      >Use this coupon and get 548 instant discount on your AU
-                      Credit and Debit cards.</span
-                    ><a
-                      href="https://www.makemytrip.com/promos/au-offers-06072021.html?lob=df"
-                      class="fontSize12"
-                      target="_blank"
-                      rel="noreferrer"
-                      >Terms &amp; Conditions</a
-                    >
-                  </div>
-                  <span
-                    class="offerIcon bgProperties"
-                   
-                  ></span>
-                </div>
-              </div>
-            </div>
-            <div class="promoContent pointer">
-              <div class="flexOne cpn-wrapper">
-                <div class="makeFlex pointer gap-x-5">
-                  <span class="radioWrap"
-                    ><span class="block radio customRadioBtn"
-                      ><span class="customRadioBtn sizeSm primaryRadiobox"
-                        ><input type="radio" value="" /><span class="outer"
-                          ><span class="inner"></span></span></span></span
-                  ></span>
-                  <div class="promoContentWrap flexOne">
-                    <span class="couponCode">MMTBFLEMI</span
-                    ><span class="promoCheckContent"
-                      >Use this coupon and get Rs 228 instant discount on your
-                      flight booking on Bajaj Finserv NO COST EMI
-                      paymode.</span
-                    ><a
-                      href="https://www.makemytrip.com/promos/df-bajaj-25052022.html"
-                      class="fontSize12"
-                      target="_blank"
-                      rel="noreferrer"
-                      >Terms &amp; Conditions</a
-                    >
-                  </div>
-                  <span
-                    class="offerIcon bgProperties"
-                   
-                  ></span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </div>
-    </div>
 
+                    <div class="fareTypeWrap">
+                      {val.travlerPricing.map((val, index) => (
+                        <div class="fareRow">
+                          <div class="makeFlex hrtlCenter pointer flexOne">
+                            {/* <span class="appendTop5">
+                            <span class="iconPlusImg bgProperties"></span>
+                          </span> */}
+                            <span class="fareHeader">{val.traverltype}</span>
+                          </div>
+                          <span class="fontSize14 darkText">
+                            ${val.ticketPrice}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                    {/* <div class="fareTypeWrap">
+                      <div class="fareRow">
+                        <div class="makeFlex hrtlCenter pointer flexOne">
+                          <span class="appendRight10 appendTop5">
+                            <span class="iconPlusImg bgProperties"></span>
+                          </span>
+                          <span class="fareHeader">Taxes and Surcharges</span>
+                        </div>
+                        <span class="fontSize14 darkText">₹ 653</span>
+                      </div>
+                    </div> */}
+                    {/* <div class="fareTypeWrap">
+                      <div class="fareRow">
+                        <div class="makeFlex hrtlCenter pointer flexOne">
+                          <span class="appendRight10 appendTop5">
+                            <span class="iconMinusImg bgProperties"></span>
+                          </span>
+                          <span class="fareHeader">Other Services</span>
+                        </div>
+                      </div>
+                      <div class="fareContentWrap">
+                        <div class="fareSubList">
+                          <p class="fareRow appendTop5">
+                            <span class="makeFlex bottom">
+                              <span class="fontSize14 darkText">Charity</span>
+                              <span class="charityAddTxt">REMOVE</span>
+                            </span>
+                            <span class="fontSize14 darkText">
+                              <span>₹ 10</span>
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div> */}
+                    <div class="fareFooter">
+                      <p class="fareRow">
+                        <span class="fontSize16 blackFont">Total Amount</span>
+                        <span class="fontSize16 blackFont">${val.total}</span>
+                      </p>
+                    </div>
+                  </section>
+                </div>
+                <div className="checkOutBtn">
+                  <button>Checkout</button>
+                </div>
+              </div>
+            </div>
+          </>
+        ))}
+      </div>
+    </>
+  );
+};
 
-  </div>
-  </>
-      )
-}
-
-export default FlightCheckout
+export default FlightCheckout;

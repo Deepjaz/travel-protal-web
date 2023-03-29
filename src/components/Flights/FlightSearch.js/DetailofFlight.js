@@ -9,6 +9,8 @@ const DetailofFlight = () => {
   const [postApi, setPostApi] = useState([]);
   const { search } = useLocation();
   const [flightDate, setflightDate] = useState("");
+  const [flightvalue , setFlightValue] =useState([])
+  const [arivalTime , setArivalTime] = useState('')
   const data = search.slice(search.indexOf("?") + 1);
   const params = {};
   data.split("/").forEach((pair) => {
@@ -98,15 +100,63 @@ const DetailofFlight = () => {
       const validData = DataApi.filter((val , index) =>  val.id === selectID.id);
       // SeturlData(validData)
        axios.post(url , validData[0]).then(res => {
-        console.log("deep jaswal" ,)
-    
-        navigate('/FlightCheckout/' , {state : `${JSON.stringify(res.data)}`})
+        console.log("deep jaswal" ,res.data)
+        console.log("deep jaswal1" ,res.data.flightOffers)
+        res.data.flightOffers.forEach((val, index) => {
+          console.log('this is the my value', val);
+        
+          const arivalData = val.itineraries[0].segments.map((segment) => {
+            return {
+              arrival: segment.arrival.at,
+              departure: segment.departure.at,
+              arrivaliataCode : segment.arrival.iataCode,
+              arrivaltermial : segment.arrival.terminal,
+              departureiataCode :segment.departure.iataCode,
+              departuretermial :segment.departure.terminal,
+              numOfStops : segment.numberOfStops,
+              aircarftCode : segment.aircraft.code
+              // cotwoEmissions : segment.co2Emissions.weight
+              
+            };
+          });
+          //cabin map 
+          const cabinDetails = val.itineraries[0].segments[0].co2Emissions.map((cabin) => {
+            return{
+              carryWeight : cabin.weight,
+              weightUnit :cabin.weightUnit,
+              cabin  : cabin.cabin,
+            }
+          })
+          // travlersPrcing 
+          const travlerPricing = val.travelerPricings.map((val , index)  => {
+            return {
+              traverltype : val.travelerType,
+              ticketPrice : val.price.total
+            }
 
+          })
+        
+          const newValues = {
+            id: val.id,
+            currency: val.price.currency,
+            total: val.price.total,
+            basePrice: val.price.base,
+            ArivalData: arivalData,
+            co2Emissions : cabinDetails,
+            travlerPricing : travlerPricing
+          };
+          // setFlightValue()
+            
+          console.log('this is the new value data' , newValues) 
+          
+          setTimeout(() => {
+              navigate('/FlightCheckout/' , {state : `${JSON.stringify(newValues)}`})
+          },1000)
+        });
       })
     } catch (err) {}
   };
-
-
+// 
 
 
   return (
@@ -133,7 +183,7 @@ const DetailofFlight = () => {
               
             </div>
             <div className="row">
-              <div className="col-6 col-md-6 col-xl-6 mb-3">
+              <div className="col-12 col-md-12 col-xl-12 mb-3">
                 <div className="row">
                   <div className="col-12 col-md-12 d-none d-lg-block">
                     <div className="row g-0 border theme-border-radius p-2 theme-bg-accent-three">
@@ -168,41 +218,7 @@ const DetailofFlight = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-6 col-md-6 col-xl-6 mb-3">
-                <div className="row">
-                  <div className="col-12 col-md-12 d-none d-lg-block">
-                    <div className="row g-0 border theme-border-radius p-2 theme-bg-accent-three">
-                      <div className="col-md-3">
-                        <span className="font-small fw-bold">Airline</span>
-                      </div>
-                      <div className="col-md-2">
-                        <span className="font-small fw-bold">Depart</span>
-                      </div>
-                      <div className="col-md-2">
-                        <span className="font-small fw-bold">Duration</span>
-                      </div>
-                      <div className="col-md-2">
-                        <span className="font-small fw-bold">Arrive</span>
-                      </div>
-                      <div className="col-md-3 text-center">
-                        <span className="font-small fw-bold">
-                          Price<i className="bi bi-arrow-up"></i>
-                          <input type="checkbox" className="cursor-pointer" />
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-12 col-md-12 d-md-block d-lg-none">
-                    <button
-                      className="btn w-100 border theme-border-radius p-2 theme-bg-accent-three"
-                      type="button"
-                    >
-                      <i className="bi bi-sliders me-2"></i>
-                      <span className="visible-xs font-medium">Sort Arrival</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
+
             </div>
             {(DataApi  && DataApi.length > 0) ? (
               <div className="row">

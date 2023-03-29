@@ -24,11 +24,7 @@ const formobject = {
     },
   ],
   travelers: [
-    // {
-    //   "id": "1",
-    //   "travelerType": "ADULT",
-    //   "fareOptions":["STANDARD"]
-    // }
+    
   ],
   sources: ["GDS"],
 };
@@ -219,9 +215,9 @@ const FLightsSearching = (props) => {
     // alert("this is the hitted data")
     event.preventDefault();
     callBackFUNc();
-    formValue.originDestinations[0].originLocationCode = newformValue.originLocationCode;
+    formValue.originDestinations[0].originLocationCode = newformValue.originLocationCode.toUpperCase();
     formValue.originDestinations[0].destinationLocationCode =
-      newformValue.destinationLocationCode;
+      newformValue.destinationLocationCode.toUpperCase();
     // formValue.travelers =
 
     formobject.originDestinations[0].departureDateTimeRange.date = selectedDate;
@@ -385,14 +381,14 @@ const FLightsSearching = (props) => {
                       value={newformValue.destinationLocationCode}
                       onChange={(e) => handleChange(e)}
                     />
-                    {/* <p
+                    <p
                       className="code makeRelative"
-                      title="DEL, Indira Gandhi International Airport India"
+                      // title="DEL, Indira Gandhi International Airport India"
                     >
                       <span className="truncate airPortName " title="">
                         {newformValue.destinationLocationCode}  International Airport India
                       </span>
-                    </p> */}
+                    </p> 
                   </label>
                 </div>
                 <div className="fsw_inputBox dates inactiveWidget ">
