@@ -289,7 +289,8 @@ useEffect(() => {
                               <div className="makeFlex gap-x-10">
                                 <div className="makeFlex time-info-ui">
                                   <span className="fontSize14 blackFont">
-                                    {time}
+                                    {depTime}
+                                    
                                   </span>
                                   <span className="layoverCircle"></span>
                                 </div>
@@ -309,7 +310,7 @@ useEffect(() => {
                               <div className="makeFlex gap-x-10 overideBg">
                                 <div className="makeFlex time-info-ui">
                                   <span className="fontSize14 blackFont">
-                                    {depTime}
+                                  {time}
                                   </span>
                                   <span className="layoverCircle"></span>
                                 </div>
@@ -448,20 +449,20 @@ useEffect(() => {
                         </div>
                       </div> */}
                     </section>
-                    <div id="TRAVELLER_DETAIL" class="oneCard-element">
-                      <div class="componentContainer appendTop15 appendBottom20">
-                        <div class="travellerWrapper">
-                          <div class="travellerHeading paddingTop20 appendBottom20">
-                            <h2 class="fontSize18 blackFont">
+                    <div id="TRAVELLER_DETAIL" className="oneCard-element">
+                      <div className="componentContainer appendTop15 appendBottom20">
+                        <div className="travellerWrapper">
+                          <div className="travellerHeading paddingTop20 appendBottom20">
+                            <h2 className="fontSize18 blackFont">
                               Traveller Details
                             </h2>
                           </div>
-                          <div class="travellerLoginSection appendBottom20">
-                            <div class="makeFlex perfectCenter">
-                              <div class="appendRight10">
-                                <span class="loginUserImg bgProperties"></span>
+                          <div className="travellerLoginSection appendBottom20">
+                            <div className="makeFlex perfectCenter">
+                              <div className="appendRight10">
+                                <span className="loginUserImg bgProperties"></span>
                               </div>
-                              <p class="fontSize14">
+                              <p className="fontSize14">
                                 Log in to view your
                                 <b>
                                   saved traveller list, unlock amazing deals
@@ -470,27 +471,27 @@ useEffect(() => {
                               </p>
                             </div>
                             <div>
-                              <button class="loginBtn">LOGIN NOW</button>
+                              <button className="loginBtn">LOGIN NOW</button>
                             </div>
                           </div>
-                          <div class="appendBottom20" id="wrapper_ADULT">
-                            <div class="adultDetailsHeading">
-                              <div class="makeFlex perfectCenter">
-                                <div class="appendRight10">
-                                  <span class="adultImg bgProperties"></span>
+                          <div className="appendBottom20" id="wrapper_ADULT">
+                            <div className="adultDetailsHeading">
+                              <div className="makeFlex perfectCenter">
+                                <div className="appendRight10">
+                                  <span className="adultImg bgProperties"></span>
                                 </div>
-                                <p class="fontSize14">
-                                  <font class="boldFont">ADULT (12 yrs+)</font>
+                                <p className="fontSize14">
+                                  <font className="boldFont">ADULT (12 yrs+)</font>
                                 </p>
                               </div>
-                              <div class="makeFlex perfectCenter fontSize14 boldFont">
+                              <div className="makeFlex perfectCenter fontSize14 boldFont">
                                 <font color="#4a4a4a">0/1</font>
                                 <font color="#9b9b9b">&nbsp;added</font>
                               </div>
                             </div>
-                            <div class="adultListWrapper">
-                              <div class="collapse"></div>
-                              <div class="otherList">
+                            <div className="adultListWrapper">
+                              <div className="collapse"></div>
+                              <div className="otherList">
                                 <span>
                                   You have not added any adults to the list
                                 </span>
@@ -511,13 +512,13 @@ useEffect(() => {
                             <label class="checkboxContainer">
                               <span class="commonCheckbox sizeSm primaryCheckbox">
                                 <input type="checkbox" value="" />
-                                <span class="box">
-                                  <span class="check"></span>
+                                <span className="box">
+                                  <span className="check"></span>
                                 </span>
                               </span>
-                              <div class="checkboxContent">
-                                <p class="checkboxTitle">
-                                  <span class="boldFont">
+                              <div className="checkboxContent">
+                                <p className="checkboxTitle">
+                                  <span className="boldFont">
                                     <font color="#000000">
                                       I have a GST number
                                     </font>
@@ -703,66 +704,33 @@ useEffect(() => {
                   </div> */}
                 </div>
               </div>
-              <div class="pageRightContainer customScroll">
+              <div className="pageRightContainer customScroll">
                 <div id="FARE_SUMMARY">
-                  <section class="fareSummary">
+                  <section className="fareSummary">
                     <div>
-                      <p class="fontSize18 blackFont">Fare Summary</p>
+                      <p className="fontSize18 blackFont">Fare Summary</p>
                     </div>
 
-                    <div class="fareTypeWrap">
+                    <div className="fareTypeWrap">
                       {val.travlerPricing.map((val, index) => (
-                        <div class="fareRow">
-                          <div class="makeFlex hrtlCenter pointer flexOne">
-                            {/* <span class="appendTop5">
-                            <span class="iconPlusImg bgProperties"></span>
+                        <div className="fareRow">
+                          <div className="makeFlex hrtlCenter pointer flexOne">
+                            {/* <span className="appendTop5">
+                            <span className="iconPlusImg bgProperties"></span>
                           </span> */}
-                            <span class="fareHeader">{val.traverltype}</span>
+                            <span className="fareHeader">{val.traverltype}</span>
                           </div>
-                          <span class="fontSize14 darkText">
+                          <span className="fontSize14 darkText">
                             ${val.ticketPrice}
                           </span>
                         </div>
                       ))}
                     </div>
-                    {/* <div class="fareTypeWrap">
-                      <div class="fareRow">
-                        <div class="makeFlex hrtlCenter pointer flexOne">
-                          <span class="appendRight10 appendTop5">
-                            <span class="iconPlusImg bgProperties"></span>
-                          </span>
-                          <span class="fareHeader">Taxes and Surcharges</span>
-                        </div>
-                        <span class="fontSize14 darkText">₹ 653</span>
-                      </div>
-                    </div> */}
-                    {/* <div class="fareTypeWrap">
-                      <div class="fareRow">
-                        <div class="makeFlex hrtlCenter pointer flexOne">
-                          <span class="appendRight10 appendTop5">
-                            <span class="iconMinusImg bgProperties"></span>
-                          </span>
-                          <span class="fareHeader">Other Services</span>
-                        </div>
-                      </div>
-                      <div class="fareContentWrap">
-                        <div class="fareSubList">
-                          <p class="fareRow appendTop5">
-                            <span class="makeFlex bottom">
-                              <span class="fontSize14 darkText">Charity</span>
-                              <span class="charityAddTxt">REMOVE</span>
-                            </span>
-                            <span class="fontSize14 darkText">
-                              <span>₹ 10</span>
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-                    </div> */}
-                    <div class="fareFooter">
-                      <p class="fareRow">
-                        <span class="fontSize16 blackFont">Total Amount</span>
-                        <span class="fontSize16 blackFont">${val.total}</span>
+                    
+                    <div className="fareFooter">
+                      <p className="fareRow">
+                        <span className="fontSize16 blackFont">Total Amount</span>
+                        <span className="fontSize16 blackFont">${val.total}</span>
                       </p>
                     </div>
                   </section>

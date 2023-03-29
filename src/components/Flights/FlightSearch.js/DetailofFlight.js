@@ -120,13 +120,28 @@ const DetailofFlight = () => {
             };
           });
           //cabin map 
+          var cabinDetailed;
+          if(!val.itineraries[0].segments[0].co2Emissions){
+              return
+          }else{
           const cabinDetails = val.itineraries[0].segments[0].co2Emissions.map((cabin) => {
             return{
               carryWeight : cabin.weight,
               weightUnit :cabin.weightUnit,
               cabin  : cabin.cabin,
-            }
+            } 
           })
+          cabinDetailed = cabinDetails
+
+          }
+          // const cabinDetails = val.itineraries[0].segments.co2Emissions.map((cabin) => {
+          //   return{
+          //     carryWeight : cabin.weight,
+          //     weightUnit :cabin.weightUnit,
+          //     cabin  : cabin.cabin,
+          //   } 
+            
+          // })
           // travlersPrcing 
           const travlerPricing = val.travelerPricings.map((val , index)  => {
             return {
@@ -142,7 +157,7 @@ const DetailofFlight = () => {
             total: val.price.total,
             basePrice: val.price.base,
             ArivalData: arivalData,
-            co2Emissions : cabinDetails,
+            co2Emissions : cabinDetailed,
             travlerPricing : travlerPricing
           };
           // setFlightValue()
