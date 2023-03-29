@@ -3257,3 +3257,6 @@ html[dir='ltr'] .widgetSection .fsw .fsw_inputBox:first-of-type:hover{background
 #myDD li label {
     font-size: 15px;
 }
+button.btn.primaryBtn.font24.latoBold.widgetSearchBtn {
+  color: white;
+}
