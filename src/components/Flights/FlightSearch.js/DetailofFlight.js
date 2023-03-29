@@ -101,21 +101,10 @@ const DetailofFlight = () => {
 
     axios.post(`${baseUrl}/api/flight-booking`, formValue).then((res) => {
       setDataApi(res.data.data);
-      const newval = res.data.data.map((val, index) => {
-            return{
-             time  : new Date(val.itineraries[0].segments[0].arrival.at),
-             deptime : new Date(val.itineraries[0].segments[0].departure.at)
-            }
-        })
-      //   console.log('newvalnewvalnewvalnewval' , newval[0].time)
-      //   newval.forEach(element  => {
-      //     const diffInMs = moment(newval.time).format('LT')  - moment(newval.deptime).format('LT')
-      //     const diffInMinutes = diffInMs / (1000 * 60);
-      //     var Hours = Math.floor(diffInMinutes /60);
-      //     console.log('diffInMsdiffInMsdiffInMsdiffInMsdiffInMsdiffInMs', moment(newval.time).format('LT'))
-      // });
 
-      // const diffInMs = time.getTime() - deptime.getTime();
+      // res.data.data.map(val => {
+      //   console.log('res.data.datares.data.datares.data.datares.data.data' , val)
+      // })
     });
   }, []);
 
@@ -146,6 +135,7 @@ const DetailofFlight = () => {
             };
           });
 
+          
           //cabin map
           var cabinDetailed;
           if (!val.itineraries[0].segments[0].co2Emissions) {
@@ -161,15 +151,7 @@ const DetailofFlight = () => {
               });
             cabinDetailed = cabinDetails;
           }
-          // const cabinDetails = val.itineraries[0].segments.co2Emissions.map((cabin) => {
-          //   return{
-          //     carryWeight : cabin.weight,
-          //     weightUnit :cabin.weightUnit,
-          //     cabin  : cabin.cabin,
-          //   }
-
-          // })
-          // travlersPrcing
+          
           const travlerPricing = val.travelerPricings.map((val, index) => {
             return {
               traverltype: val.travelerType,
@@ -286,12 +268,12 @@ const DetailofFlight = () => {
                           </span>
                         </div>
                         <div>
-                          <img
-                            src="assets/images/icons/6E.jpg"
-                            className="img-fluid theme-border-radius"
-                            alt="Indigo"
-                            title="airline Indigo"
-                          />
+                          {/* {
+                            
+                            DataApi.dictionaries.map(val => (
+                               <li className="valueFeild">{val}</li>
+                            ))
+                          } */}
                         </div>
                         <div>
                           <a href="#" className="font-small">

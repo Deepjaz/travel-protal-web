@@ -46,6 +46,23 @@ const FlightCheckout = () => {
     setformHandle({...formHandle , [event.target.name] : event.target.value})
   } 
   console.log('formHandleformHandleformHandleformHandle' , formHandle)
+  const handleClick = () => {
+    if (count === 0) {
+      return;
+    }
+    setCount(count - 1);
+    setPTags([...pTags, generatePTag(hadleChange)]);
+  };
+
+  useEffect(() => {
+    let countnum = 0;
+    data?.forEach((val) => {
+      val.travlerPricing.forEach((val) => {
+        countnum += 1;
+      });
+    });
+    setCount(countnum);
+  }, []);
   const generatePTag = () => {
     return (
       <div>
@@ -198,23 +215,7 @@ const FlightCheckout = () => {
     );
   };
 
-  const handleClick = () => {
-    if (count === 0) {
-      return;
-    }
-    setCount(count - 1);
-    setPTags([...pTags, generatePTag()]);
-  };
 
-  useEffect(() => {
-    let countnum = 0;
-    data?.forEach((val) => {
-      val.travlerPricing.forEach((val) => {
-        countnum += 1;
-      });
-    });
-    setCount(countnum);
-  }, []);
 
   // console.log(counting,"this is count in state ")
   return (

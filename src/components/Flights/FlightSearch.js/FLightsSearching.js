@@ -9,6 +9,9 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Iata from "../../../Iata";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import Footer from "react-multi-date-picker/plugins/range_picker_footer";
+
 const formobject = {
   currencyCode: "USD",
   originDestinations: [
@@ -400,7 +403,8 @@ const FLightsSearching = (props) => {
                       type="text"
                       name="destinationLocationCode"
                     /> */}
-                    <DatePicker
+                     <DatePicker
+                      numberOfMonths={2}
                       className="fsw_inputField font20"
                       selected={
                         selectedDate && new Date(selectedDate + "T00:00:00")
@@ -408,7 +412,9 @@ const FLightsSearching = (props) => {
                       onChange={(date) => handleDateChange(date)}
                       dateFormat="yyyy-MM-dd"
                       minDate={new Date()}
-                    />
+                    /> 
+                  
+                     
                     <p
                       data-cy="departureDate"
                       className="blackText font20 code lineHeight36"
