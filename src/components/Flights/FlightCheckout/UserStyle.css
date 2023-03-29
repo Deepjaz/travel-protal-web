@@ -1,0 +1,768 @@
+/*! CSS Used from: https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css */
+*,
+::after,
+::before {
+    box-sizing: border-box;
+}
+
+h2 {
+    margin-top: 0;
+    margin-bottom: .5rem;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+b {
+    font-weight: bolder;
+}
+
+svg {
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: .5rem;
+}
+
+button {
+    border-radius: 0;
+}
+
+button:focus {
+    outline: 1px dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+}
+
+button,
+input {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+button,
+input {
+    overflow: visible;
+}
+
+button {
+    text-transform: none;
+}
+
+[type=button],
+button {
+    -webkit-appearance: button;
+}
+
+[type=button]:not(:disabled),
+button:not(:disabled) {
+    cursor: pointer;
+}
+
+input[type=checkbox],
+input[type=radio] {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+h2 {
+    margin-bottom: .5rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+.collapse:not(.show) {
+    display: none;
+}
+
+@media print {
+
+    *,
+    ::after,
+    ::before {
+        text-shadow: none !important;
+        box-shadow: none !important;
+    }
+
+    h2,
+    p {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2 {
+        page-break-after: avoid;
+    }
+}
+
+/*! CSS Used from: Embedded */
+*,
+:after,
+:before {
+    box-sizing: border-box;
+}
+
+*,
+:after,
+:before {
+    -webkit-tap-highlight-color: transparent;
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+h2,
+p {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+}
+
+button:focus,
+button:hover {
+    outline: 0;
+}
+
+.show {
+    display: block;
+}
+
+.icon16 {
+    width: 16px;
+    height: 16px;
+}
+
+.bgProperties {
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    background-size: contain;
+}
+
+.darkText {
+    color: #4a4a4a;
+}
+
+.fontSize12 {
+    font-size: calc(var(--font-scale, 1)*12px);
+}
+
+.fontSize14 {
+    font-size: calc(var(--font-scale, 1)*14px);
+}
+
+.fontSize18 {
+    font-size: calc(var(--font-scale, 1)*18px);
+}
+
+.boldFont {
+    font-weight: 700;
+}
+
+.blackFont {
+    font-weight: 900;
+}
+
+.relative {
+    position: relative;
+}
+
+.makeFlex {
+    display: flex;
+}
+
+.makeFlex .flexOne {
+    flex: 1;
+}
+
+.makeFlex.column {
+    flex-direction: column;
+}
+
+.makeFlex.perfectCenter {
+    align-items: center;
+    justify-content: center;
+}
+
+.makeFlex.hrtlCenter {
+    align-items: center;
+}
+
+.appendTop2 {
+    margin-top: 2px;
+}
+
+.appendTop12 {
+    margin-top: 12px;
+}
+
+.appendTop15 {
+    margin-top: 15px;
+}
+
+.appendRight10 {
+    margin-right: 10px;
+}
+
+.appendBottom12 {
+    margin-bottom: 12px;
+}
+
+.appendBottom15 {
+    margin-bottom: 15px;
+}
+
+.appendBottom20 {
+    margin-bottom: 20px;
+}
+
+.appendLeft5 {
+    margin-left: 5px;
+}
+
+.padding20 {
+    padding: 20px;
+}
+
+.paddingTop20 {
+    padding-top: 20px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+/*! CSS Used from: https://jsak.mmtcdn.com/flights/assets/css/reviewDetails.desktop.2a979a1b.css */
+.reviewTravellerAddons b {
+    font-weight: 900;
+}
+
+.componentContainer {
+    width: 880px;
+    box-shadow: 0 3px 30px 0 rgba(0, 0, 0, .1);
+    background-color: #fff;
+    border-radius: 2px;
+}
+
+button:focus,
+button:hover {
+    outline: none;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.travellerWrapper {
+    padding: 0 20px 10px;
+}
+
+.travellerLoginSection {
+    background-color: #ecf5fa;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.adultDetailsHeading,
+.travellerLoginSection {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.adultDetailsHeading {
+    margin-bottom: 12px;
+}
+
+.adultDetailsHeading div:last-child font:first-child {
+    margin-right: 3px;
+}
+
+.adultImg {
+    width: 24px;
+    height: 24px;
+}
+
+.adultImg,
+.loginUserImg {
+    object-fit: cover;
+    vertical-align: top;
+}
+
+.loginUserImg {
+    width: 20px;
+    height: 20px;
+}
+
+.loginBtn {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font-size: calc(var(--font-scale, 1)*14px);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #008cff;
+}
+
+.adultListWrapper {
+    border-radius: 4px;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .21);
+    background-color: #fff;
+    position: relative;
+}
+
+.otherList {
+    padding: 13px;
+    border-bottom: 1px solid #eaeaea;
+    align-items: center;
+}
+
+.otherList {
+    display: flex;
+}
+
+.adultList {
+    padding: 13px;
+    border-bottom: 1px solid #eaeaea;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.adultList,
+.adultList>label {
+    margin-bottom: 0;
+}
+
+.adultList>* {
+    margin-right: 10px;
+}
+
+.adultList>:last-child {
+    margin: 0 !important;
+}
+
+.addTravellerBtn {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font-size: calc(var(--font-scale, 1)*12px);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #008cff;
+}
+
+.adultDetailsForm {
+    padding: 13px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.adultItemRow {
+    display: flex;
+}
+
+.adultItemRow>* {
+    margin-right: 10px;
+}
+
+.adultItemRow>:last-child {
+    margin: 0 !important;
+}
+
+.adultItem {
+    width: 262px;
+}
+
+.adultItem label {
+    margin-bottom: 6px;
+}
+
+.adultItem:last-child {
+    margin-right: 0;
+}
+
+.adultItem input[type=text] {
+    border-radius: 4px;
+    border: 1px solid hsla(0, 0%, 60.8%, .5);
+    padding: 10px;
+    width: 100%;
+    color: #4a4a4a;
+    outline: 0;
+}
+
+.adultItem input[type=text]:focus {
+    border-color: #008cff;
+}
+
+.adultList.checked .paxname {
+    font-weight: 900;
+}
+
+.paxname {
+    text-transform: capitalize;
+}
+
+.paxAlert {
+    margin: 0;
+    border-radius: 0;
+}
+
+.paxAlert p {
+    display: block !important;
+}
+
+.selectItem {
+    position: relative;
+}
+
+.selectItem:last-child {
+    margin-right: 0;
+}
+
+.dropdown__control {
+    min-height: 43px !important;
+}
+
+.travellerHeading {
+    display: flex;
+    align-items: center;
+}
+
+.alert-wrapper {
+    background: #fff;
+    padding: 10px;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .15);
+}
+
+.alert-wrapper p {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.selectTab {
+    border-radius: 4px;
+    border: 1px solid hsla(0, 0%, 60.8%, .5);
+}
+
+.selectTab label {
+    width: 50%;
+    display: inline-block;
+    margin: 0 !important;
+    outline: 0;
+}
+
+.selectTab label:first-child {
+    border-right: 1px solid hsla(0, 0%, 60.8%, .5);
+}
+
+.selectTabText {
+    width: 100%;
+    display: block;
+    text-align: center;
+    padding: 10px;
+    pointer-events: none;
+    font-size: calc(var(--font-scale, 1)*14px);
+    border-radius: 4px 4px 0 0;
+}
+
+.selectTab input[type=radio] {
+    visibility: hidden;
+    position: absolute;
+}
+
+.selectTab input[type=radio]:checked~.selectTabText {
+    box-shadow: inset 0 -3px 0 #008cff;
+    background-color: #eaf5ff;
+    font-weight: 700;
+}
+
+.tvlrInput {
+    border-radius: 4px;
+    width: 100%;
+    border: 1px solid #9b9b9b;
+    padding: 5px 12px;
+    font-size: calc(var(--font-scale, 1)*14px);
+    color: #4a4a4a;
+    outline: 0;
+}
+
+.tvlrInput:focus {
+    border-color: #008cff;
+}
+
+.bookingDetailsForm {
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+    padding: 20px;
+    border-radius: 0 0 2px 2px;
+}
+
+.checked .box {
+    background: #008cff;
+    border-color: #008cff;
+}
+
+.flexOne {
+    flex: 1;
+}
+
+/*! CSS Used from: Embedded */
+.checkboxContainer {
+    cursor: pointer;
+    display: flex;
+}
+
+.checkboxContent {
+    line-height: 19px;
+    margin-left: 10px;
+}
+
+.commonCheckbox {
+    display: flex;
+    position: relative;
+}
+
+.commonCheckbox input {
+    cursor: pointer;
+    height: 18px;
+    opacity: 0;
+    position: absolute;
+    width: 18px;
+    z-index: 2;
+}
+
+.commonCheckbox .box {
+    align-items: center;
+    background: #fff;
+    border: 2px solid #9b9b9b;
+    border-radius: 3px;
+    box-sizing: border-box;
+    display: inline-block;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.commonCheckbox .box .check {
+    border-color: #fff;
+    -webkit-border-image: none;
+    border-image: none;
+    border-style: none solid solid none;
+    border-width: medium 2px 2px medium;
+    box-sizing: border-box;
+    height: 11px;
+    opacity: 0;
+    position: relative;
+    top: -1px;
+    -webkit-transform: scale(1) rotate(45deg);
+    transform: scale(1) rotate(45deg);
+    -webkit-transition-delay: .1s;
+    transition-delay: .1s;
+    width: 5px;
+    z-index: 1;
+}
+
+input[type=checkbox]:checked~.box {
+    background: #008cff;
+    border: 0;
+}
+
+.sizeSm.commonCheckbox .box {
+    height: 18px;
+    width: 18px;
+}
+
+.sizeSm input[type=checkbox]:checked~.box .check {
+    opacity: 1;
+    transform: scale(1) rotate(45deg);
+}
+
+.primaryCheckbox input[type=checkbox]:checked~.box {
+    background: #008cff;
+    border: 0;
+}
+
+.checkboxTitle {
+    font-size: 14px;
+    margin: 0;
+}
+
+/*! CSS Used from: Embedded */
+* {
+    box-sizing: border-box;
+}
+
+h2,
+p {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.appendBottom12 {
+    margin-bottom: 12px;
+}
+
+.appendBottom15 {
+    margin-bottom: 15px;
+}
+
+.appendBottom20 {
+    margin-bottom: 20px;
+}
+
+html[dir='ltr'] .appendLeft5 {
+    margin-left: 5px;
+}
+
+html[dir='ltr'] .appendRight10 {
+    margin-right: 10px;
+}
+
+.appendTop15 {
+    margin-top: 15px;
+}
+
+.padding20 {
+    padding: 20px;
+}
+
+.makeFlex {
+    display: flex;
+}
+
+.flexOne {
+    flex: 1;
+}
+
+.makeFlex.column {
+    flex-direction: column;
+}
+
+.makeFlex.perfectCenter {
+    align-items: center;
+    justify-content: center;
+}
+
+.makeFlex.hrtlCenter {
+    align-items: center;
+}
+
+/*! CSS Used from: https://jsak.mmtcdn.com/flights/assets/css/rta-reviewCheaperFare.desktop.00b9d88f.css */
+label {
+    font-weight: 400 !important;
+}
+
+/*! CSS Used from: Embedded */
+.css-2b097c-container {
+    position: relative;
+    box-sizing: border-box;
+}
+
+.css-yk16xz-control {
+    -webkit-box-align: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    border-color: rgb(204, 204, 204);
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    cursor: default;
+    display: flex;
+    flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    min-height: 38px;
+    position: relative;
+    transition: all 100ms ease 0s;
+    box-sizing: border-box;
+    outline: 0px !important;
+}
+
+.css-yk16xz-control:hover {
+    border-color: rgb(179, 179, 179);
+}
+
+.css-1hwfws3 {
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+    flex: 1 1 0%;
+    flex-wrap: wrap;
+    padding: 2px 8px;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.css-1uccc91-singleValue {
+    color: rgb(51, 51, 51);
+    margin-left: 2px;
+    margin-right: 2px;
+    max-width: calc(100% - 8px);
+    overflow: hidden;
+    position: absolute;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    top: 50%;
+    transform: translateY(-50%);
+    box-sizing: border-box;
+}
+
+.css-1g6gooi {
+    margin: 2px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    visibility: visible;
+    color: rgb(51, 51, 51);
+    box-sizing: border-box;
+}
+
+.css-1wy0on6 {
+    -webkit-box-align: center;
+    align-items: center;
+    align-self: stretch;
+    display: flex;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+.css-1hyfx7x {
+    display: none;
+}
+
+.css-1eew81i {
+    color: rgb(0, 140, 255);
+}
+
+.css-19bqh2r {
+    display: inline-block;
+    fill: currentcolor;
+    line-height: 1;
+    stroke: currentcolor;
+    stroke-width: 0;
+}
+
+/*! CSS Used from: https://jsak.mmtcdn.com/flights/assets/css/rta-ancillary.desktop.89877e13.css */
+input[type=checkbox]:checked~.box {
+    background: #008cff;
+    border: 0;
+}
+
+input[type=checkbox]:checked~.box .check {
+    opacity: 1;
+    transform: scale(1) rotate(45deg);
+}
