@@ -85,14 +85,36 @@ const DetailofFlight = () => {
 
     const options = { day: "numeric", month: "short", date: "numeric" };
     const formattedDate = new Date(selectedDate).toLocaleDateString("en-US", options);
-    setflightDate(formattedDate);
+    setflightDate(formattedDate); 
 
     axios.post(`${baseUrl}/api/flight-booking`, formValue).then((res) => {
       setDataApi(res.data.data);
+      const newval  = res.data.data.map((val , index) => {
+        return{
+         time  : new Date(val.itineraries[0].segments[0].arrival.at),
+         deptime : new Date(val.itineraries[0].segments[0].departure.at)
+        }
+         
+    })
+    console.log('newvalnewvalnewvalnewval' , newval[0].time)
+    newval.forEach(element  => {
+      const diffInMs = element.time.getHours()  - element.deptime.getHours()  
+      const diffInMinutes = diffInMs / (1000 * 60);
+      console.log('diffInMsdiffInMsdiffInMsdiffInMsdiffInMsdiffInMs', diffInMs)
+
     });
+
+  // const diffInMs = time.getTime() - deptime.getTime(); 
+
+  
+
+    });
+  
+      
   }, []);
 
   const [DataApi, setDataApi] = useState([]);
+
 
   const PriceCheckData = async (e, selectID) => {
     try {
@@ -119,6 +141,7 @@ const DetailofFlight = () => {
               
             };
           });
+         
           //cabin map 
           var cabinDetailed;
           if(!val.itineraries[0].segments[0].co2Emissions){
@@ -172,6 +195,8 @@ const DetailofFlight = () => {
     } catch (err) {}
   };
 // 
+
+ // date 
 
 
   return (
@@ -268,16 +293,22 @@ const DetailofFlight = () => {
                         </div>
                       </div>
                       <div className="col-4 col-lg-2">
-                        <div className="fw-bold">{val.itineraries[0].segments[0].arrival.at}</div>
+                      {new Date(val.itineraries[0].segments[0].arrival.at).toLocaleTimeString('en-us'  ,{timeStyle: "short"})}
+                        <div className="fw-bold"></div>
                         <div className="font-small">{val.itineraries[0].segments[0].arrival.iataCode}</div>
                       </div>
                       <div className="col-4 col-lg-2">
-                        <div className="font-small">03h 15m</div>
+                        <div className="font-small">
+                       {/* {diffInMinutes} */}
+                        </div>
                         <span className="stops"></span>
                         <div className="font-small">Non Stop</div>
                       </div>
                       <div className="col-4 col-lg-2">
-                        <div className="fw-bold">{val.itineraries[0].segments[0].departure.at}</div>
+                        
+                        <div className="fw-bold">
+                          {new Date(val.itineraries[0].segments[0].departure.at).toLocaleTimeString('en-us'  ,{timeStyle: "short"})}
+                          </div>
                         <div className="font-small">LHR</div>
                       </div>
                       <div className="col-12 col-lg-3 text-center mt-2 mt-lg-0">
