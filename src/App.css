@@ -42,3 +42,131 @@
   outline: none;
   border: none;
 }
+.btn {
+  background: #f39c12;
+  color: #fff;
+  padding: 1rem 3rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.btn:hover {
+  background: #fff;
+  box-shadow: 0px 2px 20px 10px #97B1BF;
+  color: #000;
+}
+
+
+/*! CSS Used from: https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css */
+*,::after,::before{box-sizing:border-box;}
+nav{display:block;}
+p{margin-top:0;margin-bottom:1rem;}
+b{font-weight:bolder;}
+a{color:#007bff;text-decoration:none;background-color:transparent;}
+a:hover{color:#0056b3;text-decoration:underline;}
+button{border-radius:0;}
+button:focus{outline:1px dotted;outline:5px auto -webkit-focus-ring-color;}
+button{margin:0;font-family:inherit;font-size:inherit;line-height:inherit;}
+button{overflow:visible;}
+button{text-transform:none;}
+[type=button],button{-webkit-appearance:button;}
+[type=button]:not(:disabled),button:not(:disabled){cursor:pointer;}
+.fade{transition:opacity .15s linear;}
+@media (prefers-reduced-motion:reduce){
+.fade{transition:none;}
+}
+.fade:not(.show){opacity:0;}
+.nav{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;padding-left:0;margin-bottom:0;list-style:none;}
+.nav-link{display:block;padding:.5rem 1rem;}
+.nav-link:focus,.nav-link:hover{text-decoration:none;}
+.nav-tabs{border-bottom:1px solid #dee2e6;}
+.nav-tabs .nav-item{margin-bottom:-1px;}
+.nav-tabs .nav-link{border:1px solid transparent;border-top-left-radius:.25rem;border-top-right-radius:.25rem;}
+.nav-tabs .nav-link:focus,.nav-tabs .nav-link:hover{border-color:#e9ecef #e9ecef #dee2e6;}
+.nav-tabs .nav-link.active{color:#495057;background-color:#fff;border-color:#dee2e6 #dee2e6 #fff;}
+.tab-content>.tab-pane{display:none;}
+.tab-content>.active{display:block;}
+.card{position:relative;display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column;min-width:0;word-wrap:break-word;background-color:#fff;background-clip:border-box;border:1px solid rgba(0,0,0,.125);border-radius:.25rem;}
+.card-body{-ms-flex:1 1 auto;flex:1 1 auto;min-height:1px;padding:1.25rem;}
+.card-header{padding:.75rem 1.25rem;margin-bottom:0;background-color:rgba(0,0,0,.03);border-bottom:1px solid rgba(0,0,0,.125);}
+.card-header:first-child{border-radius:calc(.25rem - 1px) calc(.25rem - 1px) 0 0;}
+.accordion>.card{overflow:hidden;}
+.accordion>.card>.card-header{border-radius:0;margin-bottom:-1px;}
+@media print{
+*,::after,::before{text-shadow:none!important;box-shadow:none!important;}
+a:not(.btn){text-decoration:underline;}
+p{orphans:3;widows:3;}
+}
+/*! CSS Used from: Embedded */
+*,::after,::before{box-sizing:border-box;}
+*,::after,::before{-webkit-tap-highlight-color:rgb(0 0 0/0);padding:0;margin:0;-webkit-font-smoothing:antialiased;}
+p{margin:0;list-style:none;padding:0;}
+a{color:#0084ff;text-decoration:none;cursor:pointer;}
+a:focus,a:hover{text-decoration:none;outline:0;}
+button:focus,button:hover{outline:0;}
+.show{display:block;}
+.icon20{width:20px;height:20px;}
+.icon30{width:30px;height:30px;}
+.bgProperties{background-repeat:no-repeat;background-position:center;display:inline-block;background-size:contain;}
+.blackText{color:#000;}
+.darkText{color:#4a4a4a;}
+.fontSize12{font-size:calc(var(--font-scale, 1)*12px);}
+.fontSize14{font-size:calc(var(--font-scale, 1)*14px);}
+.fontSize20{font-size:calc(var(--font-scale, 1)*20px);}
+.lightFont{font-weight:400;}
+.boldFont{font-weight:700;}
+.makeFlex{display:flex;}
+.makeFlex.perfectCenter{align-items:center;justify-content:center;}
+.makeFlex.spaceBetween{justify-content:space-between;}
+.appendTop10{margin-top:10px;}
+.appendTop15{margin-top:15px;}
+.appendRight10{margin-right:10px;}
+.appendBottom3{margin-bottom:3px;}
+.appendBottom12{margin-bottom:12px;}
+.appendBottom15{margin-bottom:15px;}
+.appendBottom25{margin-bottom:25px;}
+.appendLeft5{margin-left:5px;}
+.appendLeft10{margin-left:10px;}
+/*! CSS Used from: https://jsak.mmtcdn.com/flights/assets/css/reviewDetails.desktop.2f202358.css */
+.reviewTravellerAddons b{font-weight:900;}
+button:focus,button:hover{outline:none;}
+.commonOverlay{background:#fff;min-width:460px;padding:30px;position:fixed;transform:translate(-50%,-50%);top:50%;z-index:100;left:50%;border-radius:2px;}
+.overlayCrossIcon{position:absolute;top:20px;right:20px;cursor:pointer;}
+.overlayCrossIcon{z-index:100;}
+/*! CSS Used from: Embedded */
+*{box-sizing:border-box;}
+p{margin:0;padding:0;list-style:none;}
+a{color:var(--color-primary, #008cff);text-decoration:none;cursor:pointer;}
+a:hover,a:focus{text-decoration:none;outline:none;}
+.appendBottom12{margin-bottom:12px;}
+.appendBottom15{margin-bottom:15px;}
+.appendBottom25{margin-bottom:25px;}
+html[dir='ltr'] .appendLeft5{margin-left:5px;}
+html[dir='ltr'] .appendLeft10{margin-left:10px;}
+html[dir='ltr'] .appendRight10{margin-right:10px;}
+.appendTop10{margin-top:10px!important;}
+.appendTop15{margin-top:15px;}
+.blackText{color:#000000;}
+.makeFlex{display:flex;}
+.makeFlex.perfectCenter{align-items:center;justify-content:center;}
+.makeFlex.spaceBetween{justify-content:space-between;}
+/*! CSS Used from: https://jsak.mmtcdn.com/flights/assets/css/desktop.rta-farerules.cd1a6754.css */
+.flightDetailsInfoLeft{width:250px;padding:12px;border-right:1px solid #dfdfdf;}
+.flightDetailsInfoLeft:not(:first-child){border-right:none;}
+.infoStrip{padding:6px 12px;background-color:#ffe3d5;border-radius:4px;width:100%;font-size:calc(var(--font-scale, 1)*12px);}
+.rtaFareRules-overlay .nav-tabs .nav-link{color:#a6a6a6;font-weight:700;border:0;border-bottom:2px solid transparent;position:relative;}
+.rtaFareRules-overlay .nav-tabs .nav-link.active{background:#f1f8ff;color:#000;border-bottom-color:#008cff;}
+.rtaFareRules-overlay .nav-tabs .nav-link:hover{color:#000;}
+.rtaFareRules-overlay .nav-tabs{border-bottom:none;}
+.rtaFareRules-overlay .nav-tabs .nav-link.active:after{content:"";border:5px solid transparent;border-top-color:#008cff;width:0;height:0;position:absolute;top:100%;left:50%;margin-left:-3px;}
+.rtaFareRules-overlay .card-header button{border:none;background:none;color:#008cff;text-transform:uppercase;font-weight:700;}
+.rtaFareRules-overlay .tab-content{margin-top:20px;}
+.rtaFareRules-overlay .flightDetails{border-radius:4px;border:1px solid #dfdfdf;width:100%;}
+.rtaFareRules-overlay .DateChangeInfo{border-bottom:1px solid #dfdfdf;display:flex;}
+.rtaFareRules-overlay .flightDetailsInfoRight{padding:12px;}
+.rtaFareRules-overlay .flightDetailsInfoLeft{width:50%;}
+.rtaFareRules-content .card-body{max-height:250px;overflow-y:auto;}
