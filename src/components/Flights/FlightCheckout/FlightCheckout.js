@@ -77,6 +77,10 @@ const FlightCheckout = () => {
     newFormHandle.splice(index, 1);
     setformHandle(newFormHandle);
   };
+  const fromSubmit = (e) => {
+    e.preventDefault()
+    localStorage.setItem('personData' , JSON.stringify(formHandle))
+  }
 
 // button stytle code 
 const [showPopup, setShowPopup] = useState(false);

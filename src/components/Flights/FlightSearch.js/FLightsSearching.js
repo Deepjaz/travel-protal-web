@@ -6,9 +6,12 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { baseUrl } from "../../../env/env";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import Iata from "../../../Iata";
+import iatadata from "../../../Iata";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import Footer from "react-multi-date-picker/plugins/range_picker_footer";
+
 const formobject = {
   currencyCode: "USD",
   originDestinations: [
@@ -36,6 +39,9 @@ const FLightsSearching = (props) => {
   const [counting, setCounting] = useState(0);
   const [counting2, setCounting2] = useState(0);
   const [apiRes, setApiRes] = useState([]);
+  const [iataCode , setiatadata] = useState(iatadata)
+
+
 
   // this code is used for form Data objects
   const [formValue, setFormValue] = useState(formobject);
@@ -167,7 +173,7 @@ const FLightsSearching = (props) => {
     const value = event.target.value;
     setInputValue(value);
 
-    const filteredSuggestions = Iata.filter((item) => {
+    const filteredSuggestions = iatadata.filter((item) => {
       return item.city.toLowerCase().startsWith(value.toLowerCase());
     });
 
@@ -192,7 +198,7 @@ const FLightsSearching = (props) => {
     const value2 = event.target.value;
     setInputValue2(value2);
 
-    const filteredSuggestion2 = Iata.filter((item) => {
+    const filteredSuggestion2 = iatadata.filter((item) => {
       return item.city.toLowerCase().startsWith(value2.toLowerCase());
     });
 
@@ -213,17 +219,22 @@ const FLightsSearching = (props) => {
 
   const handleClick = (event) => {
     // alert("this is the hitted data")
+    
     event.preventDefault();
+    console.log('iataCodeiataCode' ,newformValue)
+      const depatureFilterData  = iataCode.filter((val =>  val.city === newformValue.originLocationCode))
+      const arivalTime  = iataCode.filter((val =>  val.city === newformValue.destinationLocationCode))
+ 
+      console.log('depatureFilterDatadepatureFilterData' , depatureFilterData)
     callBackFUNc();
-    formValue.originDestinations[0].originLocationCode = newformValue.originLocationCode.toUpperCase();
-    formValue.originDestinations[0].destinationLocationCode =
-      newformValue.destinationLocationCode.toUpperCase();
+    formValue.originDestinations[0].originLocationCode =  depatureFilterData[0].iata_code;
+    formValue.originDestinations[0].destinationLocationCode = arivalTime[0].iata_code;
     // formValue.travelers =
 
     formobject.originDestinations[0].departureDateTimeRange.date = selectedDate;
     console.log("formValueformValueformValue", formValue);
     axios.post(`${baseUrl}/api/flight-booking`, formobject).then((res) => {
-      if (!newformValue.originLocationCode) {
+      if (!formValue.originDestinations[0].originLocationCode) {
         toast.error("Please fil the Detial of originLocationCode");
       }
       if (!newformValue.destinationLocationCode) {
@@ -355,11 +366,12 @@ const FLightsSearching = (props) => {
                       name="originLocationCode"
                       value={newformValue.originLocationCode}
                       onChange={(e) => handleChange(e)}
+                      style={{textTransform:'capitalize'}}
                     />
 
                     <p
                       className="code makeRelative"
-                      // title="BOM, Chhatrapati Shivaji International Airport India"
+                      
                     >
                       <span className="truncate airPortName " title="">
                         {newformValue.originLocationCode} International Airport
@@ -382,6 +394,8 @@ const FLightsSearching = (props) => {
                       name="destinationLocationCode"
                       value={newformValue.destinationLocationCode}
                       onChange={(e) => handleChange(e)}
+                      style={{textTransform:'capitalize'}}
+
                     />
                     <p
                       className="code makeRelative"
@@ -402,7 +416,8 @@ const FLightsSearching = (props) => {
                       type="text"
                       name="destinationLocationCode"
                     /> */}
-                    <DatePicker
+                     <DatePicker
+                      numberOfMonths={2}
                       className="fsw_inputField font20"
                       selected={
                         selectedDate && new Date(selectedDate + "T00:00:00")
