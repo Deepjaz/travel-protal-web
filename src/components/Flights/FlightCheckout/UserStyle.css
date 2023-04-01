@@ -368,20 +368,12 @@ button:hover {
     border-bottom: 1px solid #eaeaea;
 }
 
-<<<<<<< HEAD
 .formOuter form {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
-=======
-.adultItemRow {
-    display: none;
-    flex-wrap: wrap;
->>>>>>> bc068e3f4641e3d662114df0dffc5088ccb8da2c
 }
-.fromActive{
-    display: flex!important;
-}
+
 .formOuter {
     margin-bottom: 20px;
   }
@@ -784,3 +776,8 @@ input[type=checkbox]:checked~.box .check {
     opacity: 1;
     transform: scale(1) rotate(45deg);
 }
+.componentContainer.appendTop15.appendBottom20 {
+    width: auto;
+}
+
+

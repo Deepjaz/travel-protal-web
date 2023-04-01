@@ -5,9 +5,9 @@ import FareRules from "./FareRules";
 
 const FlightCheckout = () => {
   const { state } = useLocation();
-  const [activeform , setactiveform] = useState(false)
-  const [selectGender  , setSelectGender] = useState([{}])
-  const data = [];  
+  const [activeform, setactiveform] = useState(false);
+  const [selectGender, setSelectGender] = useState();
+  const data = [];
   // const {flightOffers} = state;
   data.push(JSON.parse(state));
   console.log("statestatestatestatestatestate1", data);
@@ -41,67 +41,67 @@ const FlightCheckout = () => {
     {
       firstName: "",
       lastName: "",
-      gender: '',
     },
   ]);
 
-  console.log('formHandleformHandleformHandle', formHandle)
+  console.log("formHandleformHandleformHandle", formHandle);
 
-  const addFromvalues = (e , index) => {
-  setactiveform(true)
-    const fromdata  = []
-    fromdata.push(data[0]?.travlerPricing.length)
-    const value = []
-    for(let i = 0; i < data[0]?.travlerPricing.length; i++){
-    console.log('this is the index' ,value.push(index + i))
-    if(formHandle.length === i){
-      setformHandle([...formHandle, { firstName: "", lastName: "", gender: "" }]);
+  const addFromvalues = (e, index) => {
+    setactiveform(true);
+    const fromdata = [];
+    fromdata.push(data[0]?.travlerPricing.length);
+    const value = [];
+    for (let i = 0; i < data[0]?.travlerPricing.length; i++) {
+      console.log("this is the index", value.push(index + i));
+      if (formHandle.length === i) {
+        setformHandle([...formHandle, { firstName: "", lastName: "" }]);
+      }
     }
-    }
+  };
 
-}
-  
-  const { firstName, lastName, gender } = formHandle;
+  const { firstName, lastName } = formHandle;
 
-  const hadleChange = (event , index) => {
-    const newformvalue = [...formHandle]
-    newformvalue[index][event.target.name] =  event.target.value
-    setformHandle(newformvalue)
+  const hadleChange = (event, index) => {
+    const newformvalue = [...formHandle];
+    newformvalue[index][event.target.name] = event.target.value;
+    setformHandle(newformvalue);
   };
   const fromSubmit = (e) => {
-    e.preventDefault()
-    localStorage.setItem('personData' , JSON.stringify(formHandle))
-  }
+    e.preventDefault();
+    localStorage.setItem("personData", JSON.stringify(formHandle));
+  };
   const deleteFormHandle = (index) => {
     const newFormHandle = [...formHandle];
     newFormHandle.splice(index, 1);
     setformHandle(newFormHandle);
   };
-  const fromSubmit = (e) => {
-    e.preventDefault()
-    localStorage.setItem('personData' , JSON.stringify(formHandle))
-  }
 
-// button stytle code 
-const [showPopup, setShowPopup] = useState(false);
+  // button stytle code
+  const [showPopup, setShowPopup] = useState(false);
 
-useEffect(() => {
-  document.addEventListener("click", handleClickOutside, false);
-  return () => {
-    document.removeEventListener("click", handleClickOutside, false);
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside, false);
+    return () => {
+      document.removeEventListener("click", handleClickOutside, false);
+    };
+  }, []);
+
+  const handleClickOutside = (event) => {
+    if (event.target.id === "popup-container") {
+      setShowPopup(false);
+    }
   };
-}, []);
-
-const handleClickOutside = (event) => {
-  if (event.target.id === "popup-container") {
-    setShowPopup(false);
-  }
-};
 
 
 
 
+  const [isOpen, setIsOpen] = useState(false);
+  const [iconClass, setIconClass] = useState('fa fa-plus');
 
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+    setIconClass(isOpen ? 'fa fa-plus' : 'fa fa-minus');
+  };
   return (
     <>
       <div>
@@ -134,11 +134,15 @@ const handleClickOutside = (event) => {
                             <font color="#ffffff">Cancellation Fees Apply</font>
                           </p>
                           <p className="fontSize14 linkText appendTop10 textRight">
-                            <button  className=" btn btn-cls" onClick={() => setShowPopup(true)}>View Fare Rules</button>
-                           {
-                            showPopup ? ( <FareRules    onClose={() => setShowPopup(false)}/> ) : null
-                           }
-                           
+                            <button
+                              className=" btn btn-cls"
+                              onClick={() => setShowPopup(true)}
+                            >
+                              View Fare Rules
+                            </button>
+                            {showPopup ? (
+                              <FareRules onClose={() => setShowPopup(false)} />
+                            ) : null}
                           </p>
                         </div>
                       </div>
@@ -229,511 +233,474 @@ const handleClickOutside = (event) => {
                             </ul>
                           </div>
                         </div>
-                        <div id="TRAVELLER_DETAIL" className="oneCard-element">
-                      <div className="componentContainer appendTop15 appendBottom20">
-                        <div className="travellerWrapper">
-                          <div className="travellerHeading paddingTop20 appendBottom20">
-                            <h2 className="fontSize18 blackFont">
-                              Traveller Details
-                            </h2>
-                          </div>
-                          <div className="travellerLoginSection appendBottom20">
-                            <div className="makeFlex perfectCenter">
-                              <div className="appendRight10">
-                                <span className="loginUserImg bgProperties"></span>
-                              </div>
-                              <p className="fontSize14">
-                                Log in to view your
-                                <b>
-                                  saved traveller list, unlock amazing deals
-                                </b>{" "}
-                                &amp; much more!
-                              </p>
+
+                        <div className="componentContainer appendTop15 appendBottom20">
+                          <div className="travellerWrapper">
+                            <div className="travellerHeading paddingTop20 appendBottom20">
+                              <h2 className="fontSize18 blackFont">
+                                Traveller Details
+                              </h2>
                             </div>
-                            <div>
-                              <Link className="loginBtn" to={"/sign-up"}>
-                                LOGIN NOW
-                              </Link>
-                            </div>
-                          </div>
-                          <div className="appendBottom20" id="wrapper_ADULT">
-                            <div className="adultDetailsHeading">
+                            <div className="travellerLoginSection appendBottom20">
                               <div className="makeFlex perfectCenter">
                                 <div className="appendRight10">
-                                  <span className="adultImg bgProperties"></span>
+                                  <span className="loginUserImg bgProperties"></span>
                                 </div>
                                 <p className="fontSize14">
-                                  <font className="boldFont">
-                                    ADULT (12 yrs+)
-                                  </font>
+                                  Log in to view your
+                                  <b>
+                                    saved traveller list, unlock amazing deals
+                                  </b>{" "}
+                                  &amp; much more!
                                 </p>
                               </div>
-                              <div className="makeFlex perfectCenter fontSize14 boldFont">
-                                <font color="#4a4a4a">0/{val.travlerPricing.length}</font>
-                                <font color="#9b9b9b">&nbsp;added</font>
+                              <div>
+                                <Link className="loginBtn" to={"/sign-up"}>
+                                  LOGIN NOW
+                                </Link>
                               </div>
                             </div>
-                            <div className="adultListWrapper">
-                              <div className="collapse"></div>
-                              <div className="otherList">
-                                <span>
-                                  You have not added any adults to the list
-                                </span>
-                              </div>
-                              {/*  */}
-                              <div>
-                                <div className="AdultFormWrapper collapse show">
-                                  <div className="alert-wrapper makeFlex appendBottom12 appendTop12 paxAlert">
-                                    <div className="makeFlex flexOne column">
-                                      <p className="darkText fontSize12 boldFont">
-                                        <span className="alert-text">
-                                          Enter name as mentioned on your
-                                          passport or Government approved IDs.
-                                        </span>
-                                      </p>
-                                    </div>
+                            <div className="appendBottom20" id="wrapper_ADULT">
+                              <div className="adultDetailsHeading">
+                                <div className="makeFlex perfectCenter">
+                                  <div className="appendRight10">
+                                    <span className="adultImg bgProperties"></span>
                                   </div>
-
-                                  <div className="adultDetailsForm">
-                                    <div className="adultDetailsInnner">
-                                      <div className={`adultItemRow ${activeform == true ? "fromActive" : ''}`}>
-                                        {formHandle?.map((val, index) => {
-                                          return (
-                                            <div  key={index} className="formOuter">
-                                              <form>
-                                              <div
-                                                className="adultItem"
-                                                style={{ width: "30%" }}
-                                               
-                                              >
-                                                <div className="relative">
-                                                  <input
-                                                    placeholder="First &amp; Middle Name"
-                                                    className="tvlrInput"
-                                                    type="text"
-                                                    name="firstName"
-                                                    value={val.firstName}
-                                                    onChange={(e) =>
-                                                      hadleChange(e , index)
-                                                    }
-                                                  />
-                                                </div>
-                                              </div>
-                                              <div
-                                                className="adultItem"
-                                                style={{ width: "30%"}}
-                                               
-                                              >
-                                                <div className="relative">
-                                                  <input
-                                                    placeholder="Last Name"
-                                                    className="tvlrInput"
-                                                    type="text"
-                                                    name="lastName"
-                                                    value={val.lastName}
-                                                    onChange={(e) =>
-                                                      hadleChange(e , index)
-                                                    }
-                                                  />
-                                                </div>
-                                              </div>
-                                              <div
-                                                className="adultItem"
-                                                style={{ width: "30%" }}
-                                              >
-                                                <div className="selectTab">
-                                                  <div className="next-cls-db">
-                                                    <label>
-                                                      <input
-                                                        type="radio"
-                                                        // name="gender_MANUAL_16cb94ae-f59f-405b-a3b7-102094725a23"
-                                                        name="male"
-                                                        value="male"
-                                                        checked = {selectGender === 'male'}
-                                                        onChange= {(e) => setSelectGender('male')}
-                                                      />
-                                                      <span className="selectTabText">
-                                                        MALE
-                                                      </span>
-                                                    </label>
-                                                    <label>
-                                                      <input
-                                                        type="radio"
-                                                        // name="gender_MANUAL_16cb94ae-f59f-405b-a3b7-102094725a23"
-                                                        // value="FEMALE"
-                                                        name="FEMALE"
-                                                        checked = {selectGender === 'FEMALE'}
-
-                                                        onChange= {(e) =>setSelectGender('FEMALE')}
-                                                      />
-                                                      <span className="selectTabText">
-                                                        FEMALE
-                                                      </span>
-                                                    </label>
-                                                  </div>
-                                                  
-                                                </div>
-                                              </div>
-                                              <button type="button" className="close" aria-label="Close"
-  onClick={() => deleteFormHandle(index)}>
-                                                <span aria-hidden="true" className="close-icon">&times;</span>
-                                              </button>
-                                             
-
-
-                                              </form>
-                                            </div>
-                                          );
-                                        })}
-                                        <button className="submit" type="submit" onClick={fromSubmit}>Submit</button>
-                                      
+                                  <p className="fontSize14">
+                                    <font className="boldFont">
+                                      ADULT (12 yrs+)
+                                    </font>
+                                  </p>
+                                </div>
+                                <div className="makeFlex perfectCenter fontSize14 boldFont">
+                                  <font color="#4a4a4a">
+                                    0/{val.travlerPricing.length}
+                                  </font>
+                                  <font color="#9b9b9b">&nbsp;added</font>
+                                </div>
+                              </div>
+                              <div className="adultListWrapper">
+                                <div className="collapse"></div>
+                                <div className="otherList">
+                                  <span>
+                                    You have not added any adults to the list
+                                  </span>
+                                </div>
+                                {/*  */}
+                                <div>
+                                  <div className="AdultFormWrapper collapse show">
+                                    <div className="alert-wrapper makeFlex appendBottom12 appendTop12 paxAlert">
+                                      <div className="makeFlex flexOne column">
+                                        <p className="darkText fontSize12 boldFont">
+                                          <span className="alert-text">
+                                            Enter name as mentioned on your
+                                            passport or Government approved IDs.
+                                          </span>
+                                        </p>
                                       </div>
                                     </div>
-                                  </div>
-                                </div>
-                                {/* <div
-                                  className="bookingDetailsForm"
-                                  id="contactDetails"
-                                >
-                                  <p className="fontSize14 boldFont appendBottom15">
-                                    Booking details will be sent to
-                                  </p>
-                                  <div className="adultItemRow">
-                                    <div
-                                      className="adultItem"
-                                      id="Country Code"
-                                    >
-                                      <label className="makeFlex hrtlCenter">
-                                        Country Code
-                                      </label>
-                                      <div className="selectItem relative">
-                                        <div className="selectList css-2b097c-container">
-                                          <div className="dropdown__control css-yk16xz-control">
-                                            <div className="dropdown__value-container dropdown__value-container--has-value css-1hwfws3">
-                                              <div className="dropdown__single-value css-1uccc91-singleValue">
-                                                India(91)
-                                              </div>
-                                              <div className="css-1g6gooi">
-                                                <div className="dropdown__input">
-                                                  <input
-                                                    autocapitalize="none"
-                                                    autocomplete="off"
-                                                    autocorrect="off"
-                                                    id="react-select-2-input"
-                                                    spellcheck="false"
-                                                    tabindex="0"
-                                                    type="text"
-                                                    aria-autocomplete="list"
-                                                    value=""
-                                                  />
-                                                  <div></div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div className="dropdown__indicators css-1wy0on6">
-                                              <span className="dropdown__indicator-separator css-1hyfx7x"></span>
+
+                                    <div className="adultDetailsForm">
+                                      <div className="adultDetailsInnner">
+                                        <div
+                                          className={`adultItemRow ${
+                                            activeform == true
+                                              ? "fromActive"
+                                              : ""
+                                          }`}
+                                        >
+                                          {formHandle?.map((val, index) => {
+                                            return (
                                               <div
-                                                aria-hidden="true"
-                                                className="dropdown__indicator dropdown__dropdown-indicator css-1eew81i"
+                                                key={index}
+                                                className="formOuter"
                                               >
-                                                <svg
-                                                  height="20"
-                                                  width="20"
-                                                  viewBox="0 0 20 20"
-                                                  aria-hidden="true"
-                                                  focusable="false"
-                                                  className="css-19bqh2r"
-                                                >
-                                                  <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path>
-                                                </svg>
+                                                <form>
+                                                  <div
+                                                    className="adultItem"
+                                                    style={{ width: "30%" }}
+                                                  >
+                                                    <div className="relative">
+                                                      <input
+                                                        placeholder="First &amp; Middle Name"
+                                                        className="tvlrInput"
+                                                        type="text"
+                                                        name="firstName"
+                                                        value={val.firstName}
+                                                        onChange={(e) =>
+                                                          hadleChange(e, index)
+                                                        }
+                                                      />
+                                                    </div>
+                                                  </div>
+                                                  <div
+                                                    className="adultItem"
+                                                    style={{ width: "30%" }}
+                                                  >
+                                                    <div className="relative">
+                                                      <input
+                                                        placeholder="Last Name"
+                                                        className="tvlrInput"
+                                                        type="text"
+                                                        name="lastName"
+                                                        value={val.lastName}
+                                                        onChange={(e) =>
+                                                          hadleChange(e, index)
+                                                        }
+                                                      />
+                                                    </div>
+                                                  </div>
+                                                  <div
+                                                    className="adultItem"
+                                                    style={{ width: "30%" }}
+                                                  >
+                                                    <div className="selectTab">
+                                                      <div className="next-cls-db">
+                                                        <label>
+                                                          <input
+                                                            type="radio"
+                                                            name={`gender`}
+                                                            value="MALE"
+                                                            checked={
+                                                              val.gender ===
+                                                              "MALE"
+                                                            }
+                                                            onChange={(e) =>
+                                                              hadleChange(
+                                                                e,
+                                                                index
+                                                              )
+                                                            }
+                                                          />
+                                                          <span className="selectTabText">
+                                                            MALE
+                                                          </span>
+                                                        </label>
+                                                        <label>
+                                                          <input
+                                                            type="radio"
+                                                            name={`gender`}
+                                                            value="FEMALE"
+                                                            checked={
+                                                              val.gender ===
+                                                              "FEMALE"
+                                                            }
+                                                            onChange={(e) =>
+                                                              hadleChange(
+                                                                e,
+                                                                index
+                                                              )
+                                                            }
+                                                          />
+                                                          <span className="selectTabText">
+                                                            FEMALE
+                                                          </span>
+                                                        </label>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                  <button
+                                                    type="button"
+                                                    className="close"
+                                                    aria-label="Close"
+                                                    onClick={() =>
+                                                      deleteFormHandle(index)
+                                                    }
+                                                  >
+                                                    <span
+                                                      aria-hidden="true"
+                                                      className="close-icon"
+                                                    >
+                                                      &times;
+                                                    </span>
+                                                  </button>
+                                                </form>
                                               </div>
-                                            </div>
-                                          </div>
+                                            );
+                                          })}
+                                          <button
+                                            className="submit"
+                                            type="submit"
+                                            onClick={fromSubmit}
+                                          >
+                                            Submit
+                                          </button>
                                         </div>
                                       </div>
                                     </div>
-                                    <div className="adultItem" id="Mobile No">
-                                      <div className="relative">
-                                        <label for="popup">Mobile No</label>
-                                        <input
-                                          placeholder="Mobile No"
-                                          className="tvlrInput"
-                                          type="text"
-                                          value=""
-                                        />
-                                      </div>
-                                    </div>
-                                    <div className="adultItem" id="Email">
-                                      <div className="relative">
-                                        <label for="popup">Email</label>
-                                        <input
-                                          placeholder="Email"
-                                          className="tvlrInput"
-                                          type="text"
-                                          value=""
-                                        />
-                                      </div>
-                                    </div>
                                   </div>
-                                </div> */}
-                              </div>
+                                  
+                                </div>
 
-                              {/*  */}
-                              <div className="otherList">
-                                <button
-                                  type="button"
-                                  className="addTravellerBtn"
-                                  onClick={e => addFromvalues(e , index)}
-                                >
-                                  + ADD NEW ADULT
-                                </button>
+                                {/*  */}
+                                <div className="otherList">
+                                  <button
+                                    type="button"
+                                    className="addTravellerBtn"
+                                    onClick={(e) => addFromvalues(e, index)}
+                                  >
+                                    + ADD NEW ADULT
+                                  </button>
+                                </div>
+                                {pTags}
                               </div>
-                              {pTags}
                             </div>
                           </div>
-                        </div>
-                        <div>
-                          <div className="padding20" id="gstDetails">
-                            <label className="checkboxContainer">
-                              <span className="commonCheckbox sizeSm primaryCheckbox">
-                                <input type="checkbox" value="" />
-                                <span className="box">
-                                  <span className="check"></span>
+                          <div>
+                            <div className="padding20" id="gstDetails">
+                              <label className="checkboxContainer">
+                                <span className="commonCheckbox sizeSm primaryCheckbox">
+                                  <input type="checkbox" value="" />
+                                  <span className="box">
+                                    <span className="check"></span>
+                                  </span>
                                 </span>
-                              </span>
-                              <div className="checkboxContent">
-                                <p className="checkboxTitle">
-                                  <span className="boldFont">
-                                    <font color="#000000">
-                                      I have a GST number
-                                    </font>
-                                    <font color="#9b9b9b">(Optional)</font>
-                                  </span>
-                                </p>
-                              </div>
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                      </div>
-                     
-                    </section>
-                   
-
-                    {/* <div className="baggageTag">
-                      <div className="baggageContent">
-                        <span className="addBaggageImg bgProperties appendRight10"></span>
-                        <p className="fontSize12 boldFont">
-                          Got excess luggage? Don't stress, buy extra check-in
-                          baggage allowance at fab rates!
-                        </p>
-                      </div>
-                      <div>
-                        <button type="button" className="addBtn">
-                          +ADD
-                        </button>
-                      </div>
-                    </div> */}
-                  </div>
-                  {/* <div className="reviewUpgradeFare appendTop20">
-                    <p className="blackText fontSize18 blackFont appendBottom5"></p>
-                    <p className="appendBottom15"></p>
-                    <div className="make_flex"></div>
-                  </div> */}
-                  {/* <div className="appendTop20">
-                    <section className="refundSection">
-                      <div>
-                        <div className="refundHdr">
-                          <div className="makeFlex hrtlCenter">
-                            <h3 className="fontSize16 blackFont">
-                              <font color="#000000">
-                                Cancellation Refund Policy
-                              </font>
-                            </h3>
-                          </div>
-                          <div>
-                            <p className="fontSize14 darkText textRight">
-                              <span className="linkText appendLeft3">
-                                View Policy
-                              </span>
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flightDetails reviewCanPolicyWrapper">
-                          <div className="cancSecWrap">
-                            <p className="flightDetailsInfo makeFlex hrtlCenter">
-                              <span className="bgProperties icon24"></span>
-                              <span className="blackFont darkText appendLeft10">
-                                BOM-DEL
-                              </span>
-                            </p>
-                            <div className="timeLineDetailsInfo makeFlex">
-                              <div className="cancInfoLeft">
-                                <p className="appendBottom20">
-                                  Cancellation Penalty :
-                                </p>
-                                <p>Cancel Between (IST) :</p>
-                              </div>
-                              <div className="flexOne">
-                                <div className="makeFlex">
-                                  <span className="cancPriceInfo fontSize16">
-                                    ₹ 3,300
-                                  </span>
-                                  <span className="cancPriceInfo fontSize16">
-                                    ₹ 3,800
-                                  </span>
-                                  <span className="cancPriceInfo fontSize16">
-                                    ₹ 4,567
-                                  </span>
-                                </div>
-                                <p className="cancGradline"></p>
-                                <div className="cancTimeline">
-                                  <div className="cancTimeNode">
-                                    <p className="blackFont">Now</p>
-                                  </div>
-                                  <div className="cancTimeNode">
-                                    <p className="blackFont">7 May</p>
-                                    <p className="fontSize12 boldFont">14:45</p>
-                                  </div>
-                                  <div className="cancTimeNode">
-                                    <p className="blackFont">10 May</p>
-                                    <p className="fontSize12 boldFont">12:45</p>
-                                  </div>
-                                  <div className="cancTimeNode">
-                                    <p className="blackFont">10 May</p>
-                                    <p className="fontSize12 boldFont">14:45</p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="refundUpgradeCard appendBottom10">
-                          <div className="makeFlex hrtlCenter">
-                            <span className="appendRight10">
-                              <span className="icon24 bgProperties"></span>
-                            </span>
-                            <span className="boldFont fontSize12">
-                              More fares with flexible refund &amp; date change
-                              policy available!
-                            </span>
-                          </div>
-                          <div>
-                            <span className="linkText boldFont fontSize12 padding5">
-                              UPGRADE
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </section>
-                  </div> */}
-                  {/* <div className="appendTop20">
-                    <div className="appendTop20">
-                      <section className="refundSection">
-                        <h3 className="fontSize16 blackFont appendBottom20">
-                          Unsure of your travel plans?
-                        </h3>
-                        <div id="0">
-                          <div
-                            className="unsureBanner makeFlex appendBottom10"
-                            id="0"
-                          >
-                            <span className="customCheckbox appendTop2">
-                              <input
-                                className="pointer"
-                                type="checkbox"
-                                id="zc-fdc-checkbox"
-                                name="<font color='#3023AE'><b>Add Zero Cancellation</b></font>"
-                                readonly=""
-                              />
-                              <span className="box">
-                                <span className="check"></span>
-                              </span>
-                            </span>
-                            <div className="makeFlex flexOne column">
-                              <div className="makeFlex spaceBetween flexOne appendLeft10">
-                                <div className="flexOne">
-                                  <div className="makeFlex appendBottom5 hrtlCenter">
-                                    <span className="boldFont appendRight10 inlineB">
-                                      <font color="#FFFFFF">
-                                        <b>Add Zero Cancellation</b>
+                                <div className="checkboxContent">
+                                  <p className="checkboxTitle">
+                                    <span className="boldFont">
+                                      <font color="#000000">
+                                        I have a GST number
                                       </font>
+                                      <font color="#9b9b9b">(Optional)</font>
                                     </span>
-                                  </div>
-                                  <div className="fontSize12 makeFlex">
-                                    <p className="darkText">
-                                      <b>Get refund of up to ₹ 4,567</b> in case
-                                      of a cancellation up to 24hrs before
-                                      departure
-                                    </p>
-                                    <span className="tncText">
-                                      <font color="#0091FF">View T&amp;C</font>
-                                    </span>
-                                  </div>
+                                  </p>
                                 </div>
-                                <div className="unsureBannerRight">
-                                  <span className="bgProperties icon20"></span>
-                                  <p className="blackFont blackText">₹ 1,549</p>
-                                </div>
-                              </div>
-                              <p className="unsurePersuasion fontSize11">
-                                <span>
-                                  <font color="#FFFFFF">
-                                    6,480 customers purchased this on your route
-                                    <font></font>
-                                  </font>
-                                </span>
-                              </p>
+                              </label>
                             </div>
                           </div>
                         </div>
-                      </section>
-                    </div>
-                  </div> */}
+                      </div>
+                    </section>
+                  </div>
                 </div>
               </div>
-              <div className="pageRightContainer customScroll">
-                <div id="FARE_SUMMARY">
-                  <section className="fareSummary">
-                    <div>
-                      <p className="fontSize18 blackFont">Fare Summary</p>
+              <div class="pageRightContainer customScroll">
+      <div id="FARE_SUMMARY">
+        <div class="fareSummary">
+     
+          <div><p class="fontSize18 blackFont">Fare Summary</p></div>
+          <div class="fareTypeWrap">
+          <i className={iconClass} aria-hidden="true" onClick={handleToggle}></i>
+          <span></span><span class="fareHeader">Base Fare</span>
+          {isOpen && (
+            (val.travlerPricing.map((val, index) => (
+            <div class="fareRow">
+              <div class="makeFlex hrtlCenter pointer flexOne">
+              {val.traverltype}
+                <span class="appendRight10 appendTop5"><span
+                    class="iconPlusImg bgProperties"
+                    style={{ backgroundImage: "url`(//jsak.mmtcdn.com/flights/assets/media/ic_expand.68dc8068.png`)"}}></span></span>
+              </div>
+            
+              <span class="fontSize14 darkText">   ${val.ticketPrice}</span>
+            </div>
+            )))
+            )}
+          </div>
+          <div class="fareTypeWrap">
+            <div class="fareRow">
+              <div class="makeFlex hrtlCenter pointer flexOne">
+                <span class="appendRight10 appendTop5" >
+                  <span
+                    class="iconPlusImg bgProperties"
+                    style={{ backgroundImage: "url(`//jsak.mmtcdn.com/flights/assets/media/ic_expand.68dc8068.png`)"}}
+                     
+                    
+                  ></span></span><span class="fareHeader">Taxes and Surcharges</span>
+              </div>
+              <span class="fontSize14 darkText">0</span>
+            </div>
+          </div>
+          <div class="fareTypeWrap">
+            <div class="fareRow">
+              <div class="makeFlex hrtlCenter pointer flexOne">
+                <span class="appendRight10 appendTop5"
+                  ><span
+                    class="iconMinusImg bgProperties"
+                    style={{backgroundImage:" url(`//jsak.mmtcdn.com/flights/assets/media/ic_collapse.83c3e92a.png`)"}}
+                      
+                    
+                  ></span></span
+                ><span class="fareHeader">Other Services</span>
+              </div>
+            </div>
+            <div class="fareContentWrap">
+              <div class="fareSubList">
+                <p class="fareRow appendTop5">
+                  <span class="makeFlex bottom"
+                    ><span class="fontSize14 darkText">Charity</span
+                    ><span class="charityAddTxt">REMOVE</span></span
+                  ><span class="fontSize14 darkText"><span>₹ 10</span></span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="fareFooter">
+            <p class="fareRow">
+              <span class="fontSize16 blackFont">Total Amount</span
+              ><span class="fontSize16 blackFont">   ${val.total}</span>
+            </p>
+          </div>
+        
+        </div>
+      </div>
+      <div class="appendTop10">
+        <section class="promocodeWrap">
+          <div>
+            <div
+              class="promoHeader"
+             
+                
+              
+            >
+              <span class="fontSize18"><b>PROMO</b> CODES</span
+              ><span class="promoIconWrapper appendLeft10"
+                ><span
+                  class="bgProperties iconPromoImg iconPromocode"
+                  style={{ backgroundImage: "url(`https://imgak.mmtcdn.com/flights/assets/media/dt/rta_assets/promo-code.png`)"}}
+                   
+                  
+                ></span
+              ></span>
+            </div>
+            <div class="appendBottom15">
+              <p class="relative">
+                <input
+                  type="text"
+                  class="promoInput"
+                  placeholder="Enter promo code here"
+                  value=""
+                />
+              </p>
+            </div>
+            <div class="appendBottom20">
+              <p class="promoTitle"></p>
+              <div class="promoContent pointer">
+                <div class="flexOne cpn-wrapper">
+                  <div class="makeFlex pointer gap-x-5">
+                    <span class="radioWrap"
+                      ><span class="block radio customRadioBtn"
+                        ><span class="customRadioBtn sizeSm primaryRadiobox"
+                          ><input type="radio" value="" /><span class="outer"
+                            ><span class="inner"></span></span></span></span
+                    ></span>
+                    <div class="promoContentWrap flexOne">
+                      <span class="couponCode">MMTSUPER</span
+                      ><span class="promoCheckContent"
+                        >Use this coupon and get Rs 300 instant discount on your
+                        flight booking.</span
+                      ><a
+                        href="https://www.makemytrip.com/promos/df-amazon-2000-20012023.html"
+                        class="fontSize12"
+                        target="_blank"
+                        rel="noreferrer"
+                        >Terms &amp; Conditions</a
+                      >
                     </div>
-
-                    <div className="fareTypeWrap">
-                      {val.travlerPricing.map((val, index) => (
-                        <div className="fareRow">
-                          <div className="makeFlex hrtlCenter pointer flexOne">
-                            {/* <span className="appendTop5">
-                            <span className="iconPlusImg bgProperties"></span>
-                          </span> */}
-                            <span className="fareHeader">
-                              {val.traverltype}
-                            </span>
-                          </div>
-                          <span className="fontSize14 darkText">
-                            ${val.ticketPrice}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="fareFooter">
-                      <p className="fareRow">
-                        <span className="fontSize16 blackFont">
-                          Total Amount
-                        </span>
-                        <span className="fontSize16 blackFont">
-                          ${val.total}
-                        </span>
-                      </p>
-                    </div>
-                  </section>
-                </div>
-                <div className="checkOutBtn">
-                  <button className="submit">Checkout</button>
+                    <span
+                      class="offerIcon bgProperties"
+                      style={{backgroundImage:" url(`https://imgak.mmtcdn.com/flights/assets/media/dt/review/INSTANT.png?v=1`)"}}
+                        
+                      
+                    ></span>
+                  </div>
                 </div>
               </div>
+              <div class="promoContent pointer">
+                <div class="flexOne cpn-wrapper">
+                  <div class="makeFlex pointer gap-x-5">
+                    <span class="radioWrap"
+                      ><span class="block radio customRadioBtn"
+                        ><span class="customRadioBtn sizeSm primaryRadiobox"
+                          ><input type="radio" value="" /><span class="outer"
+                            ><span class="inner"></span></span></span></span
+                    ></span>
+                    <div class="promoContentWrap flexOne">
+                      <span class="couponCode">AMEXFEST</span
+                      ><span class="promoCheckContent"
+                        >Use this coupon and get Rs 1168 instant discount on
+                        your flight booking with American Express credit
+                        cards.</span
+                      ><a
+                        href="https://www.makemytrip.com/promos/df-amazon-1500.html"
+                        class="fontSize12"
+                        target="_blank"
+                        rel="noreferrer"
+                        >Terms &amp; Conditions</a
+                      >
+                    </div>
+                    <span
+                      class="offerIcon bgProperties"
+                      style={{ backgroundImage: "url(`https://imgak.mmtcdn.com/flights/assets/media/dt/review/IC.png?v=1`)"}}
+                       
+                      
+                    ></span>
+                  </div>
+                </div>
+              </div>
+              <div class="promoContent pointer">
+                <div class="flexOne cpn-wrapper">
+                  <div class="makeFlex pointer gap-x-5">
+                    <span class="radioWrap"
+                      ><span class="block radio customRadioBtn"
+                        ><span class="customRadioBtn sizeSm primaryRadiobox"
+                          ><input type="radio" value="" /><span class="outer"
+                            ><span class="inner"></span></span></span></span
+                    ></span>
+                    <div class="promoContentWrap flexOne">
+                      <span class="couponCode">HDFCEMI</span
+                      ><span class="promoCheckContent"
+                        >Get Rs 1000 instant discount on paying using HDFC Bank
+                        EasyEMI</span
+                      ><a
+                        href="https://www.makemytrip.com/promos/df-amazon-1500.html"
+                        class="fontSize12"
+                        target="_blank"
+                        rel="noreferrer"
+                        >Terms &amp; Conditions</a
+                      >
+                    </div>
+                    <span
+                      class="offerIcon bgProperties"
+                       style={{ backgroundImage: "url(`https://imgak.mmtcdn.com/flights/assets/media/dt/review/IC.png?v=1`)"}}
+                    ></span>
+                  </div>
+                </div>
+              </div>
+              <div class="promoContent pointer">
+                <div class="flexOne cpn-wrapper">
+                  <div class="makeFlex pointer gap-x-5">
+                    <span class="radioWrap"
+                      ><span class="block radio customRadioBtn"
+                        ><span class="customRadioBtn sizeSm primaryRadiobox"
+                          ><input type="radio" value="" /><span class="outer"
+                            ><span class="inner"></span></span></span></span
+                    ></span>
+                    <div class="promoContentWrap flexOne">
+                      <span class="couponCode">MMTICICINB</span
+                      ><span class="promoCheckContent"
+                        >Get INR 934 Instant Discount on ICICI bank Netbanking
+                        paymode.</span
+                      ><a
+                        href="https://www.makemytrip.com/promos/df-amazon-1500.html"
+                        class="fontSize12"
+                        target="_blank"
+                        rel="noreferrer"
+                        >Terms &amp; Conditions</a
+                      >
+                    </div>
+                    <span
+                      class="offerIcon bgProperties"
+                     style={{ backgroundImage: "url(`https://imgak.mmtcdn.com/flights/assets/media/dt/review/IC.png?v=1`)"}}
+                    ></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
             </div>
           </>
         ))}

@@ -170,3 +170,118 @@ html[dir='ltr'] .appendRight10{margin-right:10px;}
 .rtaFareRules-overlay .flightDetailsInfoRight{padding:12px;}
 .rtaFareRules-overlay .flightDetailsInfoLeft{width:50%;}
 .rtaFareRules-content .card-body{max-height:250px;overflow-y:auto;}
+.popupouterlayer {
+  position: fixed;
+  z-index: 9999999999999;
+  width: 100%;
+  height: 100vh;
+  background: #0d0b0b9e;
+  right: 0;
+  left: 0;
+  display: flex;
+  top: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+/*! CSS Used from: https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css */
+*,::after,::before{box-sizing:border-box;}
+section{display:block;}
+p{margin-top:0;margin-bottom:1rem;}
+b{font-weight:bolder;}
+a{color:#007bff;text-decoration:none;background-color:transparent;}
+a:hover{color:#0056b3;text-decoration:underline;}
+input{margin:0;font-family:inherit;font-size:inherit;line-height:inherit;}
+input{overflow:visible;}
+input[type=radio]{box-sizing:border-box;padding:0;}
+@media print{
+*,::after,::before{text-shadow:none!important;box-shadow:none!important;}
+a:not(.btn){text-decoration:underline;}
+p{orphans:3;widows:3;}
+}
+/*! CSS Used from: Embedded */
+*,::after,::before{box-sizing:border-box;}
+*,::after,::before{-webkit-tap-highlight-color:rgb(0 0 0/0);padding:0;margin:0;-webkit-font-smoothing:antialiased;}
+p{margin:0;list-style:none;padding:0;}
+a{color:#0084ff;text-decoration:none;cursor:pointer;}
+a:focus,a:hover{text-decoration:none;outline:0;}
+.bgProperties{background-repeat:no-repeat;background-position:center;display:inline-block;background-size:contain;}
+.darkText{color:#4a4a4a;}
+.fontSize12{font-size:calc(var(--font-scale, 1)*12px);}
+.fontSize14{font-size:calc(var(--font-scale, 1)*14px);}
+.fontSize16{font-size:calc(var(--font-scale, 1)*16px);}
+.fontSize18{font-size:calc(var(--font-scale, 1)*18px);}
+.blackFont{font-weight:900;}
+.relative{position:relative;}
+.makeFlex{display:flex;}
+.makeFlex .flexOne{flex:1;}
+.makeFlex.hrtlCenter{align-items:center;}
+.makeFlex.bottom{align-items:flex-end;}
+.appendTop5{margin-top:5px;}
+.appendTop10{margin-top:10px;}
+.appendRight10{margin-right:10px;}
+.appendBottom15{margin-bottom:15px;}
+.appendBottom20{margin-bottom:20px;}
+.appendLeft10{margin-left:10px;}
+.pointer{cursor:pointer;}
+.customScroll::-webkit-scrollbar{width:5px;height:5px;}
+.customScroll::-webkit-scrollbar-track{-webkit-box-shadow:inset 0 0 6px rgb(0 0 0/.3);border-radius:4px;}
+.customScroll::-webkit-scrollbar-thumb{background-color:#949494;border-radius:4px;border:0;}
+.gap-x-5>:last-child{margin:0!important;}
+.gap-x-5>*{margin-right:5px;}
+/*! CSS Used from: https://jsak.mmtcdn.com/flights/assets/css/reviewDetails.desktop.2f202358.css */
+.reviewTravellerAddons b{font-weight:900;}
+.pageRightContainer{width:296px;position:sticky;top:70px;overflow-y:auto;max-height:100vh;}
+.pointer{cursor:pointer;}
+.fareContentWrap{width:100%;overflow:hidden;transition:max-height .3s cubic-bezier(1,0,1,0);height:auto;max-height:9999px;}
+.fareRow{display:flex;flex-direction:row;justify-content:space-between;align-items:center;}
+.fareHeader{font-size:calc(var(--font-scale, 1)*14px);font-weight:700;}
+.fareSummary{background-color:#fff;border-radius:2px;padding:15px;}
+.fareSummary>:last-child{margin-bottom:0;}
+.fareTypeWrap{border-bottom:1px solid #dfdfdf;padding:10px 0;}
+.iconMinusImg,.iconPlusImg{width:16px;height:16px;}
+.fareFooter{padding:15px 0;border-top:1px solid #000;}
+.fareSubList{padding-left:25px;}
+.charityAddTxt{color:#008cff;font-size:10px;font-weight:700;margin-left:10px;cursor:pointer;line-height:1.8;}
+.promocodeWrap{padding:15px;border-radius:2px;background-color:#fff;}
+.promoContent{display:flex;flex-direction:row;background-color:#f4f4f4;padding:10px 0;margin-bottom:10px;}
+.promoCheckContent{color:#6d7278;}
+.promoCheckContent,.promoTitle{font-size:calc(var(--font-scale, 1)*12px);}
+.promoTitle{font-weight:700;text-transform:uppercase;padding-bottom:5px;color:#9c9d9f;}
+.promoContentWrap{max-width:200px;display:flex;flex-direction:column;flex-wrap:wrap;}
+.couponCode{font-weight:700;text-transform:uppercase;}
+.couponCode,.promoInput{font-size:calc(var(--font-scale, 1)*14px);}
+.promoInput{border-radius:4px;border:1px solid #d5d5d5;background-color:#fff;width:100%;padding:10px;color:#000;}
+.iconPromoImg{width:49px;height:30px;}
+.promoIconWrapper{background:#fff;content:"";width:80px;height:63px;position:absolute;top:-8px;right:0;border-radius:40px 0 0 20px;justify-content:center;}
+.promoHeader,.promoIconWrapper{display:flex;align-items:center;}
+.promoHeader{position:relative;overflow:hidden;padding:8px 20px;margin:-15px -15px 15px;color:#fff;background:linear-gradient(0deg,#edd287,#b8860b);}
+.radioWrap{margin-top:3px;width:18px;cursor:pointer;}
+.offerIcon{width:24px;height:24px;}
+.flexOne{flex:1;}
+.cpn-wrapper{padding:10px;}
+/*! CSS Used from: Embedded */
+.customRadioBtn{display:inline-block;position:relative;}
+.customRadioBtn input{cursor:pointer;height:18px;opacity:0;position:absolute;width:18px;z-index:2;}
+.customRadioBtn input[type=radio]:checked+.outer{border-color:#008cff;}
+.customRadioBtn .outer{align-items:center;background-color:#fff;border:2px solid #9b9b9b;border-radius:50%;box-sizing:border-box;display:flex;height:18px;justify-content:center;margin-top:1px;width:18px;}
+.customRadioBtn .inner{background-color:#2e3092;border-radius:50%;box-sizing:border-box;display:block;height:12px;margin:1px;opacity:0;transform:scale(0);transition:all .25s ease-in-out;width:12px;}
+.customRadioBtn input[type=radio]:checked+.outer .inner{background-color:#008cff;opacity:1;transform:scale(1);}
+/*! CSS Used from: Embedded */
+*{box-sizing:border-box;}
+p{margin:0;padding:0;list-style:none;}
+a{color:var(--color-primary, #008cff);text-decoration:none;cursor:pointer;}
+a:hover,a:focus{text-decoration:none;outline:none;}
+.appendBottom15{margin-bottom:15px;}
+.appendBottom20{margin-bottom:20px;}
+html[dir='ltr'] .appendLeft10{margin-left:10px;}
+html[dir='ltr'] .appendRight10{margin-right:10px;}
+.appendTop5{margin-top:5px;}
+.appendTop10{margin-top:10px!important;}
+.makeFlex{display:flex;}
+.flexOne{flex:1;}
+.makeFlex.hrtlCenter{align-items:center;}
+.makeFlex.bottom{align-items:flex-end;}
+/*! CSS Used from: https://jsak.mmtcdn.com/flights/assets/css/rta-reviewCheaperFare.desktop.07de53a5.css */
+.radio{display:inline-block;position:relative;margin:0;font-size:calc(var(--font-scale, 1)*16px);color:#9b9b9b;}
