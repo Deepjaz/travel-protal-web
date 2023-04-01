@@ -4,9 +4,10 @@ import UserDetail from "./UserDetail";
 
 const FlightCheckout = () => {
   const { state } = useLocation();
-  const [activeform , setactiveform] = useState(false)
-  const [selectGender  , setSelectGender] = useState([{}])
-  const data = [];  
+  const [activeform, setactiveform] = useState(false);
+  const [selectGender, setSelectGender] = useState("");
+  const [childcount  , setChildCount] = useState('');
+  const data = [];
   // const {flightOffers} = state;
   data.push(JSON.parse(state));
   console.log("statestatestatestatestatestate1", data);
@@ -17,11 +18,14 @@ const FlightCheckout = () => {
   const departureDate = new Date(departureDateVal);
   // const day
   const day = date.toLocaleDateString("en-us", { weekday: "short" });
+  console.log('day asfgszhj', day);
   const month = date.toLocaleDateString("en-us", { month: "long" });
   const time = date.toLocaleTimeString("en-us", { timeStyle: "short" });
   const depTime = departureDate.toLocaleTimeString("en-us", {
     timeStyle: "short",
   });
+  
+  
 
   // const timebetweenFlight = time  - depTime
   const getDate = date.getDate();
@@ -40,37 +44,88 @@ const FlightCheckout = () => {
     {
       firstName: "",
       lastName: "",
-      gender: '',
     },
   ]);
 
-  console.log('formHandleformHandleformHandle', formHandle)
 
-  const addFromvalues = (e , index) => {
-  setactiveform(true)
-    const fromdata  = []
-    fromdata.push(data[0]?.travlerPricing.length)
-    const value = []
-    for(let i = 0; i < data[0]?.travlerPricing.length; i++){
-    console.log('this is the index' ,value.push(index + i))
-    if(formHandle.length === i){
-      setformHandle([...formHandle, { firstName: "", lastName: "", gender: "" }]);
-    }
-    }
+  console.log("formHandleformHandleformHandle", formHandle);
 
-}
-  
+  const addFromvalues = (e, index) => {
+    setactiveform(true);
+    const fromdata = [];
+    fromdata.push(data[0]?.travlerPricing.length);
+    const value = [];
+    for (let i = 0; i < data[0]?.travlerPricing.length; i++) {
+      console.log("this is the index", value.push(index + i));
+      if (formHandle.length === i) {
+        setformHandle([...formHandle, { firstName: "", lastName: "" }]);
+        // setSelectGender
+      }
+    }
+  };
+
   const { firstName, lastName, gender } = formHandle;
 
-  const hadleChange = (event , index) => {
-    const newformvalue = [...formHandle]
-    newformvalue[index][event.target.name] =  event.target.value
-    setformHandle(newformvalue)
+  const hadleChange = (event, index) => {
+    const newformvalue = [...formHandle];
+    newformvalue[index][event.target.name] = event.target.value;
+    setformHandle(newformvalue);
+    formHandle.map((val) => {
+      console.log(val);
+    });
   };
+  const selgeder = (e, index) => {
+    console.log("this is the index", index);
+    for (let i = 0; i < formHandle.length; i++) {
+      console.log(i);
+    }
+  };
+
   const fromSubmit = (e) => {
-    e.preventDefault()
-    localStorage.setItem('personData' , JSON.stringify(formHandle))
-  }
+    e.preventDefault();
+    localStorage.setItem("personData", JSON.stringify(formHandle));
+  };
+
+  
+  
+  // 
+    const travlerPricing = data[0].travlerPricing;
+    var AdultticketPrice = ''
+    console.log("selectGender", travlerPricing);
+    const filtervalue = travlerPricing.reduce((count ,entry) => {
+      console.log('countcountcountcount' , count) 
+      console.log('countcountcountcoun1t' , entry) 
+          if(entry.traverltype === "ADULT"){
+              count ++;
+              AdultticketPrice = entry.ticketPrice;
+            console.log('countcountcount' ,count)
+        }
+        
+        return count;
+    },0)
+    var childticketPrice = ''
+    const chilCount = travlerPricing.reduce((count ,entry) => {
+      console.log('countcountcountcount' , count) 
+      console.log('countcountcountcoun1t' , entry) 
+        
+          if(entry.traverltype === "CHILD"){
+            count ++;
+            childticketPrice = entry.ticketPrice;
+            // setChildCount(travelprice)
+            // console.log('countcountcount' ,travelprice)
+
+        }
+        
+        return count;
+    },0)
+    console.log('Number of ADULT entries:', chilCount);
+    
+const checkOutbtn = () => {
+
+}
+
+
+    
 
   return (
     <>
@@ -196,7 +251,6 @@ const FlightCheckout = () => {
                           </div>
                         </div>
                       </div>
-                     
                     </section>
                     <div id="TRAVELLER_DETAIL" className="oneCard-element">
                       <div className="componentContainer appendTop15 appendBottom20">
@@ -238,7 +292,9 @@ const FlightCheckout = () => {
                                 </p>
                               </div>
                               <div className="makeFlex perfectCenter fontSize14 boldFont">
-                                <font color="#4a4a4a">0/{val.travlerPricing.length}</font>
+                                <font color="#4a4a4a">
+                                  0/{val.travlerPricing.length}
+                                </font>
                                 <font color="#9b9b9b">&nbsp;added</font>
                               </div>
                             </div>
@@ -265,94 +321,128 @@ const FlightCheckout = () => {
 
                                   <div className="adultDetailsForm">
                                     <div className="adultDetailsInnner">
-                                      <div className={`adultItemRow ${activeform == true ? "fromActive" : ''}`}>
+                                      <div
+                                        className={`adultItemRow ${
+                                          activeform == true ? "fromActive" : ""
+                                        }`}
+                                      >
                                         {formHandle?.map((val, index) => {
                                           return (
-                                            <div  key={index} className="formOuter">
+                                            <div
+                                              key={index}
+                                              className="formOuter"
+                                            >
                                               <form>
-                                              <div
-                                                className="adultItem"
-                                                style={{ width: "30%" }}
-                                               
-                                              >
-                                                <div className="relative">
-                                                  <input
-                                                    placeholder="First &amp; Middle Name"
-                                                    className="tvlrInput"
-                                                    type="text"
-                                                    name="firstName"
-                                                    value={val.firstName}
-                                                    onChange={(e) =>
-                                                      hadleChange(e , index)
-                                                    }
-                                                  />
-                                                </div>
-                                              </div>
-                                              <div
-                                                className="adultItem"
-                                                style={{ width: "30%"}}
-                                               
-                                              >
-                                                <div className="relative">
-                                                  <input
-                                                    placeholder="Last Name"
-                                                    className="tvlrInput"
-                                                    type="text"
-                                                    name="lastName"
-                                                    value={val.lastName}
-                                                    onChange={(e) =>
-                                                      hadleChange(e , index)
-                                                    }
-                                                  />
-                                                </div>
-                                              </div>
-                                              <div
-                                                className="adultItem"
-                                                style={{ width: "30%" }}
-                                              >
-                                                <div className="selectTab">
-                                                  <div className="next-cls-db">
-                                                    <label>
-                                                      <input
-                                                        type="radio"
-                                                        // name="gender_MANUAL_16cb94ae-f59f-405b-a3b7-102094725a23"
-                                                        name="male"
-                                                        value="male"
-                                                        checked = {selectGender === 'male'}
-                                                        onChange= {(e) => setSelectGender('male')}
-                                                      />
-                                                      <span className="selectTabText">
-                                                        MALE
-                                                      </span>
-                                                    </label>
-                                                    <label>
-                                                      <input
-                                                        type="radio"
-                                                        // name="gender_MANUAL_16cb94ae-f59f-405b-a3b7-102094725a23"
-                                                        // value="FEMALE"
-                                                        name="FEMALE"
-                                                        checked = {selectGender === 'FEMALE'}
-
-                                                        onChange= {(e) =>setSelectGender('FEMALE')}
-                                                      />
-                                                      <span className="selectTabText">
-                                                        FEMALE
-                                                      </span>
-                                                    </label>
+                                                <div
+                                                  className="adultItem"
+                                                  style={{ width: "30%" }}
+                                                >
+                                                  <div className="relative">
+                                                    <input
+                                                      placeholder="First &amp; Middle Name"
+                                                      className="tvlrInput"
+                                                      type="text"
+                                                      name="firstName"
+                                                      value={val.firstName}
+                                                      onChange={(e) =>
+                                                        hadleChange(e, index)
+                                                      }
+                                                    />
                                                   </div>
-                                                  
                                                 </div>
-                                              </div>
-                                              <button type="button" className="close" aria-label="Close">
-                                                <span aria-hidden="true" className="close-icon">&times;</span>
-                                              </button>
-                                                  
+                                                <div
+                                                  className="adultItem"
+                                                  style={{ width: "30%" }}
+                                                >
+                                                  <div className="relative">
+                                                    <input
+                                                      placeholder="Last Name"
+                                                      className="tvlrInput"
+                                                      type="text"
+                                                      name="lastName"
+                                                      value={val.lastName}
+                                                      onChange={(e) =>
+                                                        hadleChange(e, index)
+                                                      }
+                                                    />
+                                                  </div>
+                                                </div>
+                                                <div
+                                                  className="adultItem"
+                                                  style={{ width: "30%" }}
+                                                >
+                                                  <div className="selectTab">
+                                                    <div className="next-cls-db">
+                                                      <label>
+                                                        <input
+                                                          type="radio"
+                                                          
+                                                          name={`gender`}
+                                                          value="Male"
+                                                          checked={
+                                                            val.gender ===
+                                                            "Male"
+                                                          }
+                                                          onChange={(e) =>
+                                                            hadleChange(
+                                                              e,
+                                                              index
+                                                            )
+                                                          }
+                                                        />
+
+                                                        <span className="selectTabText">
+                                                          MALE
+                                                        </span>
+                                                      </label>
+                                                      <label>
+                                                        <input
+                                                          type="radio"
+                                                          
+                                                          name="gender"
+                                                          value="FEMALE"
+                                                          checked={
+                                                            val.gender ===
+                                                            "FEMALE"
+                                                          }
+                                                          onChange={(e) =>
+                                                            hadleChange(
+                                                              e,
+                                                              index
+                                                            )
+                                                          }
+
+                                                          // onChange= {(e) =>setSelectGender(e.target.value)}
+                                                        />
+                                                        <span className="selectTabText">
+                                                          FEMALE
+                                                        </span>
+                                                      </label>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <button
+                                                  type="button"
+                                                  className="close"
+                                                  aria-label="Close"
+                                                >
+                                                  <span
+                                                    aria-hidden="true"
+                                                    className="close-icon"
+                                                  >
+                                                    &times;
+                                                  </span>
+                                                </button>
                                               </form>
                                             </div>
                                           );
                                         })}
-                                        <button type="submit" onClick={fromSubmit}>Submit</button>
-                                      
+                                        <button
+                                          type="submit"
+                                          onClick={fromSubmit}
+                                        >
+                                          Submit
+                                        </button>
                                       </div>
                                     </div>
                                   </div>
@@ -449,7 +539,7 @@ const FlightCheckout = () => {
                                 <button
                                   type="button"
                                   className="addTravellerBtn"
-                                  onClick={e => addFromvalues(e , index)}
+                                  onClick={(e) => addFromvalues(e, index)}
                                 >
                                   + ADD NEW ADULT
                                 </button>
@@ -662,23 +752,51 @@ const FlightCheckout = () => {
                       <p className="fontSize18 blackFont">Fare Summary</p>
                     </div>
 
-                    <div className="fareTypeWrap">
-                      {val.travlerPricing.map((val, index) => (
+                    {
+                      filtervalue > 0  &&
+                      <div className="fareTypeWrap">
+                      {/* {val.travlerPricing.map((val, index) => ( */}
                         <div className="fareRow">
                           <div className="makeFlex hrtlCenter pointer flexOne">
                             {/* <span className="appendTop5">
                             <span className="iconPlusImg bgProperties"></span>
                           </span> */}
                             <span className="fareHeader">
-                              {val.traverltype}
+                              {/* {val.traverltype} */}
+                              Adult
                             </span>
                           </div>
                           <span className="fontSize14 darkText">
-                            ${val.ticketPrice}
+                            {/* ${val.ticketPrice} */}
+                            ({filtervalue} x ${AdultticketPrice}) 
                           </span>
                         </div>
-                      ))}
+                      {/* ))} */}
                     </div>
+                    }
+                    {
+                      chilCount > 0 && 
+                      <div className="fareTypeWrap">
+                      {/* {val.travlerPricing.map((val, index) => ( */}
+                        <div className="fareRow">
+                          <div className="makeFlex hrtlCenter pointer flexOne">
+                            {/* <span className="appendTop5">
+                            <span className="iconPlusImg bgProperties"></span>
+                          </span> */}
+                            <span className="fareHeader">
+                              {/* {val.traverltype} */}
+                              Child
+                            </span>
+                          </div>
+                          <span className="fontSize14 darkText">
+                            {/* ${val.ticketPrice} */}
+                            ({chilCount} x ${childticketPrice}) 
+                          </span>
+                        </div>
+                      {/* ))} */}
+                    </div>
+                    }
+                   
 
                     <div className="fareFooter">
                       <p className="fareRow">
@@ -693,7 +811,7 @@ const FlightCheckout = () => {
                   </section>
                 </div>
                 <div className="checkOutBtn">
-                  <button>Checkout</button>
+                  <button onClick={checkOutbtn()}>Checkout</button>
                 </div>
               </div>
             </div>

@@ -26,9 +26,7 @@ const formobject = {
       },
     },
   ],
-  travelers: [
-    
-  ],
+  travelers: [],
   sources: ["GDS"],
 };
 
@@ -39,9 +37,7 @@ const FLightsSearching = (props) => {
   const [counting, setCounting] = useState(0);
   const [counting2, setCounting2] = useState(0);
   const [apiRes, setApiRes] = useState([]);
-  const [iataCode , setiatadata] = useState(iatadata)
-
-
+  const [iataCode, setiatadata] = useState(iatadata);
 
   // this code is used for form Data objects
   const [formValue, setFormValue] = useState(formobject);
@@ -219,16 +215,22 @@ const FLightsSearching = (props) => {
 
   const handleClick = (event) => {
     // alert("this is the hitted data")
-    
+
     event.preventDefault();
-    console.log('iataCodeiataCode' ,newformValue)
-      const depatureFilterData  = iataCode.filter((val =>  val.city === newformValue.originLocationCode))
-      const arivalTime  = iataCode.filter((val =>  val.city === newformValue.destinationLocationCode))
- 
-      console.log('depatureFilterDatadepatureFilterData' , depatureFilterData)
+    console.log("iataCodeiataCode", newformValue);
+    const depatureFilterData = iataCode.filter(
+      (val) => val.city === newformValue.originLocationCode
+    );
+    const arivalTime = iataCode.filter(
+      (val) => val.city === newformValue.destinationLocationCode
+    );
+
+    console.log("depatureFilterDatadepatureFilterData", depatureFilterData);
     callBackFUNc();
-    formValue.originDestinations[0].originLocationCode =  depatureFilterData[0].iata_code;
-    formValue.originDestinations[0].destinationLocationCode = arivalTime[0].iata_code;
+    formValue.originDestinations[0].originLocationCode =
+      depatureFilterData[0].iata_code;
+    formValue.originDestinations[0].destinationLocationCode =
+      arivalTime[0].iata_code;
     // formValue.travelers =
 
     formobject.originDestinations[0].departureDateTimeRange.date = selectedDate;
@@ -252,7 +254,7 @@ const FLightsSearching = (props) => {
       newformValue.destinationLocationCode &&
       formValue.originDestinations[0].departureDateTimeRange.date
     ) {
-      console.log(apiRes,"this is result")
+      console.log(apiRes, "this is result");
       navigate(
         `/DetailofFlight/?originLocationCode=${formValue.originDestinations[0].originLocationCode}/destinationLocationCode=${formValue.originDestinations[0].destinationLocationCode}/adults=${count}/Child=${counting}/selectedDate=${selectedDate}`
       );
@@ -287,7 +289,7 @@ const FLightsSearching = (props) => {
     console.log("thi is the e", e.target.value);
     setSelectOption(value);
   };
- 
+
   return (
     <>
       <div className="flight-search">
@@ -366,13 +368,10 @@ const FLightsSearching = (props) => {
                       name="originLocationCode"
                       value={newformValue.originLocationCode}
                       onChange={(e) => handleChange(e)}
-                      style={{textTransform:'capitalize'}}
+                      style={{ textTransform: "capitalize" }}
                     />
 
-                    <p
-                      className="code makeRelative"
-                      
-                    >
+                    <p className="code makeRelative">
                       <span className="truncate airPortName " title="">
                         {newformValue.originLocationCode} International Airport
                         India
@@ -394,17 +393,17 @@ const FLightsSearching = (props) => {
                       name="destinationLocationCode"
                       value={newformValue.destinationLocationCode}
                       onChange={(e) => handleChange(e)}
-                      style={{textTransform:'capitalize'}}
-
+                      style={{ textTransform: "capitalize" }}
                     />
                     <p
                       className="code makeRelative"
                       // title="DEL, Indira Gandhi International Airport India"
                     >
                       <span className="truncate airPortName " title="">
-                        {newformValue.destinationLocationCode}  International Airport India
+                        {newformValue.destinationLocationCode} International
+                        Airport India
                       </span>
-                    </p> 
+                    </p>
                   </label>
                 </div>
                 <div className="fsw_inputBox dates inactiveWidget ">
@@ -416,13 +415,12 @@ const FLightsSearching = (props) => {
                       type="text"
                       name="destinationLocationCode"
                     /> */}
-                     <DatePicker
+                    <DatePicker
                       numberOfMonths={2}
                       className="fsw_inputField font20"
                       selected={
                         selectedDate && new Date(selectedDate + "T00:00:00")
                       }
-                    
                       onChange={(date) => handleDateChange(date)}
                       dateFormat="yyyy-MM-dd"
                       minDate={new Date()}
