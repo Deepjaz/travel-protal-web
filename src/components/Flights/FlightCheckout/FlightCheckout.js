@@ -4,8 +4,9 @@ import UserDetail from "./UserDetail";
 
 const FlightCheckout = () => {
   const { state } = useLocation();
-
-  const data = [];
+  const [activeform , setactiveform] = useState(false)
+  const [selectGender  , setSelectGender] = useState([{}])
+  const data = [];  
   // const {flightOffers} = state;
   data.push(JSON.parse(state));
   console.log("statestatestatestatestatestate1", data);
@@ -35,189 +36,42 @@ const FlightCheckout = () => {
 
   const [count, setCount] = useState(0);
   const [pTags, setPTags] = useState([]);
-  const [formHandle ,setformHandle] = useState({
-    firstName : '',
-    lastName : '',
-    gender: ''
-  })
-  const {firstName ,lastName ,gender } = formHandle
+  const [formHandle, setformHandle] = useState([
+    {
+      firstName: "",
+      lastName: "",
+      gender: '',
+    },
+  ]);
 
-  const hadleChange = (event) => {
-    setformHandle({...formHandle , [event.target.name] : event.target.value})
-  } 
-  console.log('formHandleformHandleformHandleformHandle' , formHandle)
-  const handleClick = () => {
-    if (count === 0) {
-      return;
+  console.log('formHandleformHandleformHandle', formHandle)
+
+  const addFromvalues = (e , index) => {
+  setactiveform(true)
+    const fromdata  = []
+    fromdata.push(data[0]?.travlerPricing.length)
+    const value = []
+    for(let i = 0; i < data[0]?.travlerPricing.length; i++){
+    console.log('this is the index' ,value.push(index + i))
+    if(formHandle.length === i){
+      setformHandle([...formHandle, { firstName: "", lastName: "", gender: "" }]);
     }
-    setCount(count - 1);
-    setPTags([...pTags, generatePTag(hadleChange)]);
-  };
+    }
 
-  useEffect(() => {
-    let countnum = 0;
-    data?.forEach((val) => {
-      val.travlerPricing.forEach((val) => {
-        countnum += 1;
-      });
-    });
-    setCount(countnum);
-  }, []);
-  const generatePTag = () => {
-    return (
-      <div>
-        <div className="AdultFormWrapper collapse show">
-          <div className="alert-wrapper makeFlex appendBottom12 appendTop12 paxAlert">
-            <div className="makeFlex flexOne column">
-              <p className="darkText fontSize12 boldFont">
-                <span className="alert-text">
-                  Enter name as mentioned on your passport or Government
-                  approved IDs.
-                </span>
-              </p>
-            </div>
-          </div>
-
-          <div className="adultDetailsForm">
-            <div className="adultDetailsInnner">
-              <div className="adultItemRow appendBottom15">
-                <div className="adultItem" style={{ width: "30%" }}>
-                  <div className="relative">
-                    <input
-                      placeholder="First &amp; Middle Name"
-                      className="tvlrInput"
-                      type="text"
-                      name = 'firstName'
-                      value = {firstName}
-                      onChange = {e => hadleChange(e)}
-                    />
-                  </div>
-                </div>
-                <div className="adultItem" style={{ width: "30%" }}>
-                  <div className="relative">
-                    <input
+}
   
-                      placeholder="Last Name"
-                      className="tvlrInput"
-                      type="text"
-                      
-                      name = 'lastName'
-                      value={lastName}
-                      onChange = {e  => hadleChange(e)}
+  const { firstName, lastName, gender } = formHandle;
 
-                    />
-                  </div>
-                </div>
-                <div className="adultItem" style={{ width: "30%" }}>
-                  <div className="selectTab">
-                    <div>
-                      <label>
-                        <input
-                          type="radio"
-                          name="gender_MANUAL_16cb94ae-f59f-405b-a3b7-102094725a23"
-                          value="MALE"
-                        />
-                        <span className="selectTabText">MALE</span>
-                      </label>
-                      <label>
-                        <input
-                          type="radio"
-                          name="gender_MANUAL_16cb94ae-f59f-405b-a3b7-102094725a23"
-                          value="FEMALE"
-                        />
-                        <span className="selectTabText">FEMALE</span>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="bookingDetailsForm" id="contactDetails">
-          <p className="fontSize14 boldFont appendBottom15">
-            Booking details will be sent to
-          </p>
-          <div className="adultItemRow">
-            <div className="adultItem" id="Country Code">
-              <label className="makeFlex hrtlCenter">Country Code</label>
-              <div className="selectItem relative">
-                <div className="selectList css-2b097c-container">
-                  <div className="dropdown__control css-yk16xz-control">
-                    <div className="dropdown__value-container dropdown__value-container--has-value css-1hwfws3">
-                      <div className="dropdown__single-value css-1uccc91-singleValue">
-                        India(91)
-                      </div>
-                      <div className="css-1g6gooi">
-                        <div className="dropdown__input">
-                          <input
-                            autocapitalize="none"
-                            autocomplete="off"
-                            autocorrect="off"
-                            id="react-select-2-input"
-                            spellcheck="false"
-                            tabindex="0"
-                            type="text"
-                            aria-autocomplete="list"
-                            value=""
-                          />
-                          <div></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="dropdown__indicators css-1wy0on6">
-                      <span className="dropdown__indicator-separator css-1hyfx7x"></span>
-                      <div
-                        aria-hidden="true"
-                        className="dropdown__indicator dropdown__dropdown-indicator css-1eew81i"
-                      >
-                        <svg
-                          height="20"
-                          width="20"
-                          viewBox="0 0 20 20"
-                          aria-hidden="true"
-                          focusable="false"
-                          className="css-19bqh2r"
-                        >
-                          <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path>
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="adultItem" id="Mobile No">
-              <div className="relative">
-                <label for="popup">Mobile No</label>
-                <input
-                  placeholder="Mobile No"
-                  className="tvlrInput"
-                  type="text"
-                  value=""
-                />
-              </div>
-            </div>
-            <div className="adultItem" id="Email">
-              <div className="relative">
-                <label for="popup">Email</label>
-                <input
-                  placeholder="Email"
-                  className="tvlrInput"
-                  type="text"
-                  value=""
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+  const hadleChange = (event , index) => {
+    const newformvalue = [...formHandle]
+    newformvalue[index][event.target.name] =  event.target.value
+    setformHandle(newformvalue)
   };
+  const fromSubmit = (e) => {
+    e.preventDefault()
+    localStorage.setItem('personData' , JSON.stringify(formHandle))
+  }
 
-
-
-  // console.log(counting,"this is count in state ")
   return (
     <>
       <div>
@@ -342,105 +196,7 @@ const FlightCheckout = () => {
                           </div>
                         </div>
                       </div>
-                      {/* <div className="mmtConnectReviewInfo">
-                        <ul>
-                          <li>
-                            <p>
-                              <b>
-                                <font color="#cf8100">Change of planes</font>
-                              </b>
-                              <br />
-                              <b>5h 15m</b> Layover in Jaipur
-                            </p>
-                          </li>
-                        </ul>
-                      </div> */}
-                      {/* <div className="flightItenaryWrap">
-                        <div className="flightItenaryHdr">
-                          <div className="makeFlex gap-x-10">
-                            <span className="bgProperties icon24"></span>
-                            <p className="makeFlex gap-x-10">
-                              <span className="fontSize14 boldFont">
-                                AirAsia
-                              </span>
-                              <span className="fontSize14">I5 830</span>
-                            </p>
-                          </div>
-                          <div className="makeFlex">
-                            <div className="makeFlex hrtlCenter">
-                              <span className="fontSize14">
-                                Economy &gt;
-                                <font color="#249995">
-                                  <b>Economy</b>
-                                </font>
-                              </span>
-                              <span className="bgProperties icon16 appendLeft5 appendTop2"></span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flightItenary">
-                          <div className="flexOne">
-                            <div className="itenaryLeft">
-                              <div className="makeFlex gap-x-10">
-                                <div className="makeFlex time-info-ui">
-                                  <span className="fontSize14 blackFont">
-                                    21:45
-                                  </span>
-                                  <span className="layoverCircle"></span>
-                                </div>
-                                <div>
-                                  <span className="fontSize14 blackFont">
-                                    Jaipur{" "}
-                                  </span>
-                                  <span className="fontSize14">
-                                    . Jaipur Airport
-                                  </span>
-                                </div>
-                              </div>
-                              <div className="layover">
-                                <span className="fontSize14">1h 0m</span>
-                              </div>
-                              <div className="makeFlex gap-x-10 overideBg">
-                                <div className="makeFlex time-info-ui">
-                                  <span className="fontSize14 blackFont">
-                                    22:45
-                                  </span>
-                                  <span className="layoverCircle"></span>
-                                </div>
-                                <div>
-                                  <span className="fontSize14 blackFont">
-                                    New Delhi{" "}
-                                  </span>
-                                  <span className="fontSize14">
-                                    . Indira Gandhi International Airport,
-                                    Terminal 3
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="itenaryRight">
-                            <ul className="itenaryList">
-                              <li>
-                                <span className="fontSize12">Baggage</span>
-                                <span className="fontSize12">Check-in</span>
-                                <span className="fontSize12">Cabin</span>
-                              </li>
-                              <li>
-                                <span className="fontSize12 blackFont">
-                                  ADULT
-                                </span>
-                                <span className="fontSize12 blackFont">
-                                  15 Kgs (1 piece only)
-                                </span>
-                                <span className="fontSize12 blackFont">
-                                  7 Kgs (1 piece only)
-                                </span>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div> */}
+                     
                     </section>
                     <div id="TRAVELLER_DETAIL" className="oneCard-element">
                       <div className="componentContainer appendTop15 appendBottom20">
@@ -464,7 +220,9 @@ const FlightCheckout = () => {
                               </p>
                             </div>
                             <div>
-                              <Link className="loginBtn" to={'/sign-up'}>LOGIN NOW</Link>
+                              <Link className="loginBtn" to={"/sign-up"}>
+                                LOGIN NOW
+                              </Link>
                             </div>
                           </div>
                           <div className="appendBottom20" id="wrapper_ADULT">
@@ -480,7 +238,7 @@ const FlightCheckout = () => {
                                 </p>
                               </div>
                               <div className="makeFlex perfectCenter fontSize14 boldFont">
-                                <font color="#4a4a4a">0/1</font>
+                                <font color="#4a4a4a">0/{val.travlerPricing.length}</font>
                                 <font color="#9b9b9b">&nbsp;added</font>
                               </div>
                             </div>
@@ -491,11 +249,207 @@ const FlightCheckout = () => {
                                   You have not added any adults to the list
                                 </span>
                               </div>
+                              {/*  */}
+                              <div>
+                                <div className="AdultFormWrapper collapse show">
+                                  <div className="alert-wrapper makeFlex appendBottom12 appendTop12 paxAlert">
+                                    <div className="makeFlex flexOne column">
+                                      <p className="darkText fontSize12 boldFont">
+                                        <span className="alert-text">
+                                          Enter name as mentioned on your
+                                          passport or Government approved IDs.
+                                        </span>
+                                      </p>
+                                    </div>
+                                  </div>
+
+                                  <div className="adultDetailsForm">
+                                    <div className="adultDetailsInnner">
+                                      <div className={`adultItemRow ${activeform == true ? "fromActive" : ''}`}>
+                                        {formHandle?.map((val, index) => {
+                                          return (
+                                            <div  key={index} className="formOuter">
+                                              <form>
+                                              <div
+                                                className="adultItem"
+                                                style={{ width: "30%" }}
+                                               
+                                              >
+                                                <div className="relative">
+                                                  <input
+                                                    placeholder="First &amp; Middle Name"
+                                                    className="tvlrInput"
+                                                    type="text"
+                                                    name="firstName"
+                                                    value={val.firstName}
+                                                    onChange={(e) =>
+                                                      hadleChange(e , index)
+                                                    }
+                                                  />
+                                                </div>
+                                              </div>
+                                              <div
+                                                className="adultItem"
+                                                style={{ width: "30%"}}
+                                               
+                                              >
+                                                <div className="relative">
+                                                  <input
+                                                    placeholder="Last Name"
+                                                    className="tvlrInput"
+                                                    type="text"
+                                                    name="lastName"
+                                                    value={val.lastName}
+                                                    onChange={(e) =>
+                                                      hadleChange(e , index)
+                                                    }
+                                                  />
+                                                </div>
+                                              </div>
+                                              <div
+                                                className="adultItem"
+                                                style={{ width: "30%" }}
+                                              >
+                                                <div className="selectTab">
+                                                  <div className="next-cls-db">
+                                                    <label>
+                                                      <input
+                                                        type="radio"
+                                                        // name="gender_MANUAL_16cb94ae-f59f-405b-a3b7-102094725a23"
+                                                        name="male"
+                                                        value="male"
+                                                        checked = {selectGender === 'male'}
+                                                        onChange= {(e) => setSelectGender('male')}
+                                                      />
+                                                      <span className="selectTabText">
+                                                        MALE
+                                                      </span>
+                                                    </label>
+                                                    <label>
+                                                      <input
+                                                        type="radio"
+                                                        // name="gender_MANUAL_16cb94ae-f59f-405b-a3b7-102094725a23"
+                                                        // value="FEMALE"
+                                                        name="FEMALE"
+                                                        checked = {selectGender === 'FEMALE'}
+
+                                                        onChange= {(e) =>setSelectGender('FEMALE')}
+                                                      />
+                                                      <span className="selectTabText">
+                                                        FEMALE
+                                                      </span>
+                                                    </label>
+                                                  </div>
+                                                  
+                                                </div>
+                                              </div>
+                                              <button type="button" className="close" aria-label="Close">
+                                                <span aria-hidden="true" className="close-icon">&times;</span>
+                                              </button>
+                                                  
+                                              </form>
+                                            </div>
+                                          );
+                                        })}
+                                        <button type="submit" onClick={fromSubmit}>Submit</button>
+                                      
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                {/* <div
+                                  className="bookingDetailsForm"
+                                  id="contactDetails"
+                                >
+                                  <p className="fontSize14 boldFont appendBottom15">
+                                    Booking details will be sent to
+                                  </p>
+                                  <div className="adultItemRow">
+                                    <div
+                                      className="adultItem"
+                                      id="Country Code"
+                                    >
+                                      <label className="makeFlex hrtlCenter">
+                                        Country Code
+                                      </label>
+                                      <div className="selectItem relative">
+                                        <div className="selectList css-2b097c-container">
+                                          <div className="dropdown__control css-yk16xz-control">
+                                            <div className="dropdown__value-container dropdown__value-container--has-value css-1hwfws3">
+                                              <div className="dropdown__single-value css-1uccc91-singleValue">
+                                                India(91)
+                                              </div>
+                                              <div className="css-1g6gooi">
+                                                <div className="dropdown__input">
+                                                  <input
+                                                    autocapitalize="none"
+                                                    autocomplete="off"
+                                                    autocorrect="off"
+                                                    id="react-select-2-input"
+                                                    spellcheck="false"
+                                                    tabindex="0"
+                                                    type="text"
+                                                    aria-autocomplete="list"
+                                                    value=""
+                                                  />
+                                                  <div></div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div className="dropdown__indicators css-1wy0on6">
+                                              <span className="dropdown__indicator-separator css-1hyfx7x"></span>
+                                              <div
+                                                aria-hidden="true"
+                                                className="dropdown__indicator dropdown__dropdown-indicator css-1eew81i"
+                                              >
+                                                <svg
+                                                  height="20"
+                                                  width="20"
+                                                  viewBox="0 0 20 20"
+                                                  aria-hidden="true"
+                                                  focusable="false"
+                                                  className="css-19bqh2r"
+                                                >
+                                                  <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path>
+                                                </svg>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="adultItem" id="Mobile No">
+                                      <div className="relative">
+                                        <label for="popup">Mobile No</label>
+                                        <input
+                                          placeholder="Mobile No"
+                                          className="tvlrInput"
+                                          type="text"
+                                          value=""
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className="adultItem" id="Email">
+                                      <div className="relative">
+                                        <label for="popup">Email</label>
+                                        <input
+                                          placeholder="Email"
+                                          className="tvlrInput"
+                                          type="text"
+                                          value=""
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div> */}
+                              </div>
+
+                              {/*  */}
                               <div className="otherList">
                                 <button
                                   type="button"
                                   className="addTravellerBtn"
-                                  onClick={handleClick}
+                                  onClick={e => addFromvalues(e , index)}
                                 >
                                   + ADD NEW ADULT
                                 </button>

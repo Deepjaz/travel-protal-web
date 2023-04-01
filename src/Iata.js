@@ -1,4 +1,4 @@
-const data = [
+  const iatadata = [
     {
         "city": "Aalborg",
         "iata_code": "AAL"
@@ -5060,4 +5060,4 @@ const data = [
         "iata_code": "ZRH"
     }
 ]
-export default data;
+export default iatadata;

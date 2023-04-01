@@ -2777,6 +2777,55 @@ i.fa-circle{
     position: sticky;
     top: 0;
 }
+.pignationActice{
+  background: #000!important;
+}
+.SpinnerLoader {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  text-align: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  background:#f6faff59;
+  z-index: 99999;
+}
+.flightDetailsbtn{
+  background: #8b3eea!important;
+  color: #fff!important;
+  font-weight: 600!important;
+  text-transform: uppercase;
+
+}
+.pignationsteps li {
+	margin-left: 10px;
+	background: #8b3eea;
+	padding: 5px 12px;
+	border-radius: 100%;
+	color: #ffff;
+	font-weight: 600;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.pignationsteps {
+  width: 100%;
+  display: inline-flex;
+  width: 100%;
+  margin-top: 120px;
+  justify-content: center;
+}
+.react-datepicker{
+  display: flex!important;
+}
 .desc-card-detail .dropdown input{
   width:40%;
   padding: 0px 10px 0px 14px;
@@ -3259,4 +3308,12 @@ html[dir='ltr'] .widgetSection .fsw .fsw_inputBox:first-of-type:hover{background
 }
 button.btn.primaryBtn.font24.latoBold.widgetSearchBtn {
   color: white;
+}
+span.close-icon {
+ 
+  color: red;
+  font-size: 25px;
+}
+button.close {
+  border: none;
 }

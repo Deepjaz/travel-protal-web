@@ -369,9 +369,20 @@ button:hover {
 }
 
 .adultItemRow {
-    display: flex;
+    display: none;
+    flex-wrap: wrap;
 }
-
+.fromActive{
+    display: flex!important;
+}
+.formOuter {
+    margin-bottom: 20px;
+  }
+.formOuter form {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
 .adultItemRow>* {
     margin-right: 10px;
 }
