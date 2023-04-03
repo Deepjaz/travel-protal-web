@@ -279,6 +279,7 @@ button:hover {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .adultDetailsHeading {
@@ -368,13 +369,12 @@ button:hover {
     border-bottom: 1px solid #eaeaea;
 }
 
-.adultItemRow {
-    display: none;
-    flex-wrap: wrap;
+.formOuter form {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
-.fromActive{
-    display: flex!important;
-}
+
 .formOuter {
     margin-bottom: 20px;
   }
@@ -777,3 +777,8 @@ input[type=checkbox]:checked~.box .check {
     opacity: 1;
     transform: scale(1) rotate(45deg);
 }
+.componentContainer.appendTop15.appendBottom20 {
+    width: auto;
+}
+
+

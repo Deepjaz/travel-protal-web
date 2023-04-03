@@ -2710,6 +2710,18 @@ i.fa-circle{
 .wrapper-dropdown.active::before {
   border-width: 0 6px 6px 6px;
 }
+.crossicon {
+  position: absolute;
+  z-index: 99999;
+  right: 0px;
+  top: 200px;
+  left: 287px;
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  font-size: 30px;
+  cursor: pointer;
+}
 
 .wrapper-dropdown .dropdown {
   position: absolute;
@@ -2842,6 +2854,18 @@ i.fa-circle{
   outline: none;
   border: none;
 }
+.CheckoutLoginForm {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
+.CheckoutLoginForm .content-section {
+  background: #00000045;
+}
 
 @media screen and (max-width:768px){
   .hotel_list_desc .d-flex{
@@ -2890,6 +2914,7 @@ i.fa-circle{
     font-size:12px;
 }
 }
+
 @media screen and (min-width:768px) and (max-width:1023px){
   .hotel-host>div:first-child {
     width: 12%;}
@@ -3316,4 +3341,5 @@ span.close-icon {
 }
 button.close {
   border: none;
+  height: 0px;
 }

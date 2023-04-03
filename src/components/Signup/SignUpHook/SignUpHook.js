@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { baseUrl } from '../../../env/env'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 
 const formobject = {
@@ -12,6 +13,8 @@ const formobject = {
 }
 
 const SignUpHook = () => {
+  const navigate = useNavigate();
+
 const [formValue ,setFormValue] = useState(formobject);
 // const [signUpError , setSignUpError] = useState(Errormsg)
 console.log('formValueformValue' , formValue)
@@ -66,6 +69,8 @@ const HandleSubmit = async (event)=> {
         
     }  
   } 
+
+  
   return ({
     formValue,
     HandleSubmit,

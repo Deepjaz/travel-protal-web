@@ -6,6 +6,7 @@ import { baseUrl } from "../../../env/env";
 import { ThreeDots } from "react-loader-spinner";
 import moment from "moment";
 import flightimg from "../../../assets/images/6E.png";
+import React from "react";
 const DetailofFlight = () => {
   const [postApi, setPostApi] = useState([]);
   const { search } = useLocation();
@@ -14,6 +15,9 @@ const DetailofFlight = () => {
   const [arivalTime, setArivalTime] = useState("");
   const [spinnerState, setSpinnerState] = useState(false);
   const data = search.slice(search.indexOf("?") + 1);
+  const [durationTime , setDurationTime] = useState([])
+  const [DataApi, setDataApi] = useState([]);
+  const [timeval  , setTimeVal] = useState()
 
   const params = {};
   data.split("/").forEach((pair) => {
@@ -106,9 +110,31 @@ const DetailofFlight = () => {
     axios.post(`${baseUrl}/api/flight-booking`, formValue).then((res) => {
       setDataApi(res.data.data);
     });
+    // console.log('DataApiDataApiDataApiDataApi' , DataApi)
+  
+
   }, []);
 
-  const [DataApi, setDataApi] = useState([]);
+  // useEffect(() => {
+  //   DataApi.map(val => (
+  //     val.itineraries[0].segments.map((time , index) => {
+  //       // console.log("timetimetimetime" , time )
+  //       const selectarival = moment(time.arrival.at , '"HH:mm:ss a"') 
+  //       const selectdep = moment(time.departure.at , '"HH:mm:ss a"') 
+      
+  //       var timeDuration = moment.duration(selectdep.diff(selectarival))
+  //       const pendingTime = parseInt(timeDuration.hours())
+  //       const pendingMin = parseInt(timeDuration.minutes())
+  //       const fullTime = `${pendingTime}h ${pendingMin}m`
+  //       console.log('fullTimefullTimefullTimefullTimefullTime' , fullTime)
+  //         durationTime.push(fullTime)
+  //     })
+  //   ))
+  
+  // },[])
+  console.log('durationTimedurationTimedurationTimedurationTimedurationTimedurationTime' , durationTime)
+
+
 
   const PriceCheckData = async (e, selectID) => {
     try {
@@ -124,6 +150,7 @@ const DetailofFlight = () => {
           setSpinnerState(false);
           res.data.flightOffers.forEach((val, index) => {
             console.log("this is the my value", val);
+            localStorage.setItem('flightData', JSON.stringify(val))
 
             const arivalData = val.itineraries[0].segments.map((segment) => {
               return {
@@ -322,9 +349,23 @@ const DetailofFlight = () => {
                             </div>
                           </div>
                           <div className="col-4 col-lg-2">
-                            <div className="font-small">
-                              {/* {diffInMinutes} */}
-                            </div>
+
+                          {/* {timeval} */}
+                          {/* {
+                            durationTime.map((val , i) => {
+                            if(index === i) {
+                            return(
+                              <>
+                              <p>{val}</p>
+                              </>
+                            )
+                          }
+                          }
+                            )
+                          
+                          } */}
+
+                            
                             <span className="stops"></span>
                             <div className="font-small">Non Stop</div>
                           </div>

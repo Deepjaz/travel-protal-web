@@ -3,9 +3,8 @@ import InputFeild from '../../common/InputFeild/InputFeild'
 import SignInform from './Hooks/SignInform'
 import {Link} from 'react-router-dom'
 
-const SignIn = () => {
+const SignIn = (props) => {
      const {handleChange , signForm , handleSubmit , emailError , passError} =SignInform();
-
      console.log('emailErroremailErroremailError' , emailError) 
     return (
         <>
@@ -75,7 +74,7 @@ const SignIn = () => {
                                                         <button
                                                             type="submit"
                                                             className="btn btn-effect btn-book px-5 min-h58"
-                                                            onclick="window.location.href='index.html';"
+                                                            // onclick={e => loginSuccessFull(e)}
                                                         >
                                                             Login
                                                         </button>
