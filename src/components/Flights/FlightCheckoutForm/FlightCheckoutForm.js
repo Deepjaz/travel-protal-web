@@ -250,7 +250,7 @@ const FlightCheckoutForm = () => {
           [name]: value,
         };
       }
-      if (
+     else if (
         name === "number" ||
         name === "issuanceDate" ||
         name === "expiryDate" ||
@@ -314,7 +314,7 @@ const FlightCheckoutForm = () => {
           [name]: value,
         };
       }
-      if (
+      else if (
         name == "lines" ||
         name == "postalCode" ||
         name === "countryCode" ||
