@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import InputFeild from "../../../common/InputFeild/InputFeild";
+import { baseUrl } from "../../../env/env";
+import axios from "axios";
 
 const flightCheckout = {
   data: {
@@ -236,6 +238,7 @@ const FlightCheckoutForm = () => {
     const { name, value } = e.target;
     setFormValue((prevFormValue) => {
       const newFormValue = [...prevFormValue];
+      console.log('newFormValuenewFormValuenewFormValue' ,newFormValue) 
       if (
         name === "firstName" ||
         name === "lastName" ||
@@ -281,11 +284,13 @@ const FlightCheckoutForm = () => {
       const newValue = [...prevFromValue];
       if (name == "subType" || name == "text") {
         newValue[index].discountEligibility = {
-          ...newValue[index],
-          [name]: value,
+          ...newValue[index], [name]: value,
         };
       }
-      newValue[index] = { ...newValue[index], [name]: value };
+      else{
+        newValue[index] = { ...newValue[index], [name]: value };
+      } 
+      // 
 
       return newValue;
     });
@@ -319,7 +324,10 @@ const FlightCheckoutForm = () => {
       ) {
         newValueData[index].address = { ...newValueData[index], [name]: value };
       }
-      // newValueData[index] = { ...newValueData[index], [name]: value };
+      else{
+        newValueData[index] = { ...newValueData[index], [name]: value };
+      }
+      // 
 
       return newValueData;
     });
@@ -331,7 +339,10 @@ const FlightCheckoutForm = () => {
     formData.data.travelers.push(formValue);
     formData.data.remarks = remarkform;
     formData.data.contact.push(contactvalue);
-
+    const url =`${baseUrl}/api/flight-booking/flightOrder`
+    axios.post(url ,formData).then(res => {
+      console.log(res)
+    })
     console.log(
       "formDataformDataformDataformDataformDataformDataformDataformDataformDataformData",
       formData
@@ -503,175 +514,174 @@ const FlightCheckoutForm = () => {
                     OnChange={(e) => handlechange(e, index)}
                   />
                 </div>
-
-                <>
-              
-                  {remarkform.map((val, index) => (
-                    <>
-                      <div className="formfeilds">
-                        <InputFeild
-                          Label="subType"
-                          Type="text"
-                          Value={val.discountEligibility.subType}
-                          Name="subType"
-                          OnChange={(e) => RemarkFormHandle(e, index)}
-                        />
-                      </div>
-                      <div className="formfeilds">
-                        <InputFeild
-                          Label="Text"
-                          Type="text"
-                          Value={val.discountEligibility.text}
-                          Name="text"
-                          OnChange={(e) => RemarkFormHandle(e, index)}
-                        />
-                      </div>
-                    </>
-                  ))}
-                  {contactvalue.map((value, index) => (
-                    <>
-                      <div className="formfeilds">
-                        <InputFeild
-                          Label="firstName"
-                          Type="text"
-                          Value={value.addresseeName.firstName}
-                          Name="firstName"
-                          OnChange={(e) => ContacthandleChange(e, index)}
-                        />
-                      </div>
-
-                      <div className="formfeilds">
-                        <InputFeild
-                          Label="lastName"
-                          Type="text"
-                          Value={value.addresseeName.lastName}
-                          Name="lastName"
-                          OnChange={(e) => ContacthandleChange(e, index)}
-                        />
-                      </div>
-                      <div className="formfeilds">
-                        <InputFeild
-                          Label="middleName"
-                          Type="text"
-                          Value={value.addresseeName.middleName}
-                          Name="middleName"
-                          OnChange={(e) => ContacthandleChange(e, index)}
-                        />
-                      </div>
-                      <div className="formfeilds">
-                        <InputFeild
-                          Label="secondLastName"
-                          Type="text"
-                          Value={value.addresseeName.secondLastName}
-                          Name="secondLastName"
-                          OnChange={(e) => ContacthandleChange(e, index)}
-                        />
-                      </div>
-                      <div className="formfeilds">
-                        <InputFeild
-                          Label="lines"
-                          Type="text"
-                          Value={value.address.lines}
-                          Name="lines"
-                          OnChange={(e) => ContacthandleChange(e, index)}
-                        />
-                      </div>
-                      <div className="formfeilds">
-                        <InputFeild
-                          Label="postalCode"
-                          Type="text"
-                          Value={value.address.postalCode}
-                          Name="postalCode"
-                          OnChange={(e) => ContacthandleChange(e, index)}
-                        />
-                      </div>
-                      <div className="formfeilds">
-                        <InputFeild
-                          Label="countryCode"
-                          Type="text"
-                          Value={value.address.countryCode}
-                          Name="countryCode"
-                          OnChange={(e) => ContacthandleChange(e, index)}
-                        />
-                      </div>
-                      <div className="formfeilds">
-                        <InputFeild
-                          Label="cityName"
-                          Type="text"
-                          Value={value.address.cityName}
-                          Name="cityName"
-                          OnChange={(e) => ContacthandleChange(e, index)}
-                        />
-                      </div>
-                      <div className="formfeilds">
-                        <InputFeild
-                          Label="stateName"
-                          Type="text"
-                          Value={value.address.stateName}
-                          Name="stateName"
-                          OnChange={(e) => ContacthandleChange(e, index)}
-                        />
-                      </div>
-
-                      <div className="formfeilds">
-                        <InputFeild
-                          Label="postalBox"
-                          Type="text"
-                          Value={value.address.postalBox}
-                          Name="postalBox"
-                          OnChange={(e) => ContacthandleChange(e, index)}
-                        />
-                      </div>
-                      <div className="formfeilds">
-                        <InputFeild
-                          Label="deviceType"
-                          Type="text"
-                          Value={value.phones.deviceType}
-                          Name="deviceType"
-                          OnChange={(e) => ContacthandleChange(e, index)}
-                        />
-                      </div>
-                      <div className="formfeilds">
-                        <InputFeild
-                          Label="countryCallingCode"
-                          Type="text"
-                          Value={value.phones.countryCallingCode}
-                          Name="countryCallingCode"
-                          OnChange={(e) => ContacthandleChange(e, index)}
-                        />  
-                      </div>
-                      <div className="formfeilds">
-                        <InputFeild
-                          Label="number"
-                          Type="text"
-                          Value={value.phones.number}
-                          Name="number"
-                          OnChange={(e) => ContacthandleChange(e, index)}
-                        />
-                      </div>
-                      <div className="formfeilds">
-                        <InputFeild
-                          Label="companyName"
-                          Type="text"
-                          Value={value.companyName}
-                          Name="companyName"
-                          OnChange={(e) => ContacthandleChange(e, index)}
-                        />
-                      </div>
-                      <div className="formfeilds">
-                        <InputFeild
-                          Label="emailAddress"
-                          Type="email"
-                          Value={value.emailAddress}
-                          Name="emailAddress"
-                          OnChange={(e) => ContacthandleChange(e, index)}
-                        />
-                      </div>
-                    </>
-                  ))}
-                </>
               </>
           ))}
+           <>
+              {remarkform.map((val, index) => (
+                <>
+                  <div className="formfeilds">
+                    <InputFeild
+                      Label="subType"
+                      Type="text"
+                      Value={val.discountEligibility.subType}
+                      Name="subType"
+                      OnChange={(e) => RemarkFormHandle(e, index)}
+                    />
+                  </div>
+                  <div className="formfeilds">
+                    <InputFeild
+                      Label="Text"
+                      Type="text"
+                      Value={val.discountEligibility.text}
+                      Name="text"
+                      OnChange={(e) => RemarkFormHandle(e, index)}
+                    />
+                  </div>
+                </>
+              ))}
+              {contactvalue.map((value, index) => (
+                <>
+                <div className="formfeilds">
+                    <InputFeild
+                      Label="lines"
+                      Type="text"
+                      Value={value.address.lines}
+                      Name="lines"
+                      OnChange={(e) => ContacthandleChange(e, index)}
+                    />
+                  </div>
+                  <div className="formfeilds">
+                    <InputFeild
+                      Label="postalCode"
+                      Type="text"
+                      Value={value.address.postalCode}
+                      Name="postalCode"
+                      OnChange={(e) => ContacthandleChange(e, index)}
+                    />
+                  </div>
+                  <div className="formfeilds">
+                    <InputFeild
+                      Label="countryCode"
+                      Type="text"
+                      Value={value.address.countryCode}
+                      Name="countryCode"
+                      OnChange={(e) => ContacthandleChange(e, index)}
+                    />
+                  </div>
+                  <div className="formfeilds">
+                    <InputFeild
+                      Label="cityName"
+                      Type="text"
+                      Value={value.address.cityName}
+                      Name="cityName"
+                      OnChange={(e) => ContacthandleChange(e, index)}
+                    />
+                  </div>
+                  <div className="formfeilds">
+                    <InputFeild
+                      Label="stateName"
+                      Type="text"
+                      Value={value.address.stateName}
+                      Name="stateName"
+                      OnChange={(e) => ContacthandleChange(e, index)}
+                    />
+                  </div>
+
+                  <div className="formfeilds">
+                    <InputFeild
+                      Label="postalBox"
+                      Type="text"
+                      Value={value.address.postalBox}
+                      Name="postalBox"
+                      OnChange={(e) => ContacthandleChange(e, index)}
+                    />
+                  </div>
+                  <div className="formfeilds">
+                    <InputFeild
+                      Label="firstName"
+                      Type="text"
+                      Value={value.addresseeName.firstName}
+                      Name="firstName"
+                      OnChange={(e) => ContacthandleChange(e, index)}
+                    />
+                  </div>
+
+                  <div className="formfeilds">
+                    <InputFeild
+                      Label="lastName"
+                      Type="text"
+                      Value={value.addresseeName.lastName}
+                      Name="lastName"
+                      OnChange={(e) => ContacthandleChange(e, index)}
+                    />
+                  </div>
+                  <div className="formfeilds">
+                    <InputFeild
+                      Label="middleName"
+                      Type="text"
+                      Value={value.addresseeName.middleName}
+                      Name="middleName"
+                      OnChange={(e) => ContacthandleChange(e, index)}
+                    />
+                  </div>
+                  <div className="formfeilds">
+                    <InputFeild
+                      Label="secondLastName"
+                      Type="text"
+                      Value={value.addresseeName.secondLastName}
+                      Name="secondLastName"
+                      OnChange={(e) => ContacthandleChange(e, index)}
+                    />
+                  </div>
+                  
+                  <div className="formfeilds">
+                    <InputFeild
+                      Label="deviceType"
+                      Type="text"
+                      Value={value.phones.deviceType}
+                      Name="deviceType"
+                      OnChange={(e) => ContacthandleChange(e, index)}
+                    />
+                  </div>
+                  <div className="formfeilds">
+                    <InputFeild
+                      Label="countryCallingCode"
+                      Type="text"
+                      Value={value.phones.countryCallingCode}
+                      Name="countryCallingCode"
+                      OnChange={(e) => ContacthandleChange(e, index)}
+                    />  
+                  </div>
+                  <div className="formfeilds">
+                    <InputFeild
+                      Label="number"
+                      Type="text"
+                      Value={value.phones.number}
+                      Name="number"
+                      OnChange={(e) => ContacthandleChange(e, index)}
+                    />
+                  </div>
+                  <div className="formfeilds">
+                    <InputFeild
+                      Label="companyName"
+                      Type="text"
+                      Value={value.companyName}
+                      Name="companyName"
+                      OnChange={(e) => ContacthandleChange(e, index)}
+                    />
+                  </div>
+                  <div className="formfeilds">
+                    <InputFeild
+                      Label="emailAddress"
+                      Type="email"
+                      Value={value.emailAddress}
+                      Name="emailAddress"
+                      OnChange={(e) => ContacthandleChange(e, index)}
+                    />
+                  </div>
+                </>
+              ))}
+            </>
           </div>
           </form>
           <button
