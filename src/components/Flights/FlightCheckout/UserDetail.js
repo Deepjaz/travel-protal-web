@@ -63,14 +63,7 @@ const UserDetail = () => {
                   className="alert-wrapper makeFlex appendBottom12 appendTop12 paxAlert"
                 
                 >
-                  <div className="makeFlex flexOne column">
-                    <p className="darkText fontSize12 boldFont">
-                      <span className="alert-text"
-                        >Enter name as mentioned on your passport or Government
-                        approved IDs.</span
-                      >
-                    </p>
-                  </div>
+                  
                 </div>
                 <div className="adultDetailsForm">
                   <div className="adultDetailsInnner">

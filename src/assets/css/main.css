@@ -2723,6 +2723,44 @@ i.fa-circle{
   cursor: pointer;
 }
 
+.form-inner {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.formfeilds {
+  width: 30%;
+  margin: 0px 20px;
+}
+.form-inner .form-label {
+	width: 100%;
+	display: block;
+	font-size: 15px;
+	font-weight: 600 !important;
+	text-transform: uppercase;
+}
+.flightCheckoutPage-inner form {
+	margin: 20px;
+	background: #acacac0d;
+	padding: 30px;
+	box-shadow: 0px 0px 5px #16141447;
+	border-radius: 5px;
+}
+.flightCheckoutPage-inner h1{
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 25px;
+  width: 100%;
+  text-align: left;
+  margin: 20px 20px 30px;
+}
+.form-inner input{
+  width: 100%;
+  height: 40px;
+  padding: 0px 10px;
+  border-radius: 10px;
+  border:1px solid #8b3eea;
+}
 .wrapper-dropdown .dropdown {
   position: absolute;
   top: 100%;

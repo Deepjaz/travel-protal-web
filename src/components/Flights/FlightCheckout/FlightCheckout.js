@@ -53,7 +53,6 @@ const FlightCheckout = () => {
     time,
     depTime
   );
-
   const [count, setCount] = useState(0);
   const [pTags, setPTags] = useState([]);
   const [formHandle, setformHandle] = useState([
@@ -110,14 +109,12 @@ const FlightCheckout = () => {
               AdultticketPrice = entry.ticketPrice;
             console.log('countcountcount' ,count)
         }
-        
         return count;
     },0)
     var childticketPrice = ''
     const chilCount = travlerPricing.reduce((count ,entry) => {
       console.log('countcountcountcount' , count) 
       console.log('countcountcountcoun1t' , entry) 
-        
           if(entry.traverltype === "CHILD"){
             count ++;
             childticketPrice = entry.ticketPrice;
@@ -137,11 +134,7 @@ const checkOutbtn = () => {
     const travlerPricing = data[0].travlerPricing;
     navigate("/FlightCheckoutForm" , {state :{travlerPricing}})
   }
-}
-
-
-
-    
+}   
   const deleteFormHandle = (index) => {
     const newFormHandle = [...formHandle];
     newFormHandle.splice(index, 1);
@@ -150,7 +143,6 @@ const checkOutbtn = () => {
 
   // button stytle code
   const [showPopup, setShowPopup] = useState(false);
-
   useEffect(() => {
     document.addEventListener("click", handleClickOutside, false);
     return () => {
@@ -362,17 +354,7 @@ const checkOutbtn = () => {
                                 {/*  */}
                                 <div>
                                   <div className="AdultFormWrapper collapse show">
-                                    <div className="alert-wrapper makeFlex appendBottom12 appendTop12 paxAlert">
-                                      <div className="makeFlex flexOne column">
-                                        <p className="darkText fontSize12 boldFont">
-                                          <span className="alert-text">
-                                            Enter name as mentioned on your
-                                            passport or Government approved IDs.
-                                          </span>
-                                        </p>
-                                      </div>
-                                    </div>
-
+                                   
                                     <div className="adultDetailsForm">
                                       <div className="adultDetailsInnner">
                                         <div
